@@ -8,6 +8,10 @@
   },
   "author": "Hennadiy Kudashev, Yaroslav Kuzyo",
   "license": "MIT",
+  "repository" : {
+      "type" : "git",
+      "url" : "https://github.com/hennadiy-kudashev/stava_analyser.git"
+  },
   "devDependencies": {
     "babel-core": "^6.7.4",
     "babel-eslint": "^5.0.0",
