@@ -1,12 +1,13 @@
 var path = require('path')
 var webpack = require('webpack')
 
+
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
         'webpack-hot-middleware/client',
         'babel-polyfill',
-        './src/index'
+        './src/js/index'
     ],
     output: {
         path: path.join(__dirname, 'dist'),
@@ -23,7 +24,7 @@ module.exports = {
                 test: /\.js$/,
                 loaders: ['eslint'],
                 include: [
-                    path.resolve(__dirname, "src")
+                    path.resolve(__dirname, 'src/js')
                 ]
             }
         ],
@@ -31,10 +32,17 @@ module.exports = {
             {
                 loaders: ['react-hot', 'babel-loader'],
                 include: [
-                    path.resolve(__dirname, "src"),
+                    path.resolve(__dirname, 'src/js')
                 ],
-                test: /\.js$/,
-                plugins: ['transform-runtime'],
+                test: /\.js$/, plugins: ['transform-runtime']
+            },
+            {
+                test: /(\.scss)$/,
+                loaders: ['style', 'css?modules', 'postcss', 'sass']
+            },
+            {
+                test: /(\.css)$/,
+                loaders: ['style', 'css']
             }
         ]
     }
