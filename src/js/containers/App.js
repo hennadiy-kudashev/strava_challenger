@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 // import Page from '../components/Page'
 // import * as pageActions from '../actions/PageActions';
 
-import { AppBar, Checkbox, IconButton } from 'react-toolbox';
-import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
+import { AppBar } from 'react-toolbox';
+import { Layout, NavDrawer, Panel } from 'react-toolbox';
 
 class App extends Component {
     state = {
@@ -31,7 +31,7 @@ class App extends Component {
         return (
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
-                    pinned={this.state.drawerPinned} permanentAt='xxxl'
+                    pinned={this.state.drawerPinned} permanentAt='l'
                     onOverlayClick={ this.toggleDrawerActive }>
                     <p>
                         Navigation, account switcher, etc. go here.
@@ -42,16 +42,8 @@ class App extends Component {
                     <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
                         <h1>Main Content</h1>
                         <p>Main content goes here.</p>
-                        <Checkbox label='Pin drawer' checked={this.state.drawerPinned} onChange={this.toggleDrawerPinned} />
-                        <Checkbox label='Show sidebar' checked={this.state.sidebarPinned} onChange={this.toggleSidebar} />
                     </div>
                 </Panel>
-                <Sidebar pinned={ this.state.sidebarPinned } width={ 5 }>
-                    <div><IconButton icon='close' onClick={ this.toggleSidebar }/></div>
-                    <div style={{ flex: 1 }}>
-                        <p>Supplemental content goes here.</p>
-                    </div>
-                </Sidebar>
             </Layout>
         );
     }
