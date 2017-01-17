@@ -31,7 +31,7 @@ class App extends Component {
         return (
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
-                    pinned={this.state.drawerPinned} permanentAt='l'
+                    pinned={this.state.drawerPinned} permanentAt='xxxl'
                     onOverlayClick={ this.toggleDrawerActive }>
                     <p>
                         Navigation, account switcher, etc. go here.
