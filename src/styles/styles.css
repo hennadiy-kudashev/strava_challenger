@@ -6,7 +6,7 @@ body {
   min-height: 100%;
 }
 
-#app {
+.main {
   height: 100vh;
 }
 

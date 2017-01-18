@@ -37,6 +37,10 @@ module.exports = {
                 test: /\.js$/, plugins: ['transform-runtime']
             },
             {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader?limit=8192'
+            },
+            {
                 test: /(\.scss)$/,
                 loaders: ['style', 'css?modules', 'postcss', 'sass']
             },
