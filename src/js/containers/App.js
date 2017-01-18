@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { AppBar } from 'react-toolbox';
+import Logo from '../components/Logo';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 // import * as pageActions from '../actions/PageActions';
-
 
 class App extends Component {
     render() {
         return (
             <div className='main'>
-                <AppBar title='U-Run'/>
+                <AppBar>
+                    <Logo />
+                </AppBar>
                 <div className='content'>
                     {this.props.children}
                 </div>

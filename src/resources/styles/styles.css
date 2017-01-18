@@ -46,4 +46,16 @@ body {
   background-size: cover;
 }
 
+.logo {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background-image: url('../images/logo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-indent: -999px;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
 
