@@ -9,7 +9,7 @@ class App extends Component {
     render() {
         return (
             <div className='main'>
-                <AppBar title='U-Run' />
+                <AppBar title='U-Run'/>
                 <div className='content'>
                     {this.props.children}
                 </div>
