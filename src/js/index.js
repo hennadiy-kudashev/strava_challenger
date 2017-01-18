@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 
 // Load styles
-import '../styles/styles.css';
+import '../resources/styles/styles.css';
 import '../../node_modules/normalize.css/normalize.css';
 
 const store = configureStore();
