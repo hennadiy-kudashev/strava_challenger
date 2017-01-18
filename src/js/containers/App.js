@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { AppBar } from 'react-toolbox';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 // import * as pageActions from '../actions/PageActions';
@@ -8,7 +9,11 @@ class App extends Component {
     render() {
         return (
             <div className='main'>
-                {this.props.children}
+                <AppBar title='U-Run' />
+                <div className='content'>
+                    {this.props.children}
+                </div>
+                <div className='footer'>Powered by Strava</div>
             </div>
         );
     }
