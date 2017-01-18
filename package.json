@@ -8,9 +8,9 @@
   },
   "author": "Hennadiy Kudashev, Yaroslav Kuzyo",
   "license": "MIT",
-  "repository" : {
-      "type" : "git",
-      "url" : "https://github.com/hennadiy-kudashev/stava_analyser.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hennadiy-kudashev/stava_analyser.git"
   },
   "devDependencies": {
     "autoprefixer": "6.6.1",
@@ -29,10 +29,12 @@
     "estraverse-fb": "^1.3.1",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "postcss-loader": "^1.2.2",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.10.0"
