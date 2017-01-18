@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Logo = () => (
     <h1>
-        <a href='#' className='logo'>Logo</a>
+        <Link to='/' className='logo'/>
         U-Run
     </h1>
 );
