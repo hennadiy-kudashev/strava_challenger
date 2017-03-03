@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as authActions from '../../actions/authActions';
@@ -19,12 +19,18 @@ class CodeReceiverPage extends React.Component{
         }
         else {
             const code = location.query.code;
-            this.props.actions.requestAccessSuccess(code);
-            browserHistory.push('/');
-            return (<div>{code}</div>);
+            this.props.actions.requestAccessSuccess(code).then(()=>{
+                browserHistory.push('/');
+            });
+            return (<div>Authenticating...</div>);
         }
     }
 }
+CodeReceiverPage.propTypes = {
+    actions: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
+    
+};
 
 function mapStateToProps(state, ownProps) {
     return {

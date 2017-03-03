@@ -1,29 +1,55 @@
-import React from 'react';
-import { List, ListItem, ListSubHeader } from 'react-toolbox/lib/list';
-import AuthArea from '../auth/AuthArea'
+import React, {PropTypes} from "react";
+import {connect} from "react-redux";
+import ClubApi from "../../api/clubApi";
+import MemberList from "./MemberList";
+import * as clubActions from "../../actions/clubActions";
+import {bindActionCreators} from "redux";
 
-const DashboardPage = () => (
-    <div>
-            <AuthArea />
-            <List>
-                <ListSubHeader caption='2017 Challange' />
-                <ListItem
-                  avatar='https://dl.dropboxusercontent.com/u/2247264/assets/m.jpg'
-                  caption='Dr. Manhattan'
-                  legend="Jonathan 'Jon' Osterman"
-                />
-                <ListItem
-                  avatar='https://dl.dropboxusercontent.com/u/2247264/assets/o.jpg'
-                  caption='Ozymandias'
-                  legend='Adrian Veidt'
-                />
-                <ListItem
-                  avatar='https://dl.dropboxusercontent.com/u/2247264/assets/r.jpg'
-                  caption='Rorschach'
-                  legend='Walter Joseph Kovacs'
-                />
-            </List>
-    </div>
-);
 
-export default DashboardPage;
+class DashboardPage extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+    }
+
+    componentDidMount() {
+        const {actions, auth} = this.props;
+        if (auth.access_token) {
+            let clubApi = ClubApi.createURunClub(auth.access_token);
+            clubApi. getMembers().then(members=> {
+                actions.clubMembersReceived(members);
+            });
+        }
+    }
+
+    render() {
+        const {auth, members} = this.props;
+
+        if (!auth.access_token) {
+            return (<div>You should log in first.</div>);
+        }
+        else {
+            return (<MemberList members={members}/>);
+        }
+    }
+}
+
+DashboardPage.propTypes = {
+    auth: PropTypes.object.isRequired,
+    members: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        auth: state.auth,
+        members: state.club.members
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(clubActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);

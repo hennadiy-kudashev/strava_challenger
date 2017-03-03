@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import LoginButton from '../layout/LoginButton';
-import { List, ListItem, ListSubHeader } from 'react-toolbox/lib/list';
+import UserCard from '../layout/UserCard';
 
 class AuthArea extends React.Component {
     constructor(props, context) {
@@ -12,11 +12,7 @@ class AuthArea extends React.Component {
             return (<LoginButton/>);
         }
         else {
-            return (<ListItem
-                avatar={this.props.user.avatar}
-                caption={this.props.user.user_name}
-                legend={this.props.user.first_name + ' ' + this.props.user.last_name}
-            />);
+            return (<UserCard title={this.props.user.full_name} avatar={this.props.user.avatar}/>);
         }  
     }
 }

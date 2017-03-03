@@ -6,8 +6,7 @@ export default function authReducer(state = initialState.user, action) {
         case types.USER_RECEIVED:
             return Object.assign({}, state, {
                 user_name: action.user.username,
-                first_name: action.user.firstname,
-                last_name: action.user.lastname,
+                full_name: action.user.firstname + ' ' + action.user.lastname,
                 avatar: action.user.profile
             });
         default:

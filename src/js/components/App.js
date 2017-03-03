@@ -1,18 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import { AppBar } from 'react-toolbox';
-import Logo from './layout/Logo';
+import Header from './layout/Header';
 
 class App extends Component {
     render() {
         return (
-            <div className='main'>
-                <AppBar>
-                    <Logo />
-                </AppBar>
-                <div className='content'>
+            <div className="main">
+                <Header />
+                <div className="content">
                     {this.props.children}
                 </div>
-                <div className='footer'>Powered by Strava</div>
+                <div className="footer">Powered by Strava</div>
             </div>
         );
     }

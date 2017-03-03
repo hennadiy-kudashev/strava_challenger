@@ -5,9 +5,9 @@ import DashboardPage from '../components/dashboard/DashboardPage';
 import CodeReceiverPage from '../components/auth/CodeReceiverPage';
 
 export default (
-    <Route path='/' component={App}>
+    <Route path="/" component={App}>
         <IndexRoute component={DashboardPage} />
-        <Route path='code_receiver' component={CodeReceiverPage} />
+        <Route path="code_receiver" component={CodeReceiverPage} />
     </Route>
 );
 
