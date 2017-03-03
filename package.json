@@ -12,6 +12,9 @@
     "build": "webpack",
     "build:watch": "webpack --watch"
   },
+  "engines":{
+      "node": "4.1.2"
+  },
   "author": "Hennadiy Kudashev, Yaroslav Kuzyo",
   "license": "MIT",
   "repository": {
