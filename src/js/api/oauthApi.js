@@ -15,7 +15,7 @@ const clientSecret = 'd3f4e396495ae1f84389594b49505ef2abe52557';
 
 class OauthApi {
     static getAuthorizeURL(redirectURL) {
-        return `https://www.strava.com/oauth/authorize?client_id=${clientID}&redirect_uri=${redirectURL}&response_type=code`;
+        return `https://www.strava.com/oauth/authorize?client_id=${clientID}&response_type=code&redirect_uri=${redirectURL}`;
     }
     
     static getToken(code) {
