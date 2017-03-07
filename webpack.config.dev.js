@@ -40,13 +40,14 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 loader: 'file-loader'
             },
+            // React toolbax has problem with loading simultaneusly app scss and own scss
             {
                 test: /(\.scss)$/,
                 loaders: ['style', 'css?modules', 'postcss', 'sass']
             },
             {
                 test: /(\.css)$/,
-                loaders: ['style', 'css']
+                loaders: [ 'style-loader', 'css-loader?importLoaders=1', 'postcss-loader' ]
             }
         ]
     }

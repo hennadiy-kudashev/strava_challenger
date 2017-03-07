@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  font-size: 62.5%;
 }
 
 body {
@@ -9,6 +10,7 @@ body {
 .main {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .content {
