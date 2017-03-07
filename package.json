@@ -10,7 +10,7 @@
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",
     "build": "NODE_ENV=production webpack -p --config ./webpack.config.prod.js",
-    "postbuild": "node server.prod.js"
+    "heroku-postbuild": "npm run build"
   },
   "engines":{
       "node": "4.1.2",
