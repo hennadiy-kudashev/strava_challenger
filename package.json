@@ -4,16 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "open:src",
-    "start:dev": "npm-run-all --parallel open:src lint:watch",
-    "open:src": "node server.js",
+    "start:prod": "node server.prod.js",
+    "start": "npm-run-all --parallel open:src lint:watch",
+    "open:src": "node server.dev.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",
     "build": "webpack",
     "build:watch": "webpack --watch"
   },
   "engines":{
-      "node": "4.1.2"
+      "node": "4.1.2",
+      "npm": "2.14.4"
   },
   "author": "Hennadiy Kudashev, Yaroslav Kuzyo",
   "license": "MIT",
@@ -49,7 +50,8 @@
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.10.0",
-    "npm-run-all": "1.8.0"
+    "npm-run-all": "1.8.0",
+    "redux-immutable-state-invariant": "1.2.3"
   },
   "dependencies": {
     "babel-polyfill": "^6.3.14",
