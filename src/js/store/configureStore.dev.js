@@ -1,15 +1,19 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default function configureStore(initialState) {
     const store = createStore(
-        rootReducer, 
-        initialState, 
-        applyMiddleware(thunk, createLogger(), reduxImmutableStateInvariant()));
+        rootReducer,
+        initialState,
+        composeEnhancers(
+            applyMiddleware(thunk, createLogger(), reduxImmutableStateInvariant())
+        )
+    );
 
     if (module.hot) {
         module.hot.accept('../reducers', () => {
@@ -18,4 +22,4 @@ export default function configureStore(initialState) {
         });
     }
     return store;
-} 
+}
