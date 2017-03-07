@@ -1,34 +1,28 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin  = require('extract-text-webpack-plugin');
 
+const GLOBALS = {
+    'process.env.NODE_ENV': JSON.stringify('production')
+};
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
-    entry: [
-        'webpack-hot-middleware/client',
-        'babel-polyfill',
-        './src/js/index'
-    ],
+    devtool: 'source-map',
+    entry: ['./src/js/index'],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/static/'
+        publicPath: '/dist/'
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.DefinePlugin(GLOBALS),
+        new ExtractTextPlugin('styles.css'),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin()
     ],
-    module: { //Обновлено
-        preLoaders: [ //добавили ESlint в preloaders
-            {
-                test: /\.js$/,
-                loaders: ['eslint'],
-                include: [
-                    path.resolve(__dirname, 'src/js')
-                ]
-            }
-        ],
-        loaders: [ //добавили babel-loader
+    module: {
+        loaders: [
             {
                 loaders: ['react-hot', 'babel-loader'],
                 include: [
@@ -46,7 +40,7 @@ module.exports = {
             },
             {
                 test: /(\.css)$/,
-                loaders: ['style', 'css']
+                loader: ExtractTextPlugin.extract("css?sourceMap")
             }
         ]
     }

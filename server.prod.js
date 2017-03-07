@@ -1,11 +1,15 @@
 var express = require('express');
-var app = new (express)();
+var compression = require('compression');
+const path = require('path');
+
+var app = express();
 var port = process.env.PORT || 3000;
 
-app.use(express.static('dist'));
+app.use(compression());
+app.use('/dist', express.static('dist'));
 
 app.get('/*', function(req, res) {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(path.join(__dirname, './index.html'))
 });
 
 app.listen(port, function(error) {

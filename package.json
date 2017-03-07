@@ -9,7 +9,7 @@
     "open:src": "node server.dev.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack -p --config ./webpack.config.prod.js",
     "build:watch": "webpack --watch"
   },
   "engines":{
@@ -32,6 +32,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.26.1",
+    "compression": "1.6.1",
     "eslint": "2.9.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "1.6.1",
