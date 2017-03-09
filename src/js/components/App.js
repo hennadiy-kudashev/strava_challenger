@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import Header from './layout/Header';
+import AuthArea from './auth/AuthArea';
 
 class App extends Component {
     render() {
         return (
-            <div className="main">
+            <div className="main" >
                 <Header />
+                <AuthArea />
                 <div className="content">
                     {this.props.children}
                 </div>

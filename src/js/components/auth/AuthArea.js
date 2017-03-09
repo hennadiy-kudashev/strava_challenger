@@ -12,8 +12,8 @@ class AuthArea extends React.Component {
             return (<LoginButton/>);
         }
         else {
-            return (<UserCard title={this.props.user.full_name} avatar={this.props.user.avatar}/>);
-        }  
+            return(<div>Logged in</div>);
+        }
     }
 }
 
