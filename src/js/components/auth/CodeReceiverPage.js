@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as authActions from '../../actions/authActions';
 import {browserHistory} from "react-router";
+import Spinner from '../shared/Spinner';
 
 class CodeReceiverPage extends React.Component{
     constructor(props, context){
@@ -22,7 +23,7 @@ class CodeReceiverPage extends React.Component{
             this.props.actions.requestAccessSuccess(code).then(()=>{
                 browserHistory.push('/dashboard');
             });
-            return (<div>Authenticating...</div>);
+            return (<Spinner/>);
         }
     }
 }
