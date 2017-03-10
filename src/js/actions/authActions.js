@@ -1,9 +1,9 @@
-import * as types from './actionTypes';
-import oauthApi from '../api/oauthApi';
-import * as userActions from './userActions';
+import * as types from "./actionTypes";
+import OauthApi from "../api/oauthApi";
+import * as userActions from "./userActions";
 
 export function requestAccess() {
-    return { type: types.REQUEST_ACCESS};
+    return {type: types.REQUEST_ACCESS};
 }
 
 export function requestAccessSuccess(code) {
@@ -12,25 +12,24 @@ export function requestAccessSuccess(code) {
             type: types.REQUEST_ACCESS_SUCCESS,
             code
         });
-        
-        return oauthApi.getToken(code).then(data=>{
+
+        return new OauthApi().getToken(code).then(data=> {
             dispatch(requestTokenSuccess(data.access_token));
             dispatch(userActions.userReceived(data.athlete));
-        }).catch(error=>{
+        }).catch(error=> {
             dispatch(requestTokenError(error));
         });
     };
 }
 
 export function requestAccessDenied(error) {
-    return { type: types.REQUEST_ACCESS_DENIED, error};
+    return {type: types.REQUEST_ACCESS_DENIED, error};
 }
 
 export function requestTokenSuccess(access_token) {
-    return { type: types.REQUEST_TOKEN_SUCCESS, access_token};
+    return {type: types.REQUEST_TOKEN_SUCCESS, access_token};
 }
 
 export function requestTokenError(error) {
-    return { type: types.REQUEST_TOKEN_ERROR, error};
+    return {type: types.REQUEST_TOKEN_ERROR, error};
 }
-

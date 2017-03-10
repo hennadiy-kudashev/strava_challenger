@@ -15,7 +15,7 @@ class DashboardPage extends React.Component {
     componentDidMount() {
         const {actions, auth} = this.props;
         if (auth.access_token) {
-            let clubApi = ClubApi.createURunClub(auth.access_token);
+            let clubApi = ClubApi.createURunClub();
             clubApi. getMembers().then(members=> {
                 actions.clubMembersReceived(members);
             });

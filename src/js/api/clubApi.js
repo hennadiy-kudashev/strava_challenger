@@ -1,17 +1,17 @@
-import StravaApi from './stravaApi';
+import StravaApi from "./stravaApi";
 
-class ClubApi extends StravaApi{
-    constructor(accessToken, clubID){
-        super(accessToken);
+class ClubApi extends StravaApi {
+    constructor(clubID) {
+        super();
         this.clubID = clubID;
     }
-    
-    static createURunClub(accessToken){
-        return new ClubApi(accessToken, 'U_Run');
+
+    static createURunClub() {
+        return new ClubApi('U_Run');
     }
 
-    getMembers(){
-        return super.request(`https://www.strava.com/api/v3/clubs/${this.clubID}/members`);
+    getMembers() {
+        return super.get(`https://www.strava.com/api/v3/clubs/${this.clubID}/members`);
     }
 }
 

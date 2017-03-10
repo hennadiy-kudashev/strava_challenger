@@ -1,8 +1,10 @@
+import accessTokenStorage from "../api/accessTokenStorage";
+
 export default {
     auth: {
         code: '',
         error: '',
-        access_token: ''
+        access_token: accessTokenStorage.get()
     },
     user: {
         user_name: '',
