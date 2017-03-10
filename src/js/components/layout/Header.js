@@ -1,15 +1,10 @@
-import React, {PropTypes} from 'react';
-import { AppBar, Navigation } from 'react-toolbox';
+import React from 'react';
 import Logo from './Logo';
-import AuthArea from '../auth/AuthArea';
-
 
 const Header = () => {
     return (
         <header className="main-header">
-            <a href="#" className="logo">
-                StravaChallenger
-            </a>
+            <Logo />
             <nav className="navbar" role="navigation">
                 <a href="#" className="sidebar-toggle" role="button">
                     <span className="sr-only">Toggle navigation</span>

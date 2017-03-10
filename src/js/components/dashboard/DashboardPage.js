@@ -31,7 +31,6 @@ class DashboardPage extends React.Component {
         else {
             return (
                 <div>
-                    <Header />
                     <MemberList members={members}/>
                 </div>
             );
