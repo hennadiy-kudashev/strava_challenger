@@ -11,7 +11,7 @@ class CodeReceiverPage extends React.Component{
 
     render() {
         const {location} = this.props;
-        
+
         if (location.query.error){
             const error = location.query.error;
             this.props.actions.requestAccessDenied(error);
@@ -20,7 +20,7 @@ class CodeReceiverPage extends React.Component{
         else {
             const code = location.query.code;
             this.props.actions.requestAccessSuccess(code).then(()=>{
-                browserHistory.push('/');
+                browserHistory.push('/dashboard');
             });
             return (<div>Authenticating...</div>);
         }
@@ -29,12 +29,12 @@ class CodeReceiverPage extends React.Component{
 CodeReceiverPage.propTypes = {
     actions: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
-    
+
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        
+
     };
 }
 

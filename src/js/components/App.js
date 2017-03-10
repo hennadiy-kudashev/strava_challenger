@@ -5,13 +5,11 @@ import AuthArea from './auth/AuthArea';
 class App extends Component {
     render() {
         return (
-            <div className="main" >
-                <Header />
-                <AuthArea />
-                <div className="content">
+            <div className="skin-yellow-light" >
+                <div className="wrapper">
                     {this.props.children}
+                    <footer className="main-footer">Powered by Strava</footer>
                 </div>
-                <div className="footer">Powered by Strava</div>
             </div>
         );
     }

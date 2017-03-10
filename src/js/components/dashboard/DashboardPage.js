@@ -4,6 +4,7 @@ import ClubApi from "../../api/clubApi";
 import MemberList from "./MemberList";
 import * as clubActions from "../../actions/clubActions";
 import {bindActionCreators} from "redux";
+import Header from '../layout/Header';
 
 
 class DashboardPage extends React.Component {
@@ -28,7 +29,12 @@ class DashboardPage extends React.Component {
             return (<div>You should log in first.</div>);
         }
         else {
-            return (<MemberList members={members}/>);
+            return (
+                <div>
+                    <Header />
+                    <MemberList members={members}/>
+                </div>
+            );
         }
     }
 }
