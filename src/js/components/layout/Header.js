@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from './Logo';
+import UserCard from './UserCard';
 
 const Header = () => {
     return (
@@ -12,10 +13,7 @@ const Header = () => {
                 <div className="navbar-custom-menu">
                     <ul className="nav navbar-nav">
                         <li className="dropdown user user-menu">
-                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../dist/img/user2-160x160.jpg" className="user-image" alt="User Image" />
-                                <span className="hidden-xs">Alexander Pierce</span>
-                            </a>
+                            <UserCard />
                         </li>
                     </ul>
                 </div>

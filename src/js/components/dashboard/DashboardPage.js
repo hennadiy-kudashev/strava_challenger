@@ -1,37 +1,29 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
-import ClubApi from "../../api/clubApi";
+import Grid from '../layout/Grid';
 import * as clubActions from "../../actions/clubActions";
 import {bindActionCreators} from "redux";
-import Header from '../layout/Header';
-import Grid from '../layout/Grid';
+import {browserHistory} from "react-router";
 
 class DashboardPage extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const {actions, auth} = this.props;
-        if (auth.access_token) {
-            let clubApi = ClubApi.createURunClub();
-            clubApi. getMembers().then(members=> {
-                actions.clubMembersReceived(members);
-            });
+        if (auth.isAuthenticated) {
+            actions.getClubMembers();
+        }else{
+            browserHistory.push('/');
         }
     }
 
     render() {
-        const {auth, members} = this.props;
-
-        if (!auth.access_token) {
-            return (<div>You should log in first.</div>);
-        }
-        else {
-            return (
-                    <Grid members={members}/>
-            );
-        }
+        const {members} = this.props;
+        return (
+            <Grid members={members}/>
+        );
     }
 }
 

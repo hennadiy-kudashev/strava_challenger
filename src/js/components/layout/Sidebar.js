@@ -5,10 +5,10 @@ const Sidebar = () => {
         <div className="main-sidebar">
             <div className="sidebar">
                 <ul className="sidebar-menu">
-                    <li className="header">HEADER</li>
-                    <li className="active"><a href="#"><span>Link</span></a></li>
-                    <li><a href="#"><span>Link</span></a></li>
-                    <li><a href="#"><span>Link</span></a></li>
+                    <li className="header">SHARED CHALLENGES</li>
+                    <li className="active"><a href="#"><span>2017 in 2017</span></a></li>
+                    <li className="header">PRIVATE CHALLENGES</li>
+                    <li><a href="#"><span>My</span></a></li>
                 </ul>
             </div>
         </div>

@@ -21,7 +21,6 @@ class StravaApi {
     constructor() {
         this.headers = {};
         const accessToken = accessTokenStorage.get();
-        console.log(accessToken);
         if (accessToken) {
             this.headers['Authorization'] = `Bearer ${accessToken}`;
         }
