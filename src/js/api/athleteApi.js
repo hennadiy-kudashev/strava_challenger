@@ -8,6 +8,10 @@ class AthleteApi extends StravaApi {
     getFollowers() {
         return super.get('https://www.strava.com/api/v3/athlete/followers');
     }
+
+    getAuthAthlete(){
+        return super.get('https://www.strava.com/api/v3/athlete');
+    }
 }
 
 export default AthleteApi;

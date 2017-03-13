@@ -1,15 +1,11 @@
-import accessTokenStorage from "../api/accessTokenStorage";
-
 export default {
-    auth: {
-        code: '',
-        error: '',
-        access_token: accessTokenStorage.get()
-    },
-    user: {
-        user_name: '',
-        full_name: '',
-        avatar: ''
+auth: {
+        isAuthenticated: false,
+        user: {
+            userName: '',
+            fullName: '',
+            avatar: ''
+        }
     },
     club: {
         members:[]

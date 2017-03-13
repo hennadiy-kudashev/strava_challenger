@@ -1,27 +1,28 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as authActions from '../../actions/authActions';
+import React, {PropTypes} from "react";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as authActions from "../../actions/authActions";
 import {browserHistory} from "react-router";
-import Spinner from '../shared/Spinner';
+import Spinner from "../shared/Spinner";
 
-class CodeReceiverPage extends React.Component{
-    constructor(props, context){
+class CodeReceiverPage extends React.Component {
+    constructor(props, context) {
         super(props, context);
     }
 
     render() {
         const {location} = this.props;
 
-        if (location.query.error){
+        if (location.query.error) {
             const error = location.query.error;
-            this.props.actions.requestAccessDenied(error);
             return (<div>{error}</div>);
         }
         else {
             const code = location.query.code;
-            this.props.actions.requestAccessSuccess(code).then(()=>{
+            this.props.actions.getAccessToken(code).then(()=> {
                 browserHistory.push('/dashboard');
+            }).catch(error=> {
+                return (<div>{error}</div>);
             });
             return (<Spinner/>);
         }
@@ -34,9 +35,7 @@ CodeReceiverPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    return {
-
-    };
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {

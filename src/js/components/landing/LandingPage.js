@@ -1,5 +1,7 @@
 import React, {PropTypes} from "react";
-import AuthArea from '../auth/AuthArea';
+import {connect} from "react-redux";
+import LoginButton from "../layout/LoginButton";
+import {browserHistory} from "react-router";
 
 
 class LandingPage extends React.Component {
@@ -7,13 +9,29 @@ class LandingPage extends React.Component {
         super(props, context);
     }
 
+    componentWillMount() {
+        if (this.props.isAuthenticated) {
+            browserHistory.push('/dashboard');
+        }
+    }
+
     render() {
         return (
             <div>
-                <AuthArea />
+                <LoginButton/>
             </div>
         );
     }
 }
 
-export default LandingPage;
+LandingPage.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    };
+}
+
+export default connect(mapStateToProps)(LandingPage);

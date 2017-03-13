@@ -1,35 +1,30 @@
-import * as types from "./actionTypes";
-import OauthApi from "../api/oauthApi";
-import * as userActions from "./userActions";
+import * as types from './actionTypes';
+import OauthApi from '../api/oauthApi';
+import AthleteApi from '../api/athleteApi';
+import accessTokenStorage from "../api/accessTokenStorage";
 
-export function requestAccess() {
-    return {type: types.REQUEST_ACCESS};
-}
-
-export function requestAccessSuccess(code) {
+export function getAccessToken(code) {
     return function (dispatch) {
-        dispatch({
-            type: types.REQUEST_ACCESS_SUCCESS,
-            code
-        });
-
         return new OauthApi().getToken(code).then(data=> {
-            dispatch(requestTokenSuccess(data.access_token));
-            dispatch(userActions.userReceived(data.athlete));
-        }).catch(error=> {
-            dispatch(requestTokenError(error));
+            accessTokenStorage.set(data.access_token);
+            dispatch(setIsAuthenticated(true));
+            dispatch(setAuthUser(data.athlete));
         });
     };
 }
 
-export function requestAccessDenied(error) {
-    return {type: types.REQUEST_ACCESS_DENIED, error};
+export function setIsAuthenticated(isAuthenticated) {
+    return {type: types.SET_IS_AUTHENTICATED, isAuthenticated};
 }
 
-export function requestTokenSuccess(access_token) {
-    return {type: types.REQUEST_TOKEN_SUCCESS, access_token};
+export function getAuthUser() {
+    return function (dispatch) {
+        return new AthleteApi().getAuthAthlete().then(data=> {
+            dispatch(setAuthUser(data));
+        });
+    };
 }
 
-export function requestTokenError(error) {
-    return {type: types.REQUEST_TOKEN_ERROR, error};
+export function setAuthUser(user) {
+    return {type: types.SET_AUTH_USER, user};
 }

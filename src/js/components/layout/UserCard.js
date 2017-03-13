@@ -1,24 +1,29 @@
 import React, {PropTypes} from 'react';
-import { Card, CardTitle } from 'react-toolbox/lib/card';
-import Avatar from 'react-toolbox/lib/avatar';
+import {connect} from 'react-redux';
 
-const UserCard = ({avatar, title, subtitle}) => {
-    return (
-        /*<Card>
-            <CardTitle
-                avatar={avatar}
-                title={title}
-                subtitle={subtitle}
-            />
-        </Card>*/
-        <Avatar image={avatar} title={title} />
-    );
-};
+class UserCard extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+    }
+    render() {
+        const {avatar, fullName} = this.props.user;
+        return (
+            <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                <img src={avatar} className="user-image" alt="User Image" />
+                <span className="hidden-xs">{fullName}</span>
+            </a>
+        );
+    }
+}
 
 UserCard.propTypes = {
-    avatar: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string
+    user: PropTypes.object.isRequired
 };
 
-export default UserCard;
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.auth.user
+    };
+}
+
+export default connect(mapStateToProps)(UserCard);
