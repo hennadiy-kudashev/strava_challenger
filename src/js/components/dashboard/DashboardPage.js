@@ -1,11 +1,10 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import ClubApi from "../../api/clubApi";
-import MemberList from "./MemberList";
 import * as clubActions from "../../actions/clubActions";
 import {bindActionCreators} from "redux";
 import Header from '../layout/Header';
-
+import Grid from '../layout/Grid';
 
 class DashboardPage extends React.Component {
     constructor(props, context) {
@@ -30,9 +29,7 @@ class DashboardPage extends React.Component {
         }
         else {
             return (
-                <div>
-                    <MemberList members={members}/>
-                </div>
+                    <Grid members={members}/>
             );
         }
     }
