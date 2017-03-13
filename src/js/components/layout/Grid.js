@@ -4,7 +4,7 @@ import Table from '../layout/table/Table';
 const Grid = ({members}) => {
     return (
         <div className="content">
-            <div className="box box-primary">
+            <div className="box box-default">
                 <div className="box-header with-border">
                     <h3 className="box-title">Default Box Example</h3>
                 </div>

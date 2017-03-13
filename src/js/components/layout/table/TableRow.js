@@ -4,17 +4,14 @@ const TableRow = ({member}) => {
     return (
         <tr>
             <td>
-                <strong>
-                    {member.firstname} {member.lastname}
-                </strong>
-                <div className="text-muted">
-                    <small>
+                <div className="user-block">
+                    <img src={member.profile} className="img-circle img-bordered-sm" alt="User Image" />
+                    <div className="username">
+                        {member.firstname} {member.lastname}
+                    </div>
+                    <div className="description">
                         {member.city}, {member.state}, {member.country}
-                    </small>
-                    <small>
-                    </small>
-                    <small>
-                    </small>
+                    </div>
                 </div>
             </td>
             <td></td>
