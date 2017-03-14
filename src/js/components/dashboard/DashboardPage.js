@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import Grid from '../layout/Grid';
 import * as clubActions from "../../actions/clubActions";
 import {bindActionCreators} from "redux";
-import {browserHistory} from "react-router";
 
 class DashboardPage extends React.Component {
     constructor(props, context) {
@@ -11,12 +10,8 @@ class DashboardPage extends React.Component {
     }
 
     componentWillMount() {
-        const {actions, auth} = this.props;
-        if (auth.isAuthenticated) {
-            actions.getClubMembers();
-        }else{
-            browserHistory.push('/');
-        }
+        const {actions} = this.props;
+        actions.getClubMembers();
     }
 
     render() {
@@ -28,14 +23,12 @@ class DashboardPage extends React.Component {
 }
 
 DashboardPage.propTypes = {
-    auth: PropTypes.object.isRequired,
     members: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        auth: state.auth,
         members: state.club.members
     };
 }
