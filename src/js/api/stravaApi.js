@@ -2,14 +2,12 @@ import accessTokenStorage from './accessTokenStorage';
 
 function status(response) {
     if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response);
+        return response;
     } else {
-        let error = response.statusText;
-        if (response.status === 401){
-            error = 'Unauthorized';
-            accessTokenStorage.remove();
-        }
-        return Promise.reject(error);
+        throw {
+            status:response.status, 
+            text: response.statusText
+        };
     }
 }
 

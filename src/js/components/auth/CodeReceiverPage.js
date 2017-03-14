@@ -19,11 +19,7 @@ class CodeReceiverPage extends React.Component {
         }
         else {
             const code = location.query.code;
-            this.props.actions.getAccessToken(code).then(()=> {
-                browserHistory.push('/dashboard');
-            }).catch(error=> {
-                return (<div>{error}</div>);
-            });
+            this.props.actions.getAccessToken(code);
             return (<Spinner/>);
         }
     }
