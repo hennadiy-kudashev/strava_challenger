@@ -1,7 +1,6 @@
 import {createStore, applyMiddleware, compose} from "redux";
 import rootReducer from "../reducers";
 import createLogger from "redux-logger";
-//import thunk from "redux-thunk";
 import thunk from '../utils/thunk';
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 
