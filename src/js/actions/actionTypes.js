@@ -1,3 +1,4 @@
 export const SET_IS_AUTHENTICATED = 'SET_IS_AUTHENTICATED';
 export const SET_AUTH_USER = 'SET_AUTH_USER';
 export const SET_CLUB_MEMBERS = 'SET_CLUB_MEMBERS';
+export const SET_STATS = 'SET_STATS';

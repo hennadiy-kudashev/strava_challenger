@@ -12,6 +12,10 @@ class AthleteApi extends StravaApi {
     getAuthAthlete(){
         return super.get('https://www.strava.com/api/v3/athlete');
     }
+
+    getStats(athleteId) {
+        return super.get(`https://www.strava.com/api/v3/athletes/${athleteId}/stats`);
+    }
 }
 
 export default AthleteApi;

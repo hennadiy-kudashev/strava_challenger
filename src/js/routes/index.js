@@ -20,7 +20,7 @@ function requireAuth(nextState, replace) {
     if (!accessTokenStorage.isExist()) {
         replace({
             pathname: '/'
-        })
+        });
     }
 }
 
