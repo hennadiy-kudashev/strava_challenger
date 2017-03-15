@@ -13,11 +13,19 @@ class DashboardPage extends React.Component {
     componentWillMount() {
         const {actions} = this.props;
         actions.clubActions.getClubMembers();
-    }
 
-    componentWillUpdate(nextProps, nextState) {
-        const {actions, members } = nextProps;
-        actions.statsActions.getStats(members);
+        // Hardcoded list of athletes for challange
+        const athletes = [
+            {
+                id: '18192624',
+                token: '2d86cee021852379115518352e9f9596eed897e6'
+            },
+            {
+                id: '14419142',
+                token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
+            }
+        ];
+        actions.statsActions.getStats(athletes);
     }
 
     render() {

@@ -10,7 +10,7 @@ const TableRow = ({member}) => {
                         {member.firstname} {member.lastname}
                     </div>
                     <div className="description">
-                        {member.city}, {member.state}, {member.country}
+                        {member.city}, {member.state}, {member.country}, { member.id }
                     </div>
                 </div>
             </td>

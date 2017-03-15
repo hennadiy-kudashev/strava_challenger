@@ -1,8 +1,8 @@
 import StravaApi from "./stravaApi";
 
 class AthleteApi extends StravaApi {
-    constructor() {
-        super();
+    constructor(accessToken) {
+        super(accessToken);
     }
 
     getFollowers() {
