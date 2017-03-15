@@ -2,6 +2,7 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import Grid from '../layout/Grid';
 import * as clubActions from "../../actions/clubActions";
+import * as statsActions from "../../actions/statsActions";
 import {bindActionCreators} from "redux";
 
 class DashboardPage extends React.Component {
@@ -11,7 +12,12 @@ class DashboardPage extends React.Component {
 
     componentWillMount() {
         const {actions} = this.props;
-        actions.getClubMembers();
+        actions.clubActions.getClubMembers();
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        const {actions, members } = nextProps;
+        actions.statsActions.getStats(members);
     }
 
     render() {
@@ -35,7 +41,10 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(clubActions, dispatch)
+        actions: {
+            clubActions: bindActionCreators(clubActions, dispatch),
+            statsActions: bindActionCreators(statsActions, dispatch)
+        }
     };
 }
 

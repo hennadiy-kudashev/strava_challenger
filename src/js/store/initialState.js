@@ -9,5 +9,6 @@ auth: {
     },
     club: {
         members:[]
-    }
+    },
+    stats: []
 };
