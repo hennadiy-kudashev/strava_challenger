@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import clubReducer from './clubReducer';
-import statsReducer from './statsReducer';
+import challengeReducer from './challengeReducer';
 
 export default combineReducers({
     auth: authReducer,
     club: clubReducer,
-    stats: statsReducer
+    challenges: challengeReducer
 });

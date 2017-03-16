@@ -2,7 +2,7 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import Grid from '../layout/Grid';
 import * as clubActions from "../../actions/clubActions";
-import * as statsActions from "../../actions/statsActions";
+import * as challengeActions from "../../actions/challengeActions";
 import {bindActionCreators} from "redux";
 
 class DashboardPage extends React.Component {
@@ -14,18 +14,27 @@ class DashboardPage extends React.Component {
         const {actions} = this.props;
         actions.clubActions.getClubMembers();
 
-        // Hardcoded list of athletes for challange
-        const athletes = [
+        const Yaro = {
+            id: '18192624',
+            token: '2d86cee021852379115518352e9f9596eed897e6',
+            stats: []
+
+        };
+        const Gena = {
+            id: '14419142',
+            token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3',
+            stats: []
+        };
+
+        actions.challengeActions.setChallenge(
             {
-                id: '18192624',
-                token: '2d86cee021852379115518352e9f9596eed897e6'
-            },
-            {
-                id: '14419142',
-                token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
+                id: 0,
+                displayName: '2017 in 2017',
+                athletes: []
             }
-        ];
-        actions.statsActions.getStats(athletes);
+        );
+        actions.challengeActions.followChallenge(0, Yaro);
+        actions.challengeActions.followChallenge(0, Gena);
     }
 
     render() {
@@ -51,7 +60,7 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             clubActions: bindActionCreators(clubActions, dispatch),
-            statsActions: bindActionCreators(statsActions, dispatch)
+            challengeActions: bindActionCreators(challengeActions, dispatch)
         }
     };
 }

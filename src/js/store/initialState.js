@@ -1,5 +1,5 @@
 export default {
-auth: {
+    auth: {
         isAuthenticated: false,
         user: {
             userName: '',
@@ -10,7 +10,7 @@ auth: {
     club: {
         members:[]
     },
-    stats: []
+    challenges: []
 };
 /*
 challenges: [
@@ -25,8 +25,7 @@ challenges: [
                     name: '',
                     avatar: ''
                 },
-                stats: {}
-            }
+                stats: []
         ]
     }
 ]
