@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import clubReducer from './clubReducer';
-import challengeReducer from './challengeReducer';
+import challengesReducer from './challengesReducer';
+import currentChallengeReducer from './currentChallengeReducer';
 
 export default combineReducers({
     auth: authReducer,
     club: clubReducer,
-    challenges: challengeReducer
+    challenges: challengesReducer,
+    currentChallenge: currentChallengeReducer
 });

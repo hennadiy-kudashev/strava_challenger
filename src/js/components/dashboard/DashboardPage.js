@@ -11,30 +11,32 @@ class DashboardPage extends React.Component {
     }
 
     componentWillMount() {
-        const {actions} = this.props;
-        actions.clubActions.getClubMembers();
+        const {actions, currentChallenge} = this.props;
+        // actions.clubActions.getClubMembers();
 
         const Yaro = {
             id: '18192624',
-            token: '2d86cee021852379115518352e9f9596eed897e6',
-            stats: []
-
+            token: '2d86cee021852379115518352e9f9596eed897e6'
         };
         const Gena = {
             id: '14419142',
-            token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3',
-            stats: []
+            token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
         };
 
-        actions.challengeActions.setChallenge(
-            {
-                id: 0,
-                displayName: '2017 in 2017',
-                athletes: []
-            }
-        );
-        actions.challengeActions.followChallenge(0, Yaro);
-        actions.challengeActions.followChallenge(0, Gena);
+        // actions.challengeActions.setChallenge(
+        //     {
+        //         id: 0,
+        //         displayName: '2017 in 2017',
+        //         athletes: []
+        //     }
+        // );
+        // actions.challengeActions.followChallenge(0, Yaro);
+        // actions.challengeActions.followChallenge(0, Gena);
+
+        currentChallenge.athletes.forEach(athlete => {
+            actions.challengeActions.getChallengeAthleteInfo(athlete);
+        });
+
     }
 
     render() {
@@ -47,12 +49,16 @@ class DashboardPage extends React.Component {
 
 DashboardPage.propTypes = {
     members: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    challenges: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired,
+    currentChallenge: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        members: state.club.members
+        members: state.club.members,
+        challenges: state.challenges,
+        currentChallenge: state.currentChallenge
     };
 }
 
