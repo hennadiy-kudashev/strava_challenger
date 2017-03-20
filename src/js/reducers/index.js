@@ -11,5 +11,4 @@ export default combineReducers({
     club: clubReducer,
     challenges: challengesReducer,
     currentChallenge: currentChallengeReducer
-
 });
