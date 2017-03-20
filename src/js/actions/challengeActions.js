@@ -1,8 +1,21 @@
 import * as types from './actionTypes';
 import AthleteApi from '../api/athleteApi';
+import ChallengeApi from '../api/challengeApi';
 
 export function createChallenge(challenge) {
     return { type: types.CREATE_CHALLENGE, challenge};
+}
+
+export function getChallenges() {
+    return function (dispatch) {
+        return new ChallengeApi().getAll().then(challenges => {
+            dispatch(setChallenges(challenges));
+        });
+    };
+}
+
+export function setChallenges(challenges) {
+    return { type: types.SET_CHALLENGES, challenges};
 }
 
 // current challenge actions

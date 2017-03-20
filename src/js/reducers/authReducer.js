@@ -6,7 +6,7 @@ export default function authReducer(state = initialState.auth, action) {
     switch (action.type) {
         case types.SET_IS_AUTHENTICATED:
             if (action.isAuthenticated){
-                browserHistory.push('/dashboard');
+                browserHistory.push(action.path);
             }
             else{
                 browserHistory.push('/');

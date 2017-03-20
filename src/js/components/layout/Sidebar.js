@@ -1,15 +1,11 @@
 import React from 'react';
+import ChallengeMenu from '../challenge/ChallengeMenu';
 
 const Sidebar = () => {
     return (
         <div className="main-sidebar">
             <div className="sidebar">
-                <ul className="sidebar-menu">
-                    <li className="header">SHARED CHALLENGES</li>
-                    <li className="active"><a href="#"><span>2017 in 2017</span></a></li>
-                    <li className="header">PRIVATE CHALLENGES</li>
-                    <li><a href="#"><span>My</span></a></li>
-                </ul>
+                <ChallengeMenu />
             </div>
         </div>
     );
