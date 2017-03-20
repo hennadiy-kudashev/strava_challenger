@@ -14,13 +14,13 @@ class DashboardPage extends React.Component {
         const {actions, currentChallenge} = this.props;
         actions.clubActions.getClubMembers();
 
-        actions.challengeActions.createChallenge(
+        /*actions.challengeActions.createChallenge(
             {
-                id: 0,
-                displayName: '2017 in 2019',
+                id: '0',
+                displayName: '2017 in 2017',
                 athletes: []
             }
-        );
+        );*/
 
         currentChallenge.athletes.forEach(athlete => {
             actions.challengeActions.getChallengeAthleteInfo(athlete);
