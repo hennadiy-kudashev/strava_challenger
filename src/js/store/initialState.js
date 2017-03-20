@@ -30,21 +30,3 @@ export default {
         ]
     }
 };
-/*
-challenges: [
-    {
-        id: '',
-        displayName: '',
-        athletes: [
-            {
-                id: '',
-                token: '',
-                user: {
-                    name: '',
-                    avatar: ''
-                },
-                stats: []
-        ]
-    }
-]
-*/
