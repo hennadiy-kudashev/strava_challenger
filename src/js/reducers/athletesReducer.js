@@ -6,8 +6,14 @@ export default function athletesReducer(state = [], action) {
           case types.SET_CHALLENGE_ATHLETE_INFO:
             return state.map(athlete => {
                 if (athlete.id === action.athleteId) {
+                    const {firstname, lastname, profile} = action.info;
+
                     return Object.assign({}, athlete, {
-                        userInfo: action.info
+                        userInfo: {
+                            lastname,
+                            firstname,
+                            profile
+                        }
                     });
                 }
                 return athlete;
