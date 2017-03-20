@@ -5,8 +5,7 @@ function status(response) {
         return response;
     } else {
         throw {
-            status:response.status, 
-            text: response.statusText
+            response
         };
     }
 }

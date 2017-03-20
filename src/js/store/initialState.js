@@ -1,4 +1,5 @@
 export default {
+    errors: [],
     auth: {
         isAuthenticated: false,
         user: {
