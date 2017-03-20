@@ -16,11 +16,11 @@ function json(response) {
 }
 
 class StravaApi {
-    constructor() {
+    constructor(accessToken) {
         this.headers = {};
-        const accessToken = accessTokenStorage.get();
-        if (accessToken) {
-            this.headers['Authorization'] = `Bearer ${accessToken}`;
+        const token = accessToken || accessTokenStorage.get();
+        if (token) {
+            this.headers['Authorization'] = `Bearer ${token}`;
         }
     }
 

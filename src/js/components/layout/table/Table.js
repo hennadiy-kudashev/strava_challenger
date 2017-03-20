@@ -15,7 +15,7 @@ const Table = ({members}) => {
             </thead>
             <tbody>
                 {
-                    members.map( member => <TableRow member={member} /> )
+                    members.map( member => <TableRow key={member.id} member={member} /> )
                 }
             </tbody>
         </table>
