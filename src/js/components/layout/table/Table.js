@@ -11,7 +11,7 @@ const Table = ({columns, rows}) => {
             </thead>
             <tbody>
                 {
-                    rows.map( row => <TableRow key={row.key} row={row} /> )
+                    rows.map((row, index) => <TableRow key={index} row={row} /> )
                 }
             </tbody>
         </table>

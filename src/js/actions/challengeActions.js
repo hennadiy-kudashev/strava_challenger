@@ -1,9 +1,9 @@
-import * as types from './actionTypes';
-import AthleteApi from '../api/athleteApi';
-import ChallengeApi from '../api/challengeApi';
+import * as types from "./actionTypes";
+import AthleteApi from "../api/athleteApi";
+import ChallengeApi from "../api/challengeApi";
 
 export function createChallenge(challenge) {
-    return { type: types.CREATE_CHALLENGE, challenge};
+    return {type: types.CREATE_CHALLENGE, challenge};
 }
 
 export function getChallenges() {
@@ -15,11 +15,28 @@ export function getChallenges() {
 }
 
 export function setChallenges(challenges) {
-    return { type: types.SET_CHALLENGES, challenges};
+    return {type: types.SET_CHALLENGES, challenges};
 }
 
 export function followChallenge(challengeId, athlete) {
-    return { type: types.FOLLOW_CHALLENGE, challengeId, athlete};
+    return {type: types.FOLLOW_CHALLENGE, challengeId, athlete};
+}
+
+export function getChallenge(id, athletes) {
+    return function (dispatch) {
+        return Promise.all([
+            Promise.all(athletes.map(athlete=>new AthleteApi().getInfo(athlete.id))),
+            Promise.all(athletes.map(athlete=>new AthleteApi(athlete.token).getActivities()))
+        ]).then(values=> {
+            const infoList = values[0];
+            const activitiesList = values[1];
+            dispatch(setChallenge(id, infoList, activitiesList));
+        });
+    };
+}
+
+export function setChallenge(challengeId, infoList, activitiesList) {
+    return {type: types.SET_CHALLENGE, challengeId, infoList, activitiesList};
 }
 
 export function getChallengeAthleteInfo(challengeId, athlete) {
@@ -39,9 +56,9 @@ export function getChallengeAthleteActivities(challengeId, athlete) {
 }
 
 export function setChallengeAthleteInfo(info, challengeId, athleteId) {
-    return { type: types.SET_CHALLENGE_ATHLETE_INFO, info, challengeId, athleteId};
+    return {type: types.SET_CHALLENGE_ATHLETE_INFO, info, challengeId, athleteId};
 }
 
 export function setChallengeAthleteActivities(activities, challengeId, athleteId) {
-    return { type: types.SET_CHALLENGE_ATHLETE_ACTIVITIES, activities, challengeId, athleteId};
+    return {type: types.SET_CHALLENGE_ATHLETE_ACTIVITIES, activities, challengeId, athleteId};
 }

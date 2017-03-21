@@ -1,9 +1,8 @@
 import * as types from "../actions/actionTypes";
-import initialState from "../store/initialState";
 
 export default function athletesReducer(state = [], action) {
     switch (action.type) {
-          case types.SET_CHALLENGE_ATHLETE_INFO:
+        case types.SET_CHALLENGE_ATHLETE_INFO:
             return state.map(athlete => {
                 if (athlete.id === action.athleteId) {
                     const {firstname, lastname, profile} = action.info;
@@ -26,6 +25,16 @@ export default function athletesReducer(state = [], action) {
                     });
                 }
                 return athlete;
+            });
+        case types.SET_CHALLENGE:
+            return state.map((athlete, index) => {
+                //const userInfo = action.infoList.find(i=>i.id === athlete.id);
+                const userInfo = action.infoList[index];
+                const activities = action.activitiesList[index];
+                return Object.assign({}, athlete, {
+                    userInfo,
+                    activities
+                });
             });
         default:
             return state;

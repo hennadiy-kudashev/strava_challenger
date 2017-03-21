@@ -10,11 +10,10 @@ export default function challengesReducer(state = initialState.challenges, actio
             return action.challenges;
         case types.SET_CHALLENGE_ATHLETE_INFO:
         case types.SET_CHALLENGE_ATHLETE_ACTIVITIES:
+        case types.SET_CHALLENGE:
             return state.map(challenge => {
                 if (challenge.id === action.challengeId) {
-                    const currentChallenge = currentChallengeReducer(challenge, action);
-
-                    return currentChallenge;
+                    return currentChallengeReducer(challenge, action);
                 }
 
                 return challenge;

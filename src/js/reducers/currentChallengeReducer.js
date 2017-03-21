@@ -8,8 +8,10 @@ export default function currentChallengeReducer(state = {}, action) {
             return state;
         case types.SET_CHALLENGE_ATHLETE_INFO:
         case types.SET_CHALLENGE_ATHLETE_ACTIVITIES:
+        case types.SET_CHALLENGE:
             return Object.assign({}, state, {
-                athletes: athletesReducer(state.athletes, action)
+                athletes: athletesReducer(state.athletes, action),
+                isLoaded:true
             });
         default:
             return state;
