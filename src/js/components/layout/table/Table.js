@@ -1,21 +1,17 @@
 import React, { PropTypes } from 'react';
 import TableRow from './TableRow';
 
-const Table = ({members}) => {
+const Table = ({columns, rows}) => {
     return (
         <table className="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>Rendering engine</th>
-                <th>Browser</th>
-                <th>Platform(s)</th>
-                <th>Engine version</th>
-                <th>CSS grade</th>
+                {columns.map(column => <th>{column}</th>)}
               </tr>
             </thead>
             <tbody>
                 {
-                    members.map( member => <TableRow key={member.id} member={member} /> )
+                    rows.map( row => <TableRow key={row.key} row={row} /> )
                 }
             </tbody>
         </table>
@@ -23,7 +19,8 @@ const Table = ({members}) => {
 };
 
 Table.propTypes = {
-    members: PropTypes.array.isRequired
+    columns: PropTypes.array.isRequired,
+    rows: PropTypes.array.isRequired
 };
 
 export default Table;

@@ -4,6 +4,7 @@ import Grid from '../layout/Grid';
 import * as clubActions from "../../actions/clubActions";
 import * as challengeActions from "../../actions/challengeActions";
 import {bindActionCreators} from "redux";
+import TotalView from '../challenge/view/TotalView';
 
 class DashboardPage extends React.Component {
     constructor(props, context) {
@@ -16,9 +17,9 @@ class DashboardPage extends React.Component {
     }
 
     render() {
-        const {members} = this.props;
+        const {currentChallenge} = this.props;
         return (
-            <Grid members={members}/>
+            <TotalView title={currentChallenge.displayName} athletes={currentChallenge.athletes}/>
         );
     }
 }

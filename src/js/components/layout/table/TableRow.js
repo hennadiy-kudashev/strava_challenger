@@ -1,29 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const TableRow = ({member}) => {
+const TableRow = ({row}) => {
     return (
         <tr>
-            <td>
-                <div className="user-block">
-                    <img src={member.profile} className="img-circle img-bordered-sm" alt="User Image" />
-                    <div className="username">
-                        {member.firstname} {member.lastname}
-                    </div>
-                    <div className="description">
-                        {member.city}, {member.state}, {member.country}, { member.id }
-                    </div>
-                </div>
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            {row.map(item=><td>{item}</td>)}
         </tr>
     );
 };
 
 TableRow.propTypes = {
-    member: PropTypes.object.isRequired
+    row: PropTypes.object.isRequired
 };
 
 export default TableRow;

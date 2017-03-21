@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 import Table from '../layout/table/Table';
 
-const Grid = ({members}) => {
+const Grid = ({title, columns, rows}) => {
     return (
         <div className="content">
             <div className="box box-default">
                 <div className="box-header with-border">
-                    <h3 className="box-title">Default Box Example</h3>
+                    <h3 className="box-title">{title}</h3>
                 </div>
                 <div className="box-body">
-                    <Table members={members} />
+                    <Table columns={columns} rows={rows} />
                 </div>
                 <div className="box-footer">
                 </div>
@@ -19,7 +19,9 @@ const Grid = ({members}) => {
 };
 
 Grid.propTypes = {
-    members: PropTypes.array.isRequired
+    title: PropTypes.string,
+    columns: PropTypes.array.isRequired,
+    rows: PropTypes.array.isRequired
 };
 
 export default Grid;

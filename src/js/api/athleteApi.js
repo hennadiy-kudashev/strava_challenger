@@ -18,7 +18,8 @@ class AthleteApi extends StravaApi {
     }
 
     getActivities() {
-        return super.get(`https://www.strava.com/api/v3/athlete/activities`);
+        const firstJan2017 = new Date('2017-01-01T00:00:00Z').getTime() / 1000;
+        return super.get(`https://www.strava.com/api/v3/athlete/activities?after=${firstJan2017}&per_page=200&page=1`);
     }
 }
 
