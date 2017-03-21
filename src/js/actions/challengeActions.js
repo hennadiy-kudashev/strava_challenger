@@ -18,8 +18,6 @@ export function setChallenges(challenges) {
     return { type: types.SET_CHALLENGES, challenges};
 }
 
-// current challenge actions
-
 export function followChallenge(challengeId, athlete) {
     return { type: types.FOLLOW_CHALLENGE, challengeId, athlete};
 }
@@ -32,11 +30,10 @@ export function getChallengeAthleteInfo(challengeId, athlete) {
     };
 }
 
-// TODO: add college id parameter
-export function getChallengeAthleteActivities(athlete) {
+export function getChallengeAthleteActivities(challengeId, athlete) {
     return function (dispatch) {
         return new AthleteApi(athlete.token).getActivities().then(activities => {
-            dispatch(setChallengeAthleteActivities(activities, athlete.id));
+            dispatch(setChallengeAthleteActivities(activities, challengeId, athlete.id));
         });
     };
 }
@@ -45,6 +42,6 @@ export function setChallengeAthleteInfo(info, challengeId, athleteId) {
     return { type: types.SET_CHALLENGE_ATHLETE_INFO, info, challengeId, athleteId};
 }
 
-export function setChallengeAthleteActivities(activities, athleteId) {
-    return { type: types.SET_CHALLENGE_ATHLETE_ACTIVITIES, activities, athleteId};
+export function setChallengeAthleteActivities(activities, challengeId, athleteId) {
+    return { type: types.SET_CHALLENGE_ATHLETE_ACTIVITIES, activities, challengeId, athleteId};
 }

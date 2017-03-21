@@ -2,6 +2,7 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as challengeActions from "../../actions/challengeActions";
+import _ from 'lodash';
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
@@ -11,13 +12,14 @@ class ChallengePage extends React.Component {
     componentWillReceiveProps(next){
         const {challenge, actions} = next;
 
-        // TODO: Fix infinite loop
-
         challenge.athletes.forEach((athlete) => {
-            // actions.challengeActions.getChallengeAthleteInfo(challenge.id, athlete);
+            if (_.isEmpty(athlete.userInfo)) {
+                actions.challengeActions.getChallengeAthleteInfo(challenge.id, athlete);
+            }
 
-            // TODO: Call athlete activities
-            // actions.challengeActions.getChallengeAthleteActivities(challenge.id, athlete);
+            if (_.isEmpty(athlete.activities)) {
+                actions.challengeActions.getChallengeAthleteActivities(challenge.id, athlete);
+            }
         });
     }
 
