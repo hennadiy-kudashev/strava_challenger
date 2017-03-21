@@ -12,21 +12,7 @@ class DashboardPage extends React.Component {
 
     componentWillMount() {
         const {actions, currentChallenge} = this.props;
-        actions.clubActions.getClubMembers();
-
-        /*actions.challengeActions.createChallenge(
-            {
-                id: '0',
-                displayName: '2017 in 2017',
-                athletes: []
-            }
-        );*/
-
-        currentChallenge.athletes.forEach(athlete => {
-            actions.challengeActions.getChallengeAthleteInfo(athlete);
-            actions.challengeActions.getChallengeAthleteActivities(athlete);
-        });
-
+        // actions.clubActions.getClubMembers();
     }
 
     render() {
@@ -40,15 +26,13 @@ class DashboardPage extends React.Component {
 DashboardPage.propTypes = {
     members: PropTypes.array.isRequired,
     challenges: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired,
-    currentChallenge: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
     return {
         members: state.club.members,
-        challenges: state.challenges,
-        currentChallenge: state.currentChallenge
+        challenges: state.challenges
     };
 }
 

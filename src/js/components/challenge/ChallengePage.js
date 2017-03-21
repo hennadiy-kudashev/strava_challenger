@@ -1,6 +1,7 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import * as challengeActions from "../../actions/challengeActions";
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
@@ -8,7 +9,16 @@ class ChallengePage extends React.Component {
     }
 
     componentWillReceiveProps(next){
-        console.log(next.challenge);
+        const {challenge, actions} = next;
+
+        // TODO: Fix infinite loop
+
+        challenge.athletes.forEach((athlete) => {
+            // actions.challengeActions.getChallengeAthleteInfo(challenge.id, athlete);
+
+            // TODO: Call athlete activities
+            // actions.challengeActions.getChallengeAthleteActivities(challenge.id, athlete);
+        });
     }
 
     render() {
@@ -40,4 +50,12 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps)(ChallengePage);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
+            challengeActions: bindActionCreators(challengeActions, dispatch)
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChallengePage);
