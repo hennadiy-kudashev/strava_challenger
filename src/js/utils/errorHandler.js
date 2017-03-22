@@ -1,3 +1,4 @@
+/*eslint-disable no-console*/
 import * as authAction from '../actions/authActions';
 import  * as errorActions from '../actions/errorActions';
 

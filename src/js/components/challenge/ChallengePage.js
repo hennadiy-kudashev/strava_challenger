@@ -15,7 +15,7 @@ class ChallengePage extends React.Component {
         const {challenge, actions} = next;
         
         if (!challenge.isLoaded){
-            actions.challengeActions.getChallenge(challenge.id, challenge.athletes);
+            actions.challengeActions.getChallenge(challenge.id, challenge.athletes, challenge.criteria);
         }
         /*challenge.athletes.forEach((athlete) => {
             if (_.isEmpty(athlete.userInfo)) {

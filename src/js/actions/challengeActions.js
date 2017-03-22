@@ -22,11 +22,13 @@ export function followChallenge(challengeId, athlete) {
     return {type: types.FOLLOW_CHALLENGE, challengeId, athlete};
 }
 
-export function getChallenge(id, athletes) {
+export function getChallenge(id, athletes, criteria) {
     return function (dispatch) {
         return Promise.all([
             Promise.all(athletes.map(athlete=>new AthleteApi().getInfo(athlete.id))),
-            Promise.all(athletes.map(athlete=>new AthleteApi(athlete.token).getActivities()))
+            Promise.all(athletes.map(athlete=>new AthleteApi(athlete.token).getActivities(
+                new Date(criteria.datetime.after),
+                new Date(criteria.datetime.before))))
         ]).then(values=> {
             const infoList = values[0];
             const activitiesList = values[1];

@@ -6,10 +6,10 @@ import TotalSummary from '../../../logic/totalSummary';
 const TotalView = ({title, athletes}) => {
     const columns = ['Athlete', 'Runs', 'Distance', 'Elev Gain', 'Time'];
 
-    const rows = athletes.map(a=> {
-        const totalSummary = new TotalSummary(a.activities);
+    const rows = athletes.map(athlete=> {
+        const totalSummary = new TotalSummary(athlete.activities);
         return [
-            (<UserInfo userInfo={a.userInfo}/>), 
+            (<UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>), 
             totalSummary.getRunCount(), 
             totalSummary.getDistance(), 
             totalSummary.getElevGain(),

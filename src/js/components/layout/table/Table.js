@@ -6,7 +6,7 @@ const Table = ({columns, rows}) => {
         <table className="table table-bordered table-hover">
             <thead>
               <tr>
-                {columns.map(column => <th>{column}</th>)}
+                {columns.map((column, index) => <th key={index}>{column}</th>)}
               </tr>
             </thead>
             <tbody>

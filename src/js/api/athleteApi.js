@@ -17,9 +17,21 @@ class AthleteApi extends StravaApi {
         return super.get(`https://www.strava.com/api/v3/athletes/${athleteId}`);
     }
 
-    getActivities() {
-        const firstJan2017 = new Date('2017-01-01T00:00:00Z').getTime() / 1000;
-        return super.get(`https://www.strava.com/api/v3/athlete/activities?after=${firstJan2017}&per_page=200&page=1`);
+    /**
+     * Returns activities for given range.
+     * @param {Date} before
+     * @param {Date} after
+     * @returns {Promise.<TResult>}
+     */
+    getActivities(after, before) {
+        let url = `https://www.strava.com/api/v3/athlete/activities?per_page=200&page=1`;
+        if (after){
+            url += `&after=${after.getTime() / 1000}`;
+        }
+        if (before){
+            url += `&before=${before.getTime() / 1000}`;
+        }
+        return super.get(url);
     }
 }
 

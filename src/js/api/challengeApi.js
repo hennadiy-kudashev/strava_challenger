@@ -10,10 +10,16 @@ const challenges = [{
             id: '14419142',
             token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
         }
-    ]
+    ],
+    criteria:{
+        datetime: {
+            after: '2017-01-01T00:00:00Z',
+            before: '2017-12-31T23:59:59Z'
+        }
+    }
 }, {
     id: '23',
-    displayName: '2017 km in first half 2017',
+    displayName: 'January Distance Challenge',
     athletes: [
         {
             id: '18192624',
@@ -23,7 +29,13 @@ const challenges = [{
             id: '14419142',
             token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
         }
-    ]
+    ],
+    criteria:{
+        datetime: {
+            after: '2017-01-01T00:00:00Z',
+            before: '2017-01-31T23:59:59Z'
+        }
+    }
 }];
 class ChallengeApi {
     getAll() {
