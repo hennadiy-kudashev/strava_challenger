@@ -13,19 +13,10 @@ class ChallengePage extends React.Component {
 
     componentWillReceiveProps(next){
         const {challenge, actions} = next;
-        
+
         if (!challenge.isLoaded){
             actions.challengeActions.getChallenge(challenge.id, challenge.athletes, challenge.criteria);
         }
-        /*challenge.athletes.forEach((athlete) => {
-            if (_.isEmpty(athlete.userInfo)) {
-                actions.challengeActions.getChallengeAthleteInfo(challenge.id, athlete);
-            }
-
-            if (_.isEmpty(athlete.activities)) {
-                actions.challengeActions.getChallengeAthleteActivities(challenge.id, athlete);
-            }
-        });*/
     }
 
     render() {

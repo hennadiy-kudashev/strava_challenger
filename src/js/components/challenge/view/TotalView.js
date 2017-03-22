@@ -9,13 +9,14 @@ const TotalView = ({title, athletes}) => {
     const rows = athletes.map(athlete=> {
         const totalSummary = new TotalSummary(athlete.activities);
         return [
-            (<UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>), 
-            totalSummary.getRunCount(), 
-            totalSummary.getDistance(), 
+            (<UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>),
+            totalSummary.getRunCount(),
+            totalSummary.getDistance(),
             totalSummary.getElevGain(),
             totalSummary.getTime()
         ];
     });
+
     return (
         <Grid title={title} columns={columns} rows={rows}/>
     );

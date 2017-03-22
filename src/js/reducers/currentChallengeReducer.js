@@ -6,8 +6,6 @@ export default function currentChallengeReducer(state = {}, action) {
     switch (action.type) {
         case types.FOLLOW_CHALLENGE:
             return state;
-        case types.SET_CHALLENGE_ATHLETE_INFO:
-        case types.SET_CHALLENGE_ATHLETE_ACTIVITIES:
         case types.SET_CHALLENGE:
             return Object.assign({}, state, {
                 athletes: athletesReducer(state.athletes, action),
