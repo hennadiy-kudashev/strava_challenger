@@ -2,9 +2,10 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as challengeActions from "../../actions/challengeActions";
-import _ from 'lodash';
-import TotalView from './view/TotalView';
+import TotalView from "./view/TotalView";
+import MonthDistanceView from "./view/MonthDistanceView";
 import Spinner from "../shared/Spinner";
+import Grid from "../layout/Grid";
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
@@ -23,7 +24,10 @@ class ChallengePage extends React.Component {
         const {challenge} = this.props;
         if (challenge && challenge.isLoaded) {
             return (
-                <TotalView title={challenge.displayName} athletes={challenge.athletes}/>
+                <Grid title={challenge.displayName}>
+                    <TotalView athletes={challenge.athletes}/>
+                    <MonthDistanceView challenge={challenge}/>
+                </Grid>
             );
         } else {
             return (<Spinner/>);

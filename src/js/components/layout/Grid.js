@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
-import Table from '../layout/table/Table';
 
-const Grid = ({title, columns, rows}) => {
+const Grid = ({title, children}) => {
     return (
         <div className="content">
             <div className="box box-default">
@@ -9,7 +8,7 @@ const Grid = ({title, columns, rows}) => {
                     <h3 className="box-title">{title}</h3>
                 </div>
                 <div className="box-body">
-                    <Table columns={columns} rows={rows} />
+                    {children}
                 </div>
                 <div className="box-footer">
                 </div>
@@ -20,8 +19,7 @@ const Grid = ({title, columns, rows}) => {
 
 Grid.propTypes = {
     title: PropTypes.string,
-    columns: PropTypes.array.isRequired,
-    rows: PropTypes.array.isRequired
+    children: PropTypes.array
 };
 
 export default Grid;

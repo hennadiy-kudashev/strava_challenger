@@ -70,6 +70,7 @@
     "react-redux": "^4.0.6",
     "react-router": "^2.4.1",
     "react-toastr": "2.8.2",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "moment": "^2.18.1"
   }
 }

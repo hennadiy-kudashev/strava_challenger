@@ -30,7 +30,6 @@ export function getChallenge(id, athletes, criteria) {
                 new Date(criteria.datetime.after),
                 new Date(criteria.datetime.before))))
         ]).then(values=> {
-            console.log(values);
             const infoList = values[0];
             const activitiesList = values[1];
             dispatch(setChallenge(id, infoList, activitiesList));
