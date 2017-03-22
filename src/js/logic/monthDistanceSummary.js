@@ -39,7 +39,7 @@ class MonthDistanceSummary {
                 return {
                     distance,
                     diff: distance - monthDistance
-                }
+                };
             });
     }
 }

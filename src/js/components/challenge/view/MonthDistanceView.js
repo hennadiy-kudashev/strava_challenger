@@ -16,7 +16,7 @@ const MonthDistanceView = ({challenge}) => {
         return [
             (<UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>), 
             ...monthDistanceSummary.getMonthsDistance(athlete.activities)
-                .map(obj=><DistanceAndDiff distance={obj.distance} diff={obj.diff} />)
+                .map((obj, index)=><DistanceAndDiff key={index} distance={obj.distance} diff={obj.diff} />)
         ];
     });
     return (

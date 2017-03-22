@@ -4,17 +4,17 @@ import Table from "../../layout/table/Table";
 import TotalSummary from '../../../logic/totalSummary';
 import {Kilometre, Metre, Time} from '../../../components/layout/format';
 
-const TotalView = ({title, athletes}) => {
+const TotalView = ({athletes}) => {
     const columns = ['Athlete', 'Runs', 'Distance', 'Elev Gain', 'Time'];
 
-    const rows = athletes.map(athlete=> {
+    const rows = athletes.map((athlete, index)=> {
         const totalSummary = new TotalSummary(athlete.activities);
         return [
-            <UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>, 
+            <UserInfo key={index} userInfo={athlete.userInfo}/>, 
             totalSummary.getRunCount(),
-            <Kilometre metres={totalSummary.getDistance()} />,
-            <Metre metres={totalSummary.getElevGain()} />,
-            <Time seconds={totalSummary.getTime()} />
+            <Kilometre key={index} metres={totalSummary.getDistance()} />,
+            <Metre key={index} metres={totalSummary.getElevGain()} />,
+            <Time key={index} seconds={totalSummary.getTime()} />
         ];
     });
     return (
@@ -23,8 +23,7 @@ const TotalView = ({title, athletes}) => {
 };
 
 TotalView.propTypes = {
-    athletes: PropTypes.array.isRequired,
-    title: PropTypes.string
+    athletes: PropTypes.array.isRequired
 };
 
 export default TotalView;
