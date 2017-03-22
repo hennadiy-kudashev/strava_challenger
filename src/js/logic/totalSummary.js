@@ -1,6 +1,12 @@
+import moment from "moment";
+
 class TotalSummary {
     constructor(activities) {
-        this.activities = activities.filter(a=> a.type == 'Run');
+        this.activities = activities;
+    }
+
+    static create(activities, start, end) {
+        return new this(activities.filter(activity=>moment(activity.start_date).isBetween(moment(start), moment(end))));
     }
 
     getRunCount() {
@@ -10,21 +16,19 @@ class TotalSummary {
     getDistance() {
         let distance = 0;
         this.activities.forEach(a=> distance += a.distance);
-        return `${Math.round(distance / 1000)} km`;
+        return distance;
     }
 
     getElevGain() {
         let elevGain = 0;
         this.activities.forEach(a=> elevGain += a.total_elevation_gain);
-        return `${Math.round(elevGain)} m`;
+        return elevGain;
     }
 
-    getTime(){
+    getTime() {
         let time = 0;
         this.activities.forEach(a=> time += a.moving_time);
-        const hr  = Math.floor(time / 3600);
-        const min = Math.floor((time - (hr * 3600))/60);
-        return `${hr}h ${min}m`;
+        return time;
     }
 }
 

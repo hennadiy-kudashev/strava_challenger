@@ -9,7 +9,7 @@ const TableRow = ({row}) => {
 };
 
 TableRow.propTypes = {
-    row: PropTypes.object.isRequired
+    row: PropTypes.array.isRequired
 };
 
 export default TableRow;

@@ -1,7 +1,8 @@
 import React, {PropTypes} from "react";
 import UserInfo from "./UserInfo";
-import Grid from "../../layout/Grid";
+import Table from "../../layout/table/Table";
 import TotalSummary from '../../../logic/totalSummary';
+import {Kilometre, Metre, Time} from '../../../components/layout/format';
 
 const TotalView = ({title, athletes}) => {
     const columns = ['Athlete', 'Runs', 'Distance', 'Elev Gain', 'Time'];
@@ -9,15 +10,15 @@ const TotalView = ({title, athletes}) => {
     const rows = athletes.map(athlete=> {
         const totalSummary = new TotalSummary(athlete.activities);
         return [
-            (<UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>), 
-            totalSummary.getRunCount(), 
-            totalSummary.getDistance(), 
-            totalSummary.getElevGain(),
-            totalSummary.getTime()
+            <UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>, 
+            totalSummary.getRunCount(),
+            <Kilometre metres={totalSummary.getDistance()} />,
+            <Metre metres={totalSummary.getElevGain()} />,
+            <Time seconds={totalSummary.getTime()} />
         ];
     });
     return (
-        <Grid title={title} columns={columns} rows={rows}/>
+        <Table columns={columns} rows={rows}/>
     );
 };
 
