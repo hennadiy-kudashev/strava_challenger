@@ -5,7 +5,7 @@ const Grid = ({title, columns, rows}) => {
     return (
         <div className="content">
             <div className="box box-default">
-                <div className="box-header with-border">
+                <div className="box-header">
                     <h3 className="box-title">{title}</h3>
                 </div>
                 <div className="box-body">
