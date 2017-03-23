@@ -16,7 +16,8 @@ const challenges = [{
             after: '2017-01-01T00:00:00Z',
             before: '2017-12-31T23:59:59Z'
         }
-    }
+    },
+    views: ['total', 'monthDistance']
 }, {
     id: '23',
     displayName: 'January Distance Challenge',
@@ -35,7 +36,8 @@ const challenges = [{
             after: '2017-01-01T00:00:00Z',
             before: '2017-01-31T23:59:59Z'
         }
-    }
+    },
+    views: ['total']
 }];
 class ChallengeApi {
     getAll() {

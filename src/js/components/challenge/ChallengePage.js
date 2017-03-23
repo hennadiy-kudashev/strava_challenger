@@ -2,43 +2,42 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as challengeActions from "../../actions/challengeActions";
-import TotalView from "./view/TotalView";
-import MonthDistanceView from "./view/MonthDistanceView";
 import Spinner from "../shared/Spinner";
 import Grid from "../layout/Grid";
-import Tabs from '../layout/tabs/Tabs';
-import TabPane from '../layout/tabs/TabPane';
+import Tabs from "../layout/tabs/Tabs";
+import TabPane from "../layout/tabs/TabPane";
+import views from "./view/views";
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
 
-    componentWillReceiveProps(next){
+    componentWillReceiveProps(next) {
         const {challenge, actions} = next;
 
-        if (!challenge.isLoaded){
+        if (!challenge.isLoaded) {
             actions.challengeActions.getChallenge(challenge.id, challenge.athletes, challenge.criteria);
         }
     }
 
     render() {
         const {challenge} = this.props;
-        const labels = ['Overall', 'Monthly'];
         if (challenge && challenge.isLoaded) {
+            const labels = challenge.views.map(view=>views[view].label);
             return (
-                <Tabs labels={labels}>
-                    <TabPane>
-                        <Grid title={challenge.displayName}>
-                            <TotalView athletes={challenge.athletes}/>
-                        </Grid>
-                    </TabPane>
-                    <TabPane>
-                        <Grid title={challenge.displayName}>
-                            <MonthDistanceView challenge={challenge}/>
-                        </Grid>
-                    </TabPane>
-                </Tabs>
+                <Grid title={challenge.displayName}>
+                    <Tabs labels={labels}>
+                        {
+                            challenge.views.map(view=>{
+                                const View = views[view].component;
+                                return (<TabPane key={view}>
+                                    <View challenge={challenge} />
+                                </TabPane>);
+                            })
+                        }
+                    </Tabs>
+                </Grid>
             );
         } else {
             return (<Spinner/>);

@@ -2,10 +2,10 @@ import moment from "moment";
 import TotalSummary from "./totalSummary";
 
 class MonthDistanceSummary {
-    constructor(start, end, distance) {
+    constructor(start, end, threshold) {
         this.start = start;
         this.end = end;
-        this.distance = distance;
+        this.threshold = threshold;
     }
 
     _getMonths() {
@@ -30,7 +30,7 @@ class MonthDistanceSummary {
 
     getMonthsDistance(activities) {
         const months = this._getMonths();
-        const monthDistance = this.distance / months.length;
+        const monthDistance = this.threshold / months.length;
         return months
             .map(month=> {
                 return TotalSummary.create(activities, month.start, month.end).getDistance();
@@ -41,6 +41,14 @@ class MonthDistanceSummary {
                     diff: distance - monthDistance
                 };
             });
+    }
+
+    getTotalDistance(activities){
+        const distance = TotalSummary.create(activities, this.start, this.end).getDistance();
+        return {
+            distance,
+                diff: distance - this.threshold
+        };
     }
 }
 

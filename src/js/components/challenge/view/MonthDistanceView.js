@@ -10,13 +10,15 @@ const MonthDistanceView = ({challenge}) => {
         challenge.criteria.datetime.before,
         2017000);
     
-    const columns = ['Athlete'].concat(monthDistanceSummary.getMonths());
+    const columns = ['Athlete'].concat(monthDistanceSummary.getMonths()).concat(['Total']);
 
-    const rows = challenge.athletes.map(athlete=> {
+    const rows = challenge.athletes.map((athlete, indexA)=> {
+        const totalDistance = monthDistanceSummary.getTotalDistance(athlete.activities);
         return [
-            (<UserInfo key={athlete.userInfo.id} userInfo={athlete.userInfo}/>), 
+            <UserInfo key={indexA} userInfo={athlete.userInfo}/>,
             ...monthDistanceSummary.getMonthsDistance(athlete.activities)
-                .map((obj, index)=><DistanceAndDiff key={index} distance={obj.distance} diff={obj.diff} />)
+                .map((obj, index)=><DistanceAndDiff key={index} distance={obj.distance} diff={obj.diff} />),
+            <DistanceAndDiff key={indexA} distance={totalDistance.distance} diff={totalDistance.diff} />
         ];
     });
     return (

@@ -8,7 +8,7 @@ const UserInfo = ({userInfo}) => {
                 {userInfo.firstname} {userInfo.lastname}
             </div>
             <div className="description">
-                {userInfo.city}, {userInfo.state}, {userInfo.country}, {userInfo.id}
+                {userInfo.city}, {userInfo.state}, {userInfo.country}
             </div>
         </div>);
 };
