@@ -6,6 +6,8 @@ import TotalView from "./view/TotalView";
 import MonthDistanceView from "./view/MonthDistanceView";
 import Spinner from "../shared/Spinner";
 import Grid from "../layout/Grid";
+import Tabs from '../layout/tabs/Tabs';
+import TabPane from '../layout/tabs/TabPane';
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
@@ -22,12 +24,21 @@ class ChallengePage extends React.Component {
 
     render() {
         const {challenge} = this.props;
+        const labels = ['Overall', 'Monthly'];
         if (challenge && challenge.isLoaded) {
             return (
-                <Grid title={challenge.displayName}>
-                    <TotalView athletes={challenge.athletes}/>
-                    <MonthDistanceView challenge={challenge}/>
-                </Grid>
+                <Tabs labels={labels}>
+                    <TabPane>
+                        <Grid title={challenge.displayName}>
+                            <TotalView athletes={challenge.athletes}/>
+                        </Grid>
+                    </TabPane>
+                    <TabPane>
+                        <Grid title={challenge.displayName}>
+                            <MonthDistanceView challenge={challenge}/>
+                        </Grid>
+                    </TabPane>
+                </Tabs>
             );
         } else {
             return (<Spinner/>);

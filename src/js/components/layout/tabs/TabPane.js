@@ -1,14 +1,18 @@
 import React, {PropTypes} from 'react';
 
-const TabPane = () => {
+const TabPane = ({children}) => {
     return (
         <div className="tab-pane active">
-            here goes text
+            {children}
         </div>
     );
 };
 
 TabPane.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.object
+    ])
 };
 
 export default TabPane;

@@ -19,7 +19,10 @@ const Grid = ({title, children}) => {
 
 Grid.propTypes = {
     title: PropTypes.string,
-    children: PropTypes.array
+    children: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.object
+    ])
 };
 
 export default Grid;

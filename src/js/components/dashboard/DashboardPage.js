@@ -2,7 +2,6 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as challengeActions from "../../actions/challengeActions";
-import Tabs from '../layout/Tabs';
 
 
 class DashboardPage extends React.Component {
@@ -12,7 +11,7 @@ class DashboardPage extends React.Component {
 
     render() {
         return (
-            <Tabs />
+            <div>bla</div>
         );
     }
 }
