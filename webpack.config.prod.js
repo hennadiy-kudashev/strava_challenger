@@ -55,8 +55,17 @@ module.exports = {
               loader: "url?limit=10000&mimetype=image/svg+xml"
             },
             {
-                test: /(\.scss)$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?importLoaders=1', 'postcss-loader', 'sass-loader')
+            test: /\.scss$/,
+                use: [{
+                    loader: ExtractTextPlugin.extract({
+                        fallbackLoader: 'style-loader',
+                        loader: [
+                            'css-loader?sourceMap',
+                            'postcss-loader',
+                            'sass-loader?sourceMap'
+                        ]
+                    })
+                }]
             },
             {
                 test: /(\.css)$/,
