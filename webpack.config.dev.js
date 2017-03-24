@@ -62,11 +62,11 @@ module.exports = {
             },
             {
                 test: /(\.scss)$/,
-                loaders: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader', 'sass-loader']
+                loaders: ['style-loader', 'css-loader?importLoaders=1?sourceMap', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /(\.css)$/,
-                loaders: [ 'style-loader', 'css-loader?importLoaders=1', 'postcss-loader' ]
+                loaders: ['style-loader', 'css-loader?importLoaders=1?sourceMap']
             }
         ]
     }
