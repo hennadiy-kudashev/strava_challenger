@@ -18,8 +18,8 @@ export function setChallenges(challenges) {
     return {type: types.SET_CHALLENGES, challenges};
 }
 
-export function followChallenge(challengeId, athlete) {
-    return {type: types.FOLLOW_CHALLENGE, challengeId, athlete};
+export function joinChallenge(challengeId, athlete) {
+    return {type: types.JOIN_CHALLENGE, challengeId, athlete};
 }
 
 export function getChallenge(id, athletes, criteria) {
