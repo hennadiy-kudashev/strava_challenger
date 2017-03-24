@@ -56,11 +56,11 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('css-loader?importLoaders=1?sourceMap')
+                loader: ExtractTextPlugin.extract('css-loader?importLoaders=1')
             },
             {
                 test: /\.(sass|scss)$/,
-                loader: ExtractTextPlugin.extract(['css-loader?sourceMap','postcss-loader', 'sass-loader'])
+                loader: ExtractTextPlugin.extract(['css-loader','postcss-loader', 'sass-loader'])
             }
         ]
     }
