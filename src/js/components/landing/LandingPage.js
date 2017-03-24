@@ -16,6 +16,7 @@ class LandingPage extends React.Component {
                     </div>
                     <LoginButton/>
                 </div>
+                <div className="main-logo-api"></div>
             </div>
         );
     }

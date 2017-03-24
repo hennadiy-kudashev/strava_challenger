@@ -9,7 +9,6 @@ $md: "min-width: 768px";
 $md: "min-width: 992px";
 $lg: "min-width: 1200px";
 
-
 // General
 //---------------------------------------
 html {
@@ -23,19 +22,31 @@ body {
 
 .main {
   height: 100vh;
-  background-image:
-  url('http://d9hhrg4mnvzow.cloudfront.net/unbouncepages.com/law-online-demo/header-bg.original.jpg');
+  background-image: url('../images/imgpsh_fullsize.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
    display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+  }
 }
 
 .hero {
   text-align: center;
   color: $white;
+  position: relative;
+  z-index: 2;
 
   &-heading {
     border-top: 1px solid $white;
@@ -91,6 +102,17 @@ body {
       height: 9rem;
     }
   }
+}
+
+.main-logo-api {
+  background-image: url('../images/api_logo_pwrdBy_strava_horiz_light.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18rem;
+  height: 4rem;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
 }
 
 .content-wrapper {
