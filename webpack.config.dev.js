@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     entry: [
         'webpack-hot-middleware/client',
         'babel-polyfill',
@@ -62,11 +62,11 @@ module.exports = {
             },
             {
                 test: /(\.scss)$/,
-                loaders: ['style-loader', 'css-loader?importLoaders=1?sourceMap', 'postcss-loader', 'sass-loader']
+                loaders: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /(\.css)$/,
-                loaders: ['style-loader', 'css-loader?importLoaders=1?sourceMap']
+                loaders: ['style-loader', 'css-loader?importLoaders=1']
             }
         ]
     }
