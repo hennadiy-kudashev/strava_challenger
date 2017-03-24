@@ -1,5 +1,6 @@
 import TotalView from "./TotalView";
 import MonthDistanceView from "./MonthDistanceView";
+import MonthDistanceChart from './MonthDistanceChart';
 
 const views = {
     total: {
@@ -9,6 +10,10 @@ const views = {
     monthDistance: {
         label: 'Monthly Distances',
         component: MonthDistanceView
+    },
+    monthDistanceChart: {
+        label: 'Monthly Distances Chart',
+        component: MonthDistanceChart
     }
 };
 

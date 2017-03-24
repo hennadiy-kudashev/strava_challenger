@@ -38,7 +38,8 @@ class MonthDistanceSummary {
             .map(distance=> {
                 return {
                     distance,
-                    diff: distance - monthDistance
+                    diff: distance - monthDistance,
+                    monthDistance
                 };
             });
     }

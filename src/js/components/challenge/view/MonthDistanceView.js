@@ -8,7 +8,7 @@ const MonthDistanceView = ({challenge}) => {
     const monthDistanceSummary = new MonthDistanceSummary(
         challenge.criteria.datetime.after,
         challenge.criteria.datetime.before,
-        2017000);
+        challenge.criteria.threshold.distance);
     
     const columns = ['Athlete'].concat(monthDistanceSummary.getMonths()).concat(['Total']);
 
