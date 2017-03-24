@@ -1,0 +1,191 @@
+// Variables
+//---------------------------------------
+$primary-color: #fc4c02;
+$white: #fff;
+
+// Breakpoints
+$sm: "min-width: 480px";
+$md: "min-width: 768px";
+$md: "min-width: 992px";
+$lg: "min-width: 1200px";
+
+
+// General
+//---------------------------------------
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.main {
+  height: 100vh;
+  background-image:
+  url('http://d9hhrg4mnvzow.cloudfront.net/unbouncepages.com/law-online-demo/header-bg.original.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero {
+  text-align: center;
+  color: $white;
+
+  &-heading {
+    border-top: 1px solid $white;
+    border-bottom: 1px solid $white;
+    padding: 2rem 0;
+
+    @media($md) {
+      padding: 3rem 0;
+    }
+
+    @media($lg) {
+      padding: 4rem 0;
+    }
+  }
+
+  &-title {
+    font-size: 3rem;
+    margin: 0;
+
+    @media($sm) {
+      font-size: 5rem;
+    }
+
+    @media($md) {
+      font-size: 7rem;
+    }
+
+    span {
+      color: $primary-color;
+    }
+  }
+
+  &-sub {
+    font-size: 2rem;
+  }
+
+  &-btn {
+    display: inline-block;
+    background-image: url('../images/btn_strava_connect.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 4rem;
+    width: 20rem;
+    height: 6rem;
+
+    @media($sm) {
+      width: 25rem;
+      height: 7rem;
+    }
+
+    @media($md) {
+      width: 30rem;
+      height: 9rem;
+    }
+  }
+}
+
+.content-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &-text {
+    color: $primary-color;
+    display: inline-block;
+    margin-left: 5px;
+  }
+
+  &-bounceball {
+    position: relative;
+    display: inline-block;
+    height: 37px;
+    width: 15px;
+
+    &:before {
+      position: absolute;
+      content: '';
+      display: block;
+      top: 0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: $primary-color;
+      transform-origin: 50%;
+      animation: bounce 500ms alternate infinite ease;
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    top: 30px;
+    height: 5px;
+    border-radius: 60px 60px 20px 20px;
+    transform: scaleX(2);
+  }
+  35% {
+    height: 15px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.nowrap {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// AdminLTE overwrites
+//---------------------------------------
+.skin-yellow-light {
+  .main-header {
+    .navbar {
+      background-color: $primary-color;
+
+      .sidebar-toggle {
+        background-color: $primary-color;
+
+        &:hover {
+          background-color: $primary-color;
+        }
+      }
+    }
+
+    .logo {
+      background-color: $primary-color;
+
+      &:hover {
+        background-color: $primary-color;
+      }
+    }
+
+    li.user-header {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.tab-pane {
+  overflow-x: auto;
+}
+
+
+

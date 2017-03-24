@@ -9,8 +9,13 @@ class LandingPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <LoginButton/>
+            <div className="main">
+                <div className="hero">
+                    <div className="hero-heading">
+                        <h1 className="hero-title">Fulled <span>by</span> Challenge</h1>
+                    </div>
+                    <LoginButton/>
+                </div>
             </div>
         );
     }
