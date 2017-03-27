@@ -23,7 +23,7 @@ const challenges = [{
     views: ['total', 'monthDistance', 'monthDistanceChart']
 }, {
     id: '1',
-    displayName: 'January Distance Challenge',
+    displayName: 'March Distance Challenge',
     athletes: [
         {
             id: '18192624',
@@ -36,8 +36,8 @@ const challenges = [{
     ],
     criteria: {
         datetime: {
-            after: '2017-01-01T00:00:00Z',
-            before: '2017-01-31T23:59:59Z'
+            after: '2017-03-01T00:00:00Z',
+            before: '2017-03-31T23:59:59Z'
         },
         threshold: {
             distance: 200000

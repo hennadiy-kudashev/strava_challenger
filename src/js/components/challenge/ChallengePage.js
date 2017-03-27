@@ -15,22 +15,31 @@ class ChallengePage extends React.Component {
         super(props, context);
     }
 
-    componentWillReceiveProps(next) {
-        const {challenge, actions} = next;
+    componentWillMount(){
+        this.loadChallenge();
+    }
 
-        if (!challenge.isLoaded) {
-            actions.challengeActions.getChallenge(challenge.id, challenge.athletes, challenge.criteria);
+    componentWillReceiveProps(next) {
+        this.loadChallenge(next);
+    }
+
+    loadChallenge(props = this.props){
+        const {challenge, actions} = props;
+        if (challenge){
+            if (!challenge.isLoaded) {
+                actions.challengeActions.getChallenge(challenge.id, challenge.athletes, challenge.criteria);
+            }
         }
     }
 
     render() {
-        const {challenge} = this.props;
+        const {challenge, user} = this.props;
         if (challenge && challenge.isLoaded) {
             const labels = challenge.views.map(view=>views[view].label);
             return (
                 <Grid title={challenge.displayName}>
-                    <Progress challenge={challenge} />
-                    <JoinButton challenge={challenge} />
+                    <Progress challenge={challenge} user={user} />
+                    <JoinButton challenge={challenge} user={user} />
                     <Tabs labels={labels}>
                         {
                             challenge.views.map(view=>{
@@ -50,7 +59,8 @@ class ChallengePage extends React.Component {
 }
 
 ChallengePage.propTypes = {
-    challenge: PropTypes.object
+    challenge: PropTypes.object,
+    user: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
@@ -60,7 +70,8 @@ function mapStateToProps(state, ownProps) {
         challenge = state.challenges.find(t => t.id === challengeID);
     }
     return {
-        challenge: challenge
+        challenge: challenge,
+        user: state.auth.user
     };
 }
 

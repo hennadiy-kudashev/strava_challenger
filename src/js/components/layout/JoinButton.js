@@ -30,16 +30,10 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-function mapStateToProps(state, ownProps) {
-    return {
-        user: state.auth.user
-    };
-}
-
 JoinButton.propTypes = {
     challenge: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(JoinButton);
+export default connect(mapDispatchToProps)(JoinButton);
