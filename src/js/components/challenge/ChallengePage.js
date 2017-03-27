@@ -7,6 +7,7 @@ import Grid from "../layout/Grid";
 import Tabs from "../layout/tabs/Tabs";
 import TabPane from "../layout/tabs/TabPane";
 import views from "./view/views";
+import Progress from './Progress';
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
@@ -27,6 +28,7 @@ class ChallengePage extends React.Component {
             const labels = challenge.views.map(view=>views[view].label);
             return (
                 <Grid title={challenge.displayName}>
+                    <Progress challenge={challenge} />
                     <Tabs labels={labels}>
                         {
                             challenge.views.map(view=>{

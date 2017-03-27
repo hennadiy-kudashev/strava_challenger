@@ -13,6 +13,12 @@ class TotalSummary {
         return this.activities.length;
     }
 
+    getByCriterion(criterion){
+        let total = 0;
+        this.activities.forEach(a=> total += a[criterion]);
+        return total;
+    }
+
     getDistance() {
         let distance = 0;
         this.activities.forEach(a=> distance += a.distance);
