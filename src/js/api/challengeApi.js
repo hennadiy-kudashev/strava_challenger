@@ -3,11 +3,11 @@ const challenges = [{
     displayName: '2017 km in 2017 year',
     athletes: [
         {
-            id: '18192624',
+            id: 18192624,
             token: '2d86cee021852379115518352e9f9596eed897e6'
         },
         {
-            id: '14419142',
+            id: 14419142,
             token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
         }
     ],
@@ -26,11 +26,11 @@ const challenges = [{
     displayName: 'March Distance Challenge',
     athletes: [
         {
-            id: '18192624',
+            id: 18192624,
             token: '2d86cee021852379115518352e9f9596eed897e6'
         },
         {
-            id: '14419142',
+            id: 14419142,
             token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
         }
     ],
@@ -49,11 +49,11 @@ const challenges = [{
     displayName: 'Climb 24 km in 2017 year',
     athletes: [
         {
-            id: '18192624',
+            id: 18192624,
             token: '2d86cee021852379115518352e9f9596eed897e6'
         },
         {
-            id: '14419142',
+            id: 14419142,
             token: 'd7b559ae4e23f2e5eac0f47b9871a0c3f69bb4b3'
         }
     ],
@@ -72,7 +72,7 @@ const challenges = [{
     displayName: 'March Climb Challenge',
     athletes: [
         {
-            id: '18192624',
+            id: 18192624,
             token: '2d86cee021852379115518352e9f9596eed897e6'
         }
     ],

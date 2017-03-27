@@ -9,7 +9,6 @@ export function getAccessToken(code) {
         return new OauthApi().getToken(code).then(data=> {
             accessTokenStorage.set(data.access_token);
             dispatch(setIsAuthenticated(true, '/dashboard'));
-            // debugger;
             dispatch(setAuthUser(data.athlete, data.access_token));
         });
     };
@@ -31,7 +30,7 @@ export function setIsAuthenticated(isAuthenticated, path) {
 export function getAuthUser() {
     return function (dispatch) {
         return new AthleteApi().getAuthAthlete().then(data=> {
-            dispatch(setAuthUser(data));
+            dispatch(setAuthUser(data, accessTokenStorage.get()));
         });
     };
 }

@@ -17,7 +17,7 @@ export default function athletesReducer(state = [], action) {
                     id: action.athlete.id,
                     token: action.athlete.token,
                     activities: [],
-                    userInfo: {}
+                    userInfo: action.athlete
                 }
             ];
         default:

@@ -3,7 +3,7 @@ import TotalSummary from '../../logic/totalSummary';
 import thresholds from './view/thresholds';
 
 const Progress = ({challenge, user}) => {
-    const joinedAthlete = challenge.athletes.find(a=>a.id == user.id);
+    const joinedAthlete = challenge.athletes.find(a=>a.id === user.id);
     if (!joinedAthlete){
         return (<div/>);
     }

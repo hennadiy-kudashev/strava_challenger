@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react';
 
 const Dropdown = ({user}) => {
-    const {avatar, fullName} = user;
+    const {profile, firstname, lastname} = user;
 
     return (
         <ul className="dropdown-menu">
             <li className="user-header">
-                <img src={avatar} className="img-circle" alt="User Image" />
+                <img src={profile} className="img-circle" alt="User Image" />
                 <p>
-                    {fullName}
+                    {firstname} {lastname}
                 </p>
             </li>
             <li className="user-footer">
