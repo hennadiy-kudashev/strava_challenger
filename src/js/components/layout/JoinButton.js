@@ -16,9 +16,16 @@ class JoinButton extends React.Component {
     }
 
     render() {
-        return (
-            <a href="#" onClick={this.joinChallenge} className="btn btn-default pull-right">Join Challenge</a>
-        );
+        const {user, challenge} = this.props;
+
+        const isJoined = challenge.athletes
+            .map(athlete => athlete.id)
+            .includes(JSON.stringify(user.id));
+
+        const btn = (<a href="#" onClick={this.joinChallenge} className="btn btn-default pull-right">Join Challenge</a>);
+        const icon = (<i className="fa fa-check fa-2x pull-right text-green"></i>);
+
+        return isJoined ? icon : btn;
     }
 }
 
