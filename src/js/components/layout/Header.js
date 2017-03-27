@@ -20,14 +20,14 @@ class Header extends React.Component  {
     }
 
     render() {
-        const {user} = this.props;
+        const {user, toggleSidebar} = this.props;
 
         return (
             <header className="main-header">
                 <Logo />
                 <Error />
                 <nav className="navbar" role="navigation">
-                    <a href="#" className="sidebar-toggle" role="button">
+                    <a href="#" className="sidebar-toggle" role="button" onClick={toggleSidebar}>
                         <span className="sr-only">Toggle navigation</span>
                     </a>
                     <div className="navbar-custom-menu">
@@ -46,7 +46,8 @@ class Header extends React.Component  {
 }
 
 Header.propTypes = {
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    toggleSidebar: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

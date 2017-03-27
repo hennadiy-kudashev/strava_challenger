@@ -9,6 +9,7 @@ export default function challengesReducer(state = initialState.challenges, actio
         case types.SET_CHALLENGES:
             return action.challenges;
         case types.SET_CHALLENGE:
+        case types.JOIN_CHALLENGE:
             return state.map(challenge => {
                 if (challenge.id === action.challengeId) {
                     return currentChallengeReducer(challenge, action);

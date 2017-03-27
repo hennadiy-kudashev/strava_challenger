@@ -20,7 +20,8 @@ export default function authReducer(state = initialState.auth, action) {
                     id: action.user.id,
                     userName: action.user.username,
                     fullName: `${action.user.firstname} ${action.user.lastname}`,
-                    avatar: action.user.profile
+                    avatar: action.user.profile,
+                    token: action.token
                 }
             });
         default:
