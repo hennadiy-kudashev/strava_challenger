@@ -38,7 +38,8 @@ function mapStateToProps(state, ownProps) {
 
 JoinButton.propTypes = {
     challenge: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(JoinButton);

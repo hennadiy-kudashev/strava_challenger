@@ -12,7 +12,14 @@ export default function athletesReducer(state = [], action) {
                 });
             });
         case types.JOIN_CHALLENGE:
-            return [...state, action.athlete];
+            return [...state,
+                {
+                    id: action.athlete.id,
+                    token: action.athlete.token,
+                    activities: [],
+                    userInfo: {}
+                }
+            ];
         default:
             return state;
     }
