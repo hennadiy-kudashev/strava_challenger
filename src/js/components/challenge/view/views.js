@@ -1,31 +1,21 @@
 import TotalView from "./TotalView";
-import MonthDistanceView from "./MonthDistanceView";
-import MonthDistanceChart from './MonthDistanceChart';
-import MonthClimbView from './MonthClimbView';
-import MonthClimbChart from './MonthClimbChart';
+import MonthView from "./MonthView";
+import MonthChart from "./MonthChart";
 
+//View should be extended from BaseView
 const views = {
     total: {
         label: 'Overall',
         component: TotalView
     },
-    monthDistanceTable: {
-        label: 'Monthly Distances Table',
-        component: MonthDistanceView
+    monthTable: {
+        label: 'Monthly Table',
+        component: MonthView
     },
-    monthDistanceChart: {
-        label: 'Monthly Distances Chart',
-        component: MonthDistanceChart
-    },
-    monthClimbTable: {
-        label: 'Monthly Climb Table',
-        component: MonthClimbView
-    },
-    monthClimbChart: {
-        label: 'Monthly Climb Chart',
-        component: MonthClimbChart
+    monthChart: {
+        label: 'Monthly Chart',
+        component: MonthChart
     }
-    
 };
 
 export default views;

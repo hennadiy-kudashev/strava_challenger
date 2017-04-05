@@ -3,32 +3,33 @@ import UserInfo from "./UserInfo";
 import Table from "../../layout/table/Table";
 import MonthSummary from '../../../logic/monthSummary';
 import {Diff} from './format';
+import BaseView from './BaseView';
 
-const MonthView = ({challenge, criterion}) => {
-    const monthSummary = new MonthSummary(
-        challenge.criteria.datetime.after,
-        challenge.criteria.datetime.before,
-        challenge.criteria.threshold[criterion]);
-    
-    const columns = ['Athlete'].concat(monthSummary.getMonths()).concat(['Total']);
+class MonthView extends BaseView{
+    constructor(props, context) {
+        super(props, context);
+    }
+    render(){
+        const monthSummary = new MonthSummary(
+            this.getChallenge().criteria.datetime.after,
+            this.getChallenge().criteria.datetime.before,
+            this.getChallenge().criteria.threshold[this.getThresholdCriterion()]);
 
-    const rows = challenge.athletes.map((athlete, indexA)=> {
-        const total = monthSummary.getTotal(athlete.activities, criterion);
-        return [
-            <UserInfo key={indexA} userInfo={athlete.userInfo}/>,
-            ...monthSummary.getMonthsDiff(athlete.activities, criterion)
-                .map((obj, index)=><Diff key={index} total={obj.monthTotal} diff={obj.monthDiff} criterion={criterion} />),
-            <Diff key={indexA} total={total.total} diff={total.diff} criterion={criterion} />
-        ];
-    });
-    return (
-        <Table columns={columns} rows={rows}/>
-    );
-};
+        const columns = ['Athlete'].concat(monthSummary.getMonths()).concat(['Total']);
 
-MonthView.propTypes = {
-    challenge: PropTypes.object.isRequired,
-    criterion: PropTypes.string.isRequired
-};
+        const rows = super.getSortedAthletes().map((athlete, indexA)=> {
+            const total = monthSummary.getTotal(athlete.activities, this.getThresholdCriterion());
+            return [
+                <UserInfo key={indexA} userInfo={athlete.userInfo}/>,
+                ...monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion())
+                    .map((obj, index)=><Diff key={index} total={obj.monthTotal} diff={obj.monthDiff} criterion={this.getThresholdCriterion()} />),
+                <Diff key={indexA} total={total.total} diff={total.diff} criterion={this.getThresholdCriterion()} />
+            ];
+        });
+        return (
+            <Table columns={columns} rows={rows}/>
+        );
+    }
+}
 
 export default MonthView;
