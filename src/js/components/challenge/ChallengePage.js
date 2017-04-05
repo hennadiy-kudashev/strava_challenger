@@ -44,7 +44,7 @@ class ChallengePage extends React.Component {
                         {
                             challenge.views.map(view=>{
                                 const View = views[view].component;
-                                return (<TabPane key={view}>
+                                return (<TabPane key={challenge.id+view}>
                                     <View challenge={challenge} />
                                 </TabPane>);
                             })

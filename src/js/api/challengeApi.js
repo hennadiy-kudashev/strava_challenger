@@ -20,7 +20,7 @@ const challenges = [{
             distance: 2017000
         }
     },
-    views: ['total', 'monthDistanceTable', 'monthDistanceChart']
+    views: ['total', 'monthTable', 'monthChart']
 }, {
     id: '1',
     displayName: 'March Distance Challenge',
@@ -62,7 +62,7 @@ const challenges = [{
             total_elevation_gain: 24000
         }
     },
-    views: ['total', 'monthClimbTable', 'monthClimbChart']
+    views: ['total', 'monthTable', 'monthChart']
 }, {
     id: '3',
     displayName: 'March Climb Challenge',

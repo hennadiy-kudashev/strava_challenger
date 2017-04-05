@@ -22,7 +22,7 @@ const Progress = ({challenge, user}) => {
             <span className="progress-number"><b><Component metres={achieved}/></b>/<Component metres={threshold}/></span>
             <div className="progress">
                 <div className="progress-bar progress-bar-primary progress-bar-striped" style={{width: percentage + '%'}}>{Math.round(percentage) + '%'}</div>
-                &nbsp;{periodSummary.getSummary()}
+                &nbsp;<small>{periodSummary.getSummary()}</small>
             </div>
         </div>
     );
