@@ -23,9 +23,9 @@ class JoinButton extends React.Component {
             .includes(JSON.stringify(user.id));
 
         const btn = (<a href="#" onClick={this.joinChallenge} className="btn btn-default pull-right">Join Challenge</a>);
-        const icon = (<i className="fa fa-check fa-2x pull-right text-green"></i>);
+        const btnJoined = (<div className="btn btn-default disabled pull-right">Joined</div>);
 
-        return isJoined ? icon : btn;
+        return isJoined ? btnJoined : btn;
     }
 }
 
