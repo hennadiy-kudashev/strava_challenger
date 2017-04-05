@@ -2,6 +2,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
@@ -16,12 +17,13 @@ import '../../node_modules/admin-lte/dist/css/skins/skin-yellow-light.css';
 import '../resources/styles/styles.scss';
 
 const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
 authenticate(store);
 
 render(
     <Provider store={store}>
-        <Router history={browserHistory} routes={routes} />
+        <Router history={history} routes={routes} />
     </Provider>,
     document.getElementById('app')
 );

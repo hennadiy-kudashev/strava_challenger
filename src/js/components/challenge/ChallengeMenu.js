@@ -15,14 +15,20 @@ class ChallengeMenu extends React.Component {
     }
 
     render() {
-        const {challenges, user} = this.props;
+        const {challenges, user, pathname} = this.props;
         const joinedChallenges = challenges.filter(challenge=>challenge.athletes.some(athlete=>athlete.id == user.id));
         return (
             <ul className="sidebar-menu">
                 <li className="header">JOINED CHALLENGES</li>
-                {joinedChallenges.map(challenge => <ChallengeMenuItem key={challenge.id}
-                                                                      active={false}
-                                                                      challenge={challenge}/>)}
+                {
+                    joinedChallenges.map(challenge => {
+
+                        const active = pathname.split('/').includes(challenge.id);
+
+                        return <ChallengeMenuItem key={challenge.id} active={active} challenge={challenge}/>;
+
+                    })
+                }
             </ul>
         );
     }
@@ -31,13 +37,15 @@ class ChallengeMenu extends React.Component {
 ChallengeMenu.propTypes = {
     challenges: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    pathname: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
     return {
         challenges: state.challenges,
-        user: state.auth.user
+        user: state.auth.user,
+        pathname: state.routing.locationBeforeTransitions.pathname
     };
 }
 

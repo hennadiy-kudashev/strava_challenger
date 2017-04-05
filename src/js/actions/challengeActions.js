@@ -22,7 +22,7 @@ export function joinChallenge(challengeId, athlete, activitiesList) {
     return {type: types.JOIN_CHALLENGE, challengeId, athlete, activitiesList};
 }
 
-export function setJoinedAthlete(challengeId, criteria, athlete) {
+export function getJoinedAthlete(challengeId, criteria, athlete) {
     return function(dispatch) {
         new AthleteApi(athlete.token).getActivities(
             new Date(criteria.datetime.after),

@@ -3,7 +3,7 @@ import {Link} from "react-router";
 
 const ChallengeMenuItem = ({challenge, active}) => {
     return (
-        <li className={active? 'active':''}>
+        <li className={active ? 'active' : ''}>
             <Link to={"/challenge/"+ challenge.id}>
                 <span>{challenge.displayName}</span>
             </Link>
