@@ -1,8 +1,8 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import ChallengeMenuItem from './ChallengeMenuItem';
-import * as challengeActions from '../../actions/challengeActions';
+import ChallengeMenuItem from "./ChallengeMenuItem";
+import * as challengeActions from "../../actions/challengeActions";
 
 class ChallengeMenu extends React.Component {
     constructor(props, context) {
@@ -15,11 +15,14 @@ class ChallengeMenu extends React.Component {
     }
 
     render() {
-        const {challenges} = this.props;
+        const {challenges, user} = this.props;
+        const joinedChallenges = challenges.filter(challenge=>challenge.athletes.some(athlete=>athlete.id == user.id));
         return (
             <ul className="sidebar-menu">
-                <li className="header">CHALLENGES</li>
-                {challenges.map(challenge => <ChallengeMenuItem key={challenge.id} active={false} challenge={challenge} />)}
+                <li className="header">JOINED CHALLENGES</li>
+                {joinedChallenges.map(challenge => <ChallengeMenuItem key={challenge.id}
+                                                                      active={false}
+                                                                      challenge={challenge}/>)}
             </ul>
         );
     }
@@ -27,12 +30,14 @@ class ChallengeMenu extends React.Component {
 
 ChallengeMenu.propTypes = {
     challenges: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        challenges: state.challenges
+        challenges: state.challenges,
+        user: state.auth.user
     };
 }
 

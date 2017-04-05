@@ -2,7 +2,7 @@ import React, {PropTypes} from "react";
 import UserInfo from "./UserInfo";
 import Table from "../../layout/table/Table";
 import TotalSummary from '../../../logic/totalSummary';
-import {Kilometre, Metre, Time} from '../../../components/layout/format';
+import {Kilometre, Metre, Time} from './format';
 
 const TotalView = ({challenge}) => {
     const columns = ['Athlete', 'Runs', 'Distance', 'Elev Gain', 'Time'];

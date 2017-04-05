@@ -16,13 +16,7 @@ export default function authReducer(state = initialState.auth, action) {
             return Object.assign({}, state, {isAuthenticated: action.isAuthenticated});
         case types.SET_AUTH_USER:
             return Object.assign({}, state, {
-                user: {
-                    id: action.user.id,
-                    userName: action.user.username,
-                    fullName: `${action.user.firstname} ${action.user.lastname}`,
-                    avatar: action.user.profile,
-                    token: action.token
-                }
+                user:Object.assign(action.user, {token: action.token})
             });
         default:
             return state;

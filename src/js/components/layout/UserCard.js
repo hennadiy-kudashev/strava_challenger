@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 
 const UserCard = ({user}) => {
-    const {avatar, fullName} = user;
+    const {profile, firstname, lastname} = user;
 
     return (
         <a href="#">
-            <img src={avatar} className="user-image" alt="User Image" />
-            <span className="hidden-xs">{fullName}</span>
+            <img src={profile} className="user-image" alt="User Image" />
+            <span className="hidden-xs">{firstname} {lastname}</span>
         </a>
     );
 };

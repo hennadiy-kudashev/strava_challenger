@@ -13,22 +13,22 @@ class TotalSummary {
         return this.activities.length;
     }
 
+    getByCriterion(criterion){
+        let total = 0;
+        this.activities.forEach(a=> total += a[criterion]);
+        return total;
+    }
+
     getDistance() {
-        let distance = 0;
-        this.activities.forEach(a=> distance += a.distance);
-        return distance;
+        return this.getByCriterion('distance');
     }
 
     getElevGain() {
-        let elevGain = 0;
-        this.activities.forEach(a=> elevGain += a.total_elevation_gain);
-        return elevGain;
+        return this.getByCriterion('total_elevation_gain');
     }
 
     getTime() {
-        let time = 0;
-        this.activities.forEach(a=> time += a.moving_time);
-        return time;
+        return this.getByCriterion('moving_time');
     }
 }
 
