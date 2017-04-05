@@ -12,7 +12,7 @@ class JoinButton extends React.Component {
     joinChallenge(e) {
         e.preventDefault();
         const {user, challenge, actions} = this.props;
-        actions.challengeActions.joinChallenge(challenge.id, user);
+        actions.challengeActions.setJoinedAthlete(challenge.id, challenge.criteria, user);
     }
 
     render() {

@@ -18,8 +18,19 @@ export function setChallenges(challenges) {
     return {type: types.SET_CHALLENGES, challenges};
 }
 
-export function joinChallenge(challengeId, athlete) {
-    return {type: types.JOIN_CHALLENGE, challengeId, athlete};
+export function joinChallenge(challengeId, athlete, activitiesList) {
+    return {type: types.JOIN_CHALLENGE, challengeId, athlete, activitiesList};
+}
+
+export function setJoinedAthlete(challengeId, criteria, athlete) {
+    return function(dispatch) {
+        new AthleteApi(athlete.token).getActivities(
+            new Date(criteria.datetime.after),
+            new Date(criteria.datetime.before)
+        ).then(activities => {
+                dispatch(joinChallenge(challengeId, athlete, activities));
+        });
+    };
 }
 
 export function getChallenge(id, athletes, criteria) {
