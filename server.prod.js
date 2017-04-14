@@ -1,21 +1,10 @@
-var express = require('express');
-var compression = require('compression');
-const path = require('path');
+const express = require('express');
+const compression = require('compression');
+const route = require('./src/server/route.js');
 
-var app = express();
-var port = process.env.PORT || 3000;
+const app = express();
 
 app.use(compression());
 app.use('/dist', express.static('dist'));
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, './index.html'))
-});
-
-app.listen(port, function(error) {
-    if (error) {
-        console.error(error)
-    } else {
-        console.info('Production version: Listening on port %s.', port)
-    }
-});
+route(app);
