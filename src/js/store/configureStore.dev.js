@@ -1,4 +1,6 @@
 import {createStore, applyMiddleware, compose} from "redux";
+import { routerMiddleware } from 'react-router-redux';
+import { browserHistory  } from 'react-router';
 import rootReducer from "../reducers";
 import createLogger from "redux-logger";
 import thunk from '../utils/thunk';
@@ -11,7 +13,12 @@ export default function configureStore(initialState) {
         rootReducer,
         initialState,
         composeEnhancers(
-            applyMiddleware(thunk, createLogger(), reduxImmutableStateInvariant())
+            applyMiddleware(
+                thunk,
+                createLogger(),
+                reduxImmutableStateInvariant(),
+                routerMiddleware(browserHistory)
+            )
         )
     );
 

@@ -5,14 +5,6 @@ import {browserHistory} from "react-router";
 export default function authReducer(state = initialState.auth, action) {
     switch (action.type) {
         case types.SET_IS_AUTHENTICATED:
-            if (action.isAuthenticated) {
-                if (action.path){
-                    browserHistory.push(action.path);
-                }
-            }
-            else{
-                browserHistory.push('/');
-            }
             return Object.assign({}, state, {isAuthenticated: action.isAuthenticated});
         case types.SET_AUTH_USER:
             return Object.assign({}, state, {
