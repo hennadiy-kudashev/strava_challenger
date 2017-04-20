@@ -9,12 +9,15 @@ function status(response) {
 }
 
 function json(response) {
-    return response.json();
+    if (response.status != 204) {
+        return response.json();
+    }
 }
 
 class FetchApi {
-    constructor(headers = {}) {
+    constructor(headers = {}, bodyConverter=body=>body) {
         this.headers = headers;
+        this.bodyConverter = bodyConverter;
     }
 
     /**
@@ -38,12 +41,8 @@ class FetchApi {
     post(url, body) {
         return fetch(url, {
             method: 'post',
-            headers: Object.assign({
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-            }, this.headers),
-            body: Object.keys(body).map(key=> {
-                return `${key}=${body[key]}`;
-            }).join('&')//key1=value1&key2=value2
+            headers: this.headers,
+            body: this.bodyConverter(body)
         }).then(status).then(json);
     }
 }

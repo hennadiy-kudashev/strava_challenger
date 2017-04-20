@@ -19,16 +19,23 @@ export function setChallenges(challenges) {
 }
 
 export function joinChallenge(challengeId, athlete, activitiesList) {
-    return {type: types.JOIN_CHALLENGE, challengeId, athlete, activitiesList};
+    return function (dispatch) {
+        return new ChallengeApi().addAthlete(challengeId, {
+            id: athlete.id,
+            token: athlete.token
+        }).then(() => {
+            dispatch({type: types.JOIN_CHALLENGE, challengeId, athlete, activitiesList});
+        });
+    };
 }
 
 export function getJoinedAthlete(challengeId, criteria, athlete) {
-    return function(dispatch) {
+    return function (dispatch) {
         new AthleteApi(athlete.token).getActivities(
             new Date(criteria.datetime.after),
             new Date(criteria.datetime.before)
         ).then(activities => {
-                dispatch(joinChallenge(challengeId, athlete, activities));
+            dispatch(joinChallenge(challengeId, athlete, activities));
         });
     };
 }
