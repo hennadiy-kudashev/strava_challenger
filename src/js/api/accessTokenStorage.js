@@ -4,7 +4,7 @@ class AssessTokenStorage {
     static isExist(){
         return !!this.get();
     }
-    
+
     static get() {
         return sessionStorage.getItem(KEY);
     }

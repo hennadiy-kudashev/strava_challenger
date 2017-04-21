@@ -16,6 +16,7 @@ module.exports.register = function (router, db) {
         .get(function (request, response) {
             wrap(challengeRepository.getAll(), response);
         });
+
     router.route('/challenges/:challengeID')
         .get(function (request, response) {
             const challengeID = request.params.challengeID;

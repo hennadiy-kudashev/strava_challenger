@@ -16,5 +16,9 @@ class ChallengeRepository {
     addAthlete(challengeID, athlete) {
         this._db.collection('challenges').updateOne({id: challengeID}, {$push: {athletes: athlete}});
     }
+
+    updateUserToken(athlete) {
+        console.log(athlete);
+    }
 }
 module.exports = ChallengeRepository;

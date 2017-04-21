@@ -2,16 +2,18 @@ import * as types from './actionTypes';
 import OauthApi from '../api/oauthApi';
 import AthleteApi from '../api/athleteApi';
 import accessTokenStorage from "../api/accessTokenStorage";
-import { push  } from 'react-router-redux';
-
+import { push } from 'react-router-redux';
+import UserApi from "../api/userApi";
 
 export function getAccessToken(code) {
     return function (dispatch) {
         return new OauthApi().getToken(code).then(data=> {
-            accessTokenStorage.set(data.access_token);
-            dispatch(setIsAuthenticated(true));
-            dispatch(setAuthUser(data.athlete, data.access_token));
-            dispatch(push('/dashboard'));
+            new UserApi().updateToken(data.athlete).then(() => {
+                accessTokenStorage.set(data.access_token);
+                dispatch(setIsAuthenticated(true));
+                dispatch(setAuthUser(data.athlete, data.access_token));
+                dispatch(push('/dashboard'));
+            });
         });
     };
 }
@@ -24,7 +26,6 @@ export function logout() {
         dispatch(push('/'));
     };
 }
-
 
 export function setIsAuthenticated(isAuthenticated, path) {
     return {type: types.SET_IS_AUTHENTICATED, isAuthenticated};

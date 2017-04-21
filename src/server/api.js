@@ -1,5 +1,6 @@
 const express = require('express');
 const challengeController = require('./controller/challengeController');
+const userController = require('./controller/userController');
 
 module.exports.register = function (app, db) {
     const router = express.Router();
@@ -13,5 +14,6 @@ module.exports.register = function (app, db) {
     });
 
     challengeController.register(router, db);
+    userController.register(router, db);
     app.use('/api', router);
 };

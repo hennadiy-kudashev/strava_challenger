@@ -1,11 +1,8 @@
-import FetchApi from "./fetchApi";
+import ServerApi from "./serverApi";
 
-class ChallengeApi extends FetchApi {
+class ChallengeApi extends ServerApi {
     constructor() {
-        super({
-            'Accept': 'application/json',
-            'Content-type': 'application/json'
-        }, body=> JSON.stringify(body));
+        super();
     }
 
     getAll() {
