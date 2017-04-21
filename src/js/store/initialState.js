@@ -8,8 +8,5 @@ export default {
             avatar: ''
         }
     },
-    club: {
-        members: []
-    },
     challenges: []
 };
