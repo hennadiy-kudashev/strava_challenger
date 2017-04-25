@@ -25,7 +25,10 @@ module.exports.register = function (router, db) {
         .post(function (request, response) {
             const challengeID = request.params.challengeID;
             const athlete = request.body;
-            challengeRepository.addAthlete(challengeID, athlete);
-            response.status(204).end();
+            challengeRepository.addAthlete(challengeID, athlete).then(()=>{
+                response.status(204).end();
+            }, error=>{
+                response.status(500).send({error});
+            });
         });
 };

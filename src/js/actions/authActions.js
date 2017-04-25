@@ -8,7 +8,7 @@ import UserApi from "../api/userApi";
 export function getAccessToken(code) {
     return function (dispatch) {
         return new OauthApi().getToken(code).then(data=> {
-            new UserApi().updateToken(data.athlete).then(() => {
+            new UserApi().updateToken(data).then(() => {
                 accessTokenStorage.set(data.access_token);
                 dispatch(setIsAuthenticated(true));
                 dispatch(setAuthUser(data.athlete, data.access_token));

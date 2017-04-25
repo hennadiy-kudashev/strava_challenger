@@ -6,11 +6,17 @@ const api = require('./api');
 //set env variable MONGOLAB_URI locally.
 const mongoUrl = process.env.MONGOLAB_URI;
 
+
 module.exports = function (app) {
     // configure app to use bodyParser(). This will let us get the data from a POST
     app.use(bodyParser.json()); //for parsing application/json
     app.use(bodyParser.urlencoded({extended: true})); //for parsing application/x-www-form-urlencoded
 
+    if (!mongoUrl){
+        console.error('Enviroment variable MONGOLAB_URI should be specified.');
+        return;
+    }
+    
     MongoClient.connect(mongoUrl, (err, database) => {
         if (err) return console.log(err);
         console.log('Connection to mongo success.');

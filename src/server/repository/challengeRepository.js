@@ -14,11 +14,13 @@ class ChallengeRepository {
     }
 
     addAthlete(challengeID, athlete) {
-        this._db.collection('challenges').updateOne({id: challengeID}, {$push: {athletes: athlete}});
+        return this._db.collection('challenges').updateOne({id: challengeID}, {$push: {athletes: athlete}});
     }
 
-    updateUserToken(athlete) {
-        console.log(athlete);
+    updateUserToken(userID, token) {
+        return this._db.collection('challenges').updateMany({athletes: {$elemMatch: {id: parseInt(userID)}}}, {$set: {
+            "athletes.$.token": token
+        }});
     }
 }
 module.exports = ChallengeRepository;

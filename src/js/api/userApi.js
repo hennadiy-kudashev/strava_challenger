@@ -5,8 +5,9 @@ class UserApi extends ServerApi {
         super();
     }
 
-    updateToken(athlete) {
-        return super.post(`/api/user/change_token/${athlete.id}`, athlete);
+    updateToken(data) {
+        const {athlete, access_token} = data;
+        return super.post(`/api/users/${athlete.id}/change_token/`, {token: access_token});
     }
 }
 
