@@ -1,6 +1,7 @@
 import * as types from "./actionTypes";
 import AthleteApi from "../api/athleteApi";
 import ChallengeApi from "../api/challengeApi";
+import * as errorActions from './errorActions';
 
 export function createChallenge(challenge) {
     return {type: types.CREATE_CHALLENGE, challenge};
@@ -46,7 +47,10 @@ export function getChallenge(id, athletes, criteria) {
             Promise.all(athletes.map(athlete=>new AthleteApi().getInfo(athlete.id))),
             Promise.all(athletes.map(athlete=>new AthleteApi(athlete.token).getActivities(
                 new Date(criteria.datetime.after),
-                new Date(criteria.datetime.before))))
+                new Date(criteria.datetime.before)).catch(error=>{
+                    dispatch(errorActions.setError(`Fail to retrieve activities for user ${athlete.id}.`));
+                    return [];
+            })))
         ]).then(values=> {
             const infoList = values[0];
             const activitiesList = values[1];
