@@ -3,10 +3,11 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as challengeActions from "../../actions/challengeActions";
 import Spinner from "../shared/Spinner";
-import Grid from "../layout/Grid";
+import Box from "../layout/Box";
 import Tabs from "../layout/tabs/Tabs";
 import TabPane from "../layout/tabs/TabPane";
 import views from "./view/views";
+import Info from './Info';
 import Progress from './Progress';
 import JoinButton from '../layout/JoinButton';
 
@@ -37,7 +38,8 @@ class ChallengePage extends React.Component {
         if (challenge && challenge.isLoaded) {
             const labels = challenge.views.map(view=>views[view].label);
             return (
-                <Grid title={challenge.displayName}>
+                <Box title={challenge.displayName}>
+                    <Info challenge={challenge} />
                     <Progress challenge={challenge} user={user} />
                     <JoinButton challenge={challenge} user={user} />
                     <Tabs labels={labels}>
@@ -50,7 +52,7 @@ class ChallengePage extends React.Component {
                             })
                         }
                     </Tabs>
-                </Grid>
+                </Box>
             );
         } else {
             return (<Spinner/>);

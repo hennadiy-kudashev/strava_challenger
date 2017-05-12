@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, {PropTypes} from "react";
 
-const Grid = ({title, children}) => {
+const Box = ({title, children}) => {
     return (
         <div className="content">
             <div className="box box-default">
-                <div className="box-header">
+                <div className="box-header with-border">
                     <h3 className="box-title">{title}</h3>
                 </div>
                 <div className="box-body">
@@ -17,7 +17,7 @@ const Grid = ({title, children}) => {
     );
 };
 
-Grid.propTypes = {
+Box.propTypes = {
     title: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.array,
@@ -25,4 +25,4 @@ Grid.propTypes = {
     ])
 };
 
-export default Grid;
+export default Box;

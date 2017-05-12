@@ -2,7 +2,9 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as challengeActions from "../../actions/challengeActions";
-import List from '../layout/list/List';
+import List from "../layout/list/List";
+import Box from "../layout/Box";
+import Intro from './Intro';
 
 class DashboardPage extends React.Component {
     constructor(props, context) {
@@ -13,9 +15,11 @@ class DashboardPage extends React.Component {
         const {challenges, user} = this.props;
 
         return (
-            <div className="content">
-                <List challenges={challenges} user={user} />
-            </div>
+            <Box title="Dashboard">
+                <Intro />
+                <h4 className="box-title">List of Challenges</h4>
+                <List challenges={challenges} user={user}/>
+            </Box>
         );
     }
 }
