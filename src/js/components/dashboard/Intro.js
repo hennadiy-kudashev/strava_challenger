@@ -1,5 +1,11 @@
 import React from 'react';
 
+function onEmailClick() {
+    this.href=this.href
+        .replace(/AT/,'&#64;')
+        .replace(/DOT/,'&#46;');
+}
+
 const Intro = () => {
     return (
         <div className="box-body">
@@ -16,7 +22,7 @@ const Intro = () => {
                     So when you add new activity to Strava it will reflect challenge result on this site.</dd>
                 <dt>Collaboration</dt>
                 <dd>The project is open source, so feel free to <a href="https://github.com/hennadiy-kudashev/strava_challenger">contribute</a>.
-                    Ideas, feedback and improvements please send to <a href="mailto:genaDOTutyfATgmailDOTcom" onClick="this.href=this.href.replace(/AT/,'&#64;').replace(/DOT/,'&#46;')">email</a>.</dd>
+                    Ideas, feedback and improvements please send to <a href="mailto:genaDOTutyfATgmailDOTcom" onClick={onEmailClick}>email</a>.</dd>
             </dl>
         </div>
     );
