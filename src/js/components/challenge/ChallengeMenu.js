@@ -17,14 +17,21 @@ class ChallengeMenu extends React.Component {
     render() {
         const {challenges, user, pathname} = this.props;
         const joinedChallenges = challenges.filter(challenge=>challenge.athletes.some(athlete=>athlete.id == user.id));
+        const openedChallenges = challenges.filter(challenge=>!challenge.athletes.some(athlete=>athlete.id == user.id));
         return (
             <ul className="sidebar-menu">
                 <li className="header">JOINED CHALLENGES</li>
                 {
                     joinedChallenges.map(challenge => {
-
                         const active = pathname.split('/').includes(challenge.id);
+                        return <ChallengeMenuItem key={challenge.id} active={active} challenge={challenge}/>;
 
+                    })
+                }
+                <li className="header">OPENED CHALLENGES</li>
+                {
+                    openedChallenges.map(challenge => {
+                        const active = pathname.split('/').includes(challenge.id);
                         return <ChallengeMenuItem key={challenge.id} active={active} challenge={challenge}/>;
 
                     })
