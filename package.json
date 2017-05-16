@@ -6,7 +6,7 @@
   "scripts": {
     "start:prod": "node server.prod.js",
     "start": "npm-run-all --parallel open:src lint:watch",
-    "open:src": "nodemon server.dev.js",
+    "open:src": "nodemon --ignore src/js/ server.dev.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",
     "build": "NODE_ENV=production webpack -p --config ./webpack.config.prod.js",

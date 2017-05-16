@@ -4,8 +4,10 @@ export default function athletesReducer(state = [], action) {
     switch (action.type) {
         case types.SET_CHALLENGE:
             return state.map((athlete, index) => {
-                const userInfo = action.infoList[index];
-                const activities = action.activitiesList[index].filter(a=> a.type == 'Run');
+                const userInfo = action.infoList.find(info=>info.id === athlete.id);
+                const activities = action.activitiesList
+                    .find(activities=>activities.some(activity=>activity.athlete.id ===athlete.id))
+                    .filter(a=> a.type == 'Run');
                 return Object.assign({}, athlete, {
                     userInfo,
                     activities
