@@ -215,5 +215,12 @@ body {
     height: 50px;
     text-align: center;
   }
+
+  .product-description {
+      overflow: visible;
+      white-space: inherit;
+      text-overflow: inherit;
+      width: 70%;
+  }
 }
 
