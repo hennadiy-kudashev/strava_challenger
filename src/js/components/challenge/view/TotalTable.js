@@ -5,7 +5,7 @@ import TotalSummary from '../../../logic/totalSummary';
 import {Kilometre, Metre, Time} from './format';
 import BaseView from './BaseView';
 
-class TotalView extends BaseView {
+class TotalTable extends BaseView {
     constructor(props, context) {
         super(props, context);
     }
@@ -29,4 +29,4 @@ class TotalView extends BaseView {
     }
 }
 
-export default TotalView;
+export default TotalTable;

@@ -24,14 +24,14 @@ class MonthChart extends BaseView{
                 labels: monthSummary.getMonths(),
                 datasets: [
                     {
-                        label: `Expected, ${threshold.unit}`,
+                        label: `Norm, ${threshold.unit}`,
                         fillColor: "rgba(220,220,220,0.2)",
                         strokeColor: "rgba(220,220,220,1)",
                         pointColor: "rgba(220,220,220,1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion()).map(t=> threshold.convert(t.monthThreshold))
+                        data: monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion()).map(t=> threshold.convert(t.monthNorm))
                     },
                     {
                         label: `Actual, ${threshold.unit}`,

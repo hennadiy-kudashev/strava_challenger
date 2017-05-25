@@ -15,8 +15,16 @@ class PeriodSummary {
         return this.now.isAfter(this.end);
     }
 
+    isBetween(){
+        return this.now.isBetween(this.start, this.end);
+    }
+
     getDaysLeft(){
         return this.end.diff(this.now, 'days');
+    }
+
+    getDaysPast(){
+        return this.now.diff(this.start, 'days');
     }
 
     getSummary(){
