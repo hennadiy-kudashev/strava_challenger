@@ -1,5 +1,6 @@
 import moment from "moment";
 import TotalSummary from "./totalSummary";
+import PeriodSummary from "./periodSummary";
 
 class MonthSummary {
     constructor(start, end, threshold) {
@@ -9,6 +10,7 @@ class MonthSummary {
     }
 
     _getMonths() {
+        const self = this;
         let dateStart = moment(this.start);
         let dateEnd = moment(this.end);
         let months = [];
@@ -17,7 +19,19 @@ class MonthSummary {
             months.push({
                 start: dateStart.clone().startOf('month'),
                 end: dateStart.clone().endOf('month'),
-                label: dateStart.format('MMMM')
+                label: dateStart.format('MMMM'),
+                getNorm: function () {
+                    const periodSummary = new PeriodSummary(this.start, this.end);
+                    if (periodSummary.isEnded()) {
+                        return self.getMonthNorm();
+                    }
+                    if (periodSummary.isNotStarted()) {
+                        return 0;
+                    }
+                    if (periodSummary.isBetween()) {
+                        return self.getDayNorm() * periodSummary.getDaysPast();
+                    }
+                }
             });
             dateStart.add(1, 'month');
         }
@@ -29,17 +43,14 @@ class MonthSummary {
     }
 
     getMonthsDiff(activities, criterion) {
-        const months = this._getMonths();
-        const monthThreshold = this.threshold / months.length;
-        return months
+        return this._getMonths()
             .map(month=> {
-                return TotalSummary.create(activities, month.start, month.end).getByCriterion(criterion);
-            })
-            .map(monthTotal=> {
+                const total = TotalSummary.create(activities, month.start, month.end).getByCriterion(criterion);
+                const norm = month.getNorm();
                 return {
-                    monthTotal: monthTotal,
-                    monthDiff: monthTotal - monthThreshold,
-                    monthThreshold: monthThreshold
+                    monthTotal: total,
+                    monthDiff: total - norm,
+                    monthNorm: norm
                 };
             });
     }
@@ -48,8 +59,28 @@ class MonthSummary {
         const total = TotalSummary.create(activities, this.start, this.end).getByCriterion(criterion);
         return {
             total: total,
-            diff: total - this.threshold
+            diff: total - this.getNormByNow()
         };
+    }
+
+    getMonthsNorm() {
+        return this._getMonths().map(month=> {
+            return month.getNorm();
+        });
+    }
+
+    getNormByNow() {
+        return this.getMonthsNorm().reduce((a, b) => a + b, 0);
+    }
+
+    getMonthNorm() {
+        const months = this._getMonths().length;
+        return this.threshold / months;
+    }
+
+    getDayNorm() {
+        const days = moment(this.end).diff(moment(this.start), 'days');
+        return this.threshold / days;
     }
 }
 
