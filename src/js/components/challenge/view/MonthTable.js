@@ -29,8 +29,8 @@ class MonthTable extends BaseView{
         });
         rows.unshift([
             <span>Norm<Tooltip>
-                <div>Norm for a past month - threshold / month count.</div>
-                <div>Norm for the current month - norm of a day * past days within the month.</div>
+                <div>Norm for a past month - norm of a day * number of days in month.</div>
+                <div>Norm for the current month - norm of a day * past days in the month by now.</div>
                 <div>Colored values display the difference between norm and actual data.</div>
             </Tooltip></span>,
             ...monthSummary.getMonthsNorm().map((obj, index)=><Unit key={index} unit={obj} criterion={this.getThresholdCriterion()}/>),

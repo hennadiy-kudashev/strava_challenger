@@ -14,7 +14,7 @@ const Tooltip = ({children}) => {
 };
 
 Tooltip.propTypes = {
-    children: PropTypes.string
+    children: PropTypes.array
 };
 
 export default Tooltip;

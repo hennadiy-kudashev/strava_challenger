@@ -20,11 +20,18 @@ class PeriodSummary {
     }
 
     getDaysLeft(){
-        return this.end.diff(this.now, 'days');
+        //use true to return float number, which is more precise to count days in month
+        return this.end.diff(this.now, 'days', true);
     }
 
     getDaysPast(){
-        return this.now.diff(this.start, 'days');
+        //use true to return float number, which is more precise to count the norm in the first day of month
+        return this.now.diff(this.start, 'days', true);
+    }
+    
+    getDays(){
+        //use true to return float number, which is more precise to count days in month
+        return this.end.diff(this.start, 'days', true);
     }
 
     getSummary(){
@@ -34,7 +41,7 @@ class PeriodSummary {
         if (this.isEnded()){
             return 'Ended';
         }
-        return `${this.getDaysLeft()} Days Left`;
+        return `${Math.round(this.getDaysLeft())} Days Left`;
 
     }
 }

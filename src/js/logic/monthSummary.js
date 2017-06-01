@@ -23,7 +23,7 @@ class MonthSummary {
                 getNorm: function () {
                     const periodSummary = new PeriodSummary(this.start, this.end);
                     if (periodSummary.isEnded()) {
-                        return self.getMonthNorm();
+                        return self.getDayNorm() * periodSummary.getDays();
                     }
                     if (periodSummary.isNotStarted()) {
                         return 0;
@@ -73,13 +73,8 @@ class MonthSummary {
         return this.getMonthsNorm().reduce((a, b) => a + b, 0);
     }
 
-    getMonthNorm() {
-        const months = this._getMonths().length;
-        return this.threshold / months;
-    }
-
     getDayNorm() {
-        const days = moment(this.end).diff(moment(this.start), 'days');
+        const days = new PeriodSummary(this.start, this.end).getDays();
         return this.threshold / days;
     }
 }
