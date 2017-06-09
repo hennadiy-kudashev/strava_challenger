@@ -28,7 +28,7 @@ class MonthTable extends BaseView{
             ];
         });
         rows.unshift([
-            <span>Norm<Tooltip>
+            <span key="tooltip">Norm<Tooltip>
                 <div>Norm for a past month - norm of a day * number of days in month.</div>
                 <div>Norm for the current month - norm of a day * past days in the month by now.</div>
                 <div>Colored values display the difference between norm and actual data.</div>
