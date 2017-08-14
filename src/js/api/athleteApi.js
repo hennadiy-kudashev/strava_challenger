@@ -24,7 +24,7 @@ class AthleteApi extends StravaApi {
      * @returns {Promise.<Array>}
      */
     getActivities(after, before) {
-        const PAGE_SIZE = 50; //max allowed by Strava.
+        const PAGE_SIZE = 200; //max allowed by Strava.
         const PAGE_NUMBER = 1;
         return this._getActivitiesRecursion(after, before, PAGE_SIZE, PAGE_NUMBER, []);
     }
