@@ -1,5 +1,5 @@
 import React from 'react';
-import ChallengeMenu from '../challenge/ChallengeMenu';
+import ChallengeMenu from '../challenge/menu/ChallengeMenu';
 
 const Sidebar = () => {
     return (
