@@ -5,7 +5,8 @@ import DashboardPage from '../components/dashboard/DashboardPage';
 import CodeReceiverPage from '../components/auth/CodeReceiverPage';
 import LandingPage from '../components/landing/LandingPage';
 import accessTokenStorage from '../api/accessTokenStorage';
-import ChallengePage  from '../components/challenge/ChallengePage';
+import ChallengePage from '../components/challenge/ChallengePage';
+import CreateChallengePage from '../components/challenge/create/CreatePage';
 
 export default (
     <Route path="/">
@@ -13,6 +14,7 @@ export default (
         <Route path="code_receiver" component={CodeReceiverPage} />
         <Route path="/" component={App} onEnter={requireAuth}>
             <Route path="dashboard" component={DashboardPage} />
+            <Route path="challenge/create" component={CreateChallengePage} />
             <Route path="challenge/:id" component={ChallengePage} />
         </Route>
     </Route>
