@@ -15,6 +15,7 @@ export default (
         <Route path="/" component={App} onEnter={requireAuth}>
             <Route path="dashboard" component={DashboardPage} />
             <Route path="challenge/create" component={CreateChallengePage} />
+            <Route path="challenge/create/:id" component={CreateChallengePage} />
             <Route path="challenge/:id" component={ChallengePage} />
         </Route>
     </Route>

@@ -14,7 +14,6 @@ export default function challengesReducer(state = initialState.challenges, actio
                 if (challenge.id === action.challengeId) {
                     return currentChallengeReducer(challenge, action);
                 }
-
                 return challenge;
             });
         default:

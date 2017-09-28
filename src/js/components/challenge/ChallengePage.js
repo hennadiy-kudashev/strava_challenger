@@ -10,6 +10,7 @@ import views from "./view/views";
 import Info from "./Info";
 import Progress from "./Progress";
 import JoinButton from "../layout/JoinButton";
+import AdminButtons from "./AdminButtons";
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
@@ -45,6 +46,7 @@ class ChallengePage extends React.Component {
                     <Info challenge={challenge}/>
                     <Progress challenge={challenge} user={user}/>
                     <JoinButton challenge={challenge} user={user}/>
+                    <AdminButtons challenge={challenge} user={user}/>
                     <Tabs labels={labels}>
                         {
                             challenge.views.map(view=> {
