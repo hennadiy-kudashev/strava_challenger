@@ -3,12 +3,12 @@ import {Link} from 'react-router';
 import {Button} from "react-bootstrap";
 
 const AdminButtons = ({challenge, user}) => {
-    if (challenge.createdBy !== user.id){
-        return null;
-    }
+    // if (challenge.createdBy !== user.id){
+    //     return null;
+    // }
     return (<div>
         <Button type="button" bsClass="btn btn-default pull-right">Remove</Button>
-        <Link className="btn btn-default pull-right" to={"/challenge/create/"+ challenge.id}>Edit</Link>
+        <Link className="btn btn-default pull-right" to={"/challenge/edit/"+ challenge.id}>Edit</Link>
     </div>);
 };
 

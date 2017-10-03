@@ -7,6 +7,7 @@ import LandingPage from '../components/landing/LandingPage';
 import accessTokenStorage from '../api/accessTokenStorage';
 import ChallengePage from '../components/challenge/ChallengePage';
 import CreateChallengePage from '../components/challenge/create/CreatePage';
+import EditChallengePage from '../components/challenge/create/EditPage';
 
 export default (
     <Route path="/">
@@ -15,7 +16,7 @@ export default (
         <Route path="/" component={App} onEnter={requireAuth}>
             <Route path="dashboard" component={DashboardPage} />
             <Route path="challenge/create" component={CreateChallengePage} />
-            <Route path="challenge/create/:id" component={CreateChallengePage} />
+            <Route path="challenge/edit/:id" component={EditChallengePage} />
             <Route path="challenge/:id" component={ChallengePage} />
         </Route>
     </Route>

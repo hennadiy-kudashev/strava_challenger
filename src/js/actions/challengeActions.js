@@ -4,7 +4,20 @@ import ChallengeApi from "../api/challengeApi";
 import * as errorActions from './errorActions';
 
 export function createChallenge(challenge) {
-    return {type: types.CREATE_CHALLENGE, challenge};
+    return function (dispatch) {
+        return new ChallengeApi().create(challenge).then(challenge => {
+            dispatch({type: types.CREATE_CHALLENGE, challenge});
+            return challenge;
+        });
+    };
+}
+
+export function editChallenge(challenge) {
+    return function (dispatch) {
+        return new ChallengeApi().edit(challenge).then(challenge => {
+            dispatch({type: types.EDIT_CHALLENGE, challenge});
+        });
+    };
 }
 
 export function getChallenges() {
