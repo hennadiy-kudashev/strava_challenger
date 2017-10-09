@@ -6,6 +6,7 @@ import CheckboxList from "../../shared/CheckboxList";
 import Box from "../../layout/Box";
 import views from "../view/views";
 import thresholds from "../view/thresholds";
+import activityTypes from "../view/activityTypes";
 import EditStateConverter from './EditStateConverter';
 
 const checkboxListItems = Object.keys(views).map(key=> {
@@ -13,6 +14,9 @@ const checkboxListItems = Object.keys(views).map(key=> {
 });
 const thresholdItems = Object.keys(thresholds).map(key=> {
     return {key, label: thresholds[key].label};
+});
+const activityTypeItems = Object.keys(activityTypes).map(key=> {
+    return {key, label: activityTypes[key].label};
 });
 const handlerChangeFor = (state, onChange, propName, getter = e=>e.target.value) => {
     return (e)=> {
@@ -22,9 +26,7 @@ const handlerChangeFor = (state, onChange, propName, getter = e=>e.target.value)
 };
 
 const EditForm = ({operation, challenge, onChange, onSave}) => {
-    
     const state = EditStateConverter.fromAPI(challenge);
-    
     return (
         <Box title={`${operation} Challenge`}>
             <FormGroup>
@@ -45,6 +47,13 @@ const EditForm = ({operation, challenge, onChange, onSave}) => {
             </FormGroup>
             <FormGroup>
                 <ControlLabel>Criteria</ControlLabel>
+                <br/>
+                Activity Type
+                <FormControl componentClass="select" placeholder="Select activity type"
+                             value={state.criteria_type}
+                             onChange={handlerChangeFor(state, onChange, 'criteria_type')}>
+                    {activityTypeItems.map(item=>(<option key={item.key} value={item.key}>{item.label}</option>))}
+                </FormControl>
                 <br/>
                 Date Time
                 <DateTimeRangeControl

@@ -14,8 +14,16 @@ export function createChallenge(challenge) {
 
 export function editChallenge(challenge) {
     return function (dispatch) {
-        return new ChallengeApi().edit(challenge).then(challenge => {
+        return new ChallengeApi().update(challenge).then((challenge) => {
             dispatch({type: types.EDIT_CHALLENGE, challenge});
+        });
+    };
+}
+
+export function removeChallenge(challengeID) {
+    return function (dispatch) {
+        return new ChallengeApi().remove(challengeID).then(() => {
+            dispatch({type: types.REMOVE_CHALLENGE, challengeID});
         });
     };
 }
@@ -47,7 +55,8 @@ export function getJoinedAthlete(challengeId, criteria, athlete) {
     return function (dispatch) {
         new AthleteApi(athlete.token).getActivities(
             new Date(criteria.datetime.after),
-            new Date(criteria.datetime.before)
+            new Date(criteria.datetime.before),
+            criteria.type
         ).then(activities => {
             dispatch(joinChallenge(challengeId, athlete, activities));
         });
@@ -60,7 +69,8 @@ export function getChallenge(id, athletes, criteria) {
             Promise.all(athletes.map(athlete=>new AthleteApi().getInfo(athlete.id))),
             Promise.all(athletes.map(athlete=>new AthleteApi(athlete.token).getActivities(
                 new Date(criteria.datetime.after),
-                new Date(criteria.datetime.before)).catch(error=>{
+                new Date(criteria.datetime.before),
+                criteria.type).catch(error=>{
                     dispatch(errorActions.setError(`Fail to retrieve activities for user ${athlete.id}.`));
                     return [];
             })))

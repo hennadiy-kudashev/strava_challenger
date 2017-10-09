@@ -2,10 +2,10 @@ const ChallengeRepository = require('../repository/challengeRepository');
 
 function wrap(promise, response) {
     promise.then(
-        result=>{
+        result=> {
             response.json(result);
         },
-        error=>{
+        error=> {
             response.status(500).send({error});
         });
 }
@@ -15,6 +15,14 @@ module.exports.register = function (router, db) {
     router.route('/challenges')
         .get(function (request, response) {
             wrap(challengeRepository.getAll(), response);
+        })
+        .put(function (request, response) {
+            const challenge = request.body;
+            wrap(challengeRepository.create(challenge), response);
+        })
+        .post(function (request, response) {
+            const challenge = request.body;
+            wrap(challengeRepository.update(challenge), response);
         });
 
     router.route('/challenges/:challengeID')
@@ -25,9 +33,17 @@ module.exports.register = function (router, db) {
         .post(function (request, response) {
             const challengeID = request.params.challengeID;
             const athlete = request.body;
-            challengeRepository.addAthlete(challengeID, athlete).then(()=>{
+            challengeRepository.addAthlete(challengeID, athlete).then(()=> {
                 response.status(204).end();
-            }, error=>{
+            }, error=> {
+                response.status(500).send({error});
+            });
+        })
+        .delete(function (request, response) {
+            const challengeID = request.params.challengeID;
+            challengeRepository.remove(challengeID).then(()=> {
+                response.status(204).end();
+            }, error=> {
                 response.status(500).send({error});
             });
         });

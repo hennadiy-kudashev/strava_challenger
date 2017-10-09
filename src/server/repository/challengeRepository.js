@@ -8,13 +8,7 @@ class ChallengeRepository {
     }
 
     getAll() {
-        return this._db.collection('challenges').find().toArray().then(items=> {
-            return items.map(item=> {
-                //UI uses id
-                item.id = item._id;
-                return item;
-            });
-        });
+        return this._db.collection('challenges').find().toArray();
     }
 
     get(id) {
@@ -31,6 +25,25 @@ class ChallengeRepository {
                 "athletes.$.token": token
             }
         });
+    }
+
+    create(challenge) {
+        challenge.athletes=[];
+        return this._db.collection('challenges').insertOne(challenge).then(item=> {
+            challenge._id = item.insertedId;
+            return challenge;
+        });
+    }
+
+    update(challenge) {
+        const challengeID = challenge._id;
+        delete challenge._id;
+        return this._db.collection('challenges').findOneAndUpdate({_id: ObjectId(challengeID)}, {$set: challenge},{returnOriginal:false})
+            .then(item=>item.value);
+    }
+
+    remove(challengeID) {
+        return this._db.collection('challenges').removeOne({_id: ObjectId(challengeID)});
     }
 }
 module.exports = ChallengeRepository;

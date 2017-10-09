@@ -8,6 +8,8 @@ export default function challengesReducer(state = initialState.challenges, actio
             return [...state, Object.assign({}, action.challenge)];
         case types.EDIT_CHALLENGE:
             return [...state.filter(challenge=>challenge.id !== action.challenge.id), Object.assign({}, action.challenge)];
+        case types.REMOVE_CHALLENGE:
+            return state.filter(challenge=>challenge.id !== action.challengeID);
         case types.SET_CHALLENGES:
             return action.challenges;
         case types.SET_CHALLENGE:
