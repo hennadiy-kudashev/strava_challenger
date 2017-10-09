@@ -5,6 +5,7 @@ import * as challengeActions from "../../../actions/challengeActions";
 import EditForm from "./EditForm";
 import Spinner from "../../shared/Spinner";
 import {browserHistory} from "react-router";
+import {Alert} from "react-bootstrap";
 
 class EditPage extends React.Component {
     constructor(props, context) {
@@ -37,6 +38,9 @@ class EditPage extends React.Component {
         const {challenge} = this.state;
         if (!challenge) {
             return (<Spinner/>);
+        }
+        if (challenge.createdBy !== this.props.user.id){
+         return (<Alert bsStyle="info">You are not authorized to edit this challenge.</Alert>);
         }
 
         return (<EditForm operation="Edit" challenge={challenge} onChange={this.onChange} onSave={this.onSave}/>);

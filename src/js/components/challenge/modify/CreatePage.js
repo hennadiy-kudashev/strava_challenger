@@ -43,7 +43,6 @@ class CreatePage extends React.Component {
         this.props.actions.createChallenge(challenge).then((challenge)=>{
             browserHistory.push('/challenge/' + challenge.id);
         });
-
     }
 
     onChange(state) {

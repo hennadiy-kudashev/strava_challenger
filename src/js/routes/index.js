@@ -6,8 +6,8 @@ import CodeReceiverPage from '../components/auth/CodeReceiverPage';
 import LandingPage from '../components/landing/LandingPage';
 import accessTokenStorage from '../api/accessTokenStorage';
 import ChallengePage from '../components/challenge/ChallengePage';
-import CreateChallengePage from '../components/challenge/create/CreatePage';
-import EditChallengePage from '../components/challenge/create/EditPage';
+import CreateChallengePage from '../components/challenge/modify/CreatePage';
+import EditChallengePage from '../components/challenge/modify/EditPage';
 
 export default (
     <Route path="/">
