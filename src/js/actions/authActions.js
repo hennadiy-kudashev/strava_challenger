@@ -1,20 +1,26 @@
-import * as types from './actionTypes';
-import OauthApi from '../api/oauthApi';
-import AthleteApi from '../api/athleteApi';
+import * as types from "./actionTypes";
+import AthleteApi from "../api/athleteApi";
 import accessTokenStorage from "../api/accessTokenStorage";
-import { push } from 'react-router-redux';
+import {push} from "react-router-redux";
 import UserApi from "../api/userApi";
 
 export function getAccessToken(code) {
     return function (dispatch) {
-        return new OauthApi().getToken(code).then(data=> {
-            new UserApi().updateToken(data).then(() => {
-                accessTokenStorage.set(data.access_token);
-                dispatch(setIsAuthenticated(true));
-                dispatch(setAuthUser(data.athlete, data.access_token));
-                dispatch(push('/dashboard'));
-            });
+        return new UserApi().auth(code).then(data=> {
+            accessTokenStorage.set(data.access_token);
+            dispatch(setIsAuthenticated(true));
+            dispatch(setAuthUser(data.athlete, data.access_token));
+            dispatch(push('/dashboard'));
         });
+
+        // return new OauthApi().getToken(code).then(data=> {
+        //     new UserApi().updateToken(data).then(() => {
+        //         accessTokenStorage.set(data.access_token);
+        //         dispatch(setIsAuthenticated(true));
+        //         dispatch(setAuthUser(data.athlete, data.access_token));
+        //         dispatch(push('/dashboard'));
+        //     });
+        // });
     };
 }
 
