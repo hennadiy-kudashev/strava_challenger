@@ -20,7 +20,8 @@ module.exports.register = function (router, db) {
         .post(function (request, response) {
             const code = request.body.code;
             stravaService.getTokenWithAthlete(code).then(data=> {
-                const {athlete, access_token} = data;
+                const athlete = data.athlete;
+                const access_token = data.access_token;
                 challengeRepository.updateUserToken(athlete.id, access_token).then(()=> {
                     response.status(201).send(data);
                 }, error=> {
