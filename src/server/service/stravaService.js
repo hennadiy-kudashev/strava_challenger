@@ -1,6 +1,6 @@
 'use strict';
 
-var strava = require('strava-v3');
+const strava = require('strava-v3');
 
 class StravaService {
     constructor() {

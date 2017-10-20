@@ -1,6 +1,0 @@
-{
-    "access_token"    :"Your apps access token (Required for Quickstart)"
-    , "client_id"     :"15685"
-    , "client_secret" :"d3f4e396495ae1f84389594b49505ef2abe52557"
-    , "redirect_uri"  :"Your apps Authorization Redirection URI (Required for oauth)"
-}
