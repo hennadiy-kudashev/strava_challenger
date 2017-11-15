@@ -5,6 +5,10 @@ class UserApi extends ServerApi {
         super();
     }
 
+    getUrl() {
+        return super.get(`/api/users/auth`);
+    }
+    
     auth(code) {
         return super.post(`/api/users/auth`, {code: code});
     }

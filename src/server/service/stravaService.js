@@ -7,9 +7,16 @@ class StravaService {
 
     }
 
+    getRequestAccessURL(redirectURL){
+        return Promise.resolve({url: strava.oauth.getRequestAccessURL({scope: 'view_private'})});
+    }
+
     getTokenWithAthlete(code) {
         return new Promise((resolve, reject)=> {
             strava.oauth.getToken(code, function (error, payload, limits) {
+                if (error) {
+                    reject(error);
+                }
                 if (payload.errors) {
                     reject(payload);
                 }

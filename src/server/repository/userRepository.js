@@ -8,7 +8,7 @@ class UserRepository {
     }
 
     getUserCollection(){
-        return this._db.collection('users')
+        return this._db.collection('users');
     }
 
     getAll() {

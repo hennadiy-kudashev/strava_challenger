@@ -16,7 +16,16 @@ module.exports.register = function (router, db) {
     const userRepository = new UserRepository(db);
     const stravaService = new StravaService();
 
+
     router.route('/users/auth')
+        .get(function (request, response) {
+            const redirectURL = request.query.redirectURL;
+            stravaService.getRequestAccessURL(redirectURL).then(data=> {
+                response.status(200).send(data);
+            }, error=> {
+                response.status(500).send({error});
+            });
+        })
         .post(function (request, response) {
             const code = request.body.code;
             stravaService.getTokenWithAthlete(code).then(data=> {
@@ -59,6 +68,6 @@ module.exports.register = function (router, db) {
                 response.status(204).end();
             }, error=> {
                 response.status(500).send({error});
-            })
+            });
         });
 };
