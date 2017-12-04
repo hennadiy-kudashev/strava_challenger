@@ -1,0 +1,7 @@
+export STRAVA_CLIENT_ID=defineMe
+export STRAVA_CLIENT_SECRET=defineMe
+export STRAVA_REDIRECT_URI=defineMe
+export STRAVA_ACCESS_TOKEN=defineMe
+export MONGOLAB_URI=defineMe
+export SECRET=defineMe
+export PORT=defineMe

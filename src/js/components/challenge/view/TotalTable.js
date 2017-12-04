@@ -16,7 +16,7 @@ class TotalTable extends BaseView {
         const rows = super.getSortedAthletes().map((athlete, index)=> {
             const totalSummary = new TotalSummary(athlete.activities);
             return [
-                <UserInfo key={index} userInfo={athlete.userInfo}/>,
+                <UserInfo key={index} userInfo={athlete.info}/>,
                 totalSummary.getRunCount(),
                 <Kilometre key={index} metres={totalSummary.getDistance()} />,
                 <Metre key={index} metres={totalSummary.getElevGain()} />,

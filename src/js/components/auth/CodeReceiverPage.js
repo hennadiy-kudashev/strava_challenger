@@ -19,7 +19,7 @@ class CodeReceiverPage extends React.Component {
         }
         else {
             const code = location.query.code;
-            this.props.actions.getAccessToken(code);
+            this.props.actions.authenticate(code);
             return (<Spinner/>);
         }
     }

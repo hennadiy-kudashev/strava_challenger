@@ -1,19 +1,15 @@
-import * as types from './actionTypes';
-import OauthApi from '../api/oauthApi';
-import AthleteApi from '../api/athleteApi';
+import * as types from "./actionTypes";
 import accessTokenStorage from "../api/accessTokenStorage";
-import { push } from 'react-router-redux';
+import {push} from "react-router-redux";
+import AuthApi from "../api/authApi";
 import UserApi from "../api/userApi";
 
-export function getAccessToken(code) {
+export function authenticate(code) {
     return function (dispatch) {
-        return new OauthApi().getToken(code).then(data=> {
-            new UserApi().updateToken(data).then(() => {
-                accessTokenStorage.set(data.access_token);
-                dispatch(setIsAuthenticated(true));
-                dispatch(setAuthUser(data.athlete, data.access_token));
-                dispatch(push('/dashboard'));
-            });
+        return new AuthApi().auth(code).then(data=> {
+            accessTokenStorage.set(data.token);
+            dispatch(setAuthUser(data.user));
+            dispatch(push('/dashboard'));
         });
     };
 }
@@ -21,24 +17,23 @@ export function getAccessToken(code) {
 export function logout() {
     return function (dispatch) {
         accessTokenStorage.remove();
-        dispatch(setIsAuthenticated(false));
         dispatch(setAuthUser({}));
         dispatch(push('/'));
     };
 }
 
-export function setIsAuthenticated(isAuthenticated, path) {
-    return {type: types.SET_IS_AUTHENTICATED, isAuthenticated};
-}
-
 export function getAuthUser() {
     return function (dispatch) {
-        return new AthleteApi().getAuthAthlete().then(data=> {
-            dispatch(setAuthUser(data, accessTokenStorage.get()));
+        return new UserApi().getAuthUser().then(data=> {
+            dispatch(setAuthUser(data));
+        }, error=>{
+            if (error.response.status === 401) { //unauthorized
+               dispatch(logout());
+            }
         });
     };
 }
 
-export function setAuthUser(user, token) {
-    return {type: types.SET_AUTH_USER, user, token};
+export function setAuthUser(user) {
+    return {type: types.SET_AUTH_USER, user};
 }

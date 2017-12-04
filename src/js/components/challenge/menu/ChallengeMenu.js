@@ -17,10 +17,10 @@ class ChallengeMenu extends React.Component {
 
     render() {
         const {challenges, user, pathname} = this.props;
-        const activeChallenges = challenges.filter(challenge=>moment().isBetween(moment(challenge.criteria.datetime.after),moment(challenge.criteria.datetime.before)));
-        const joinedChallenges = activeChallenges.filter(challenge=>challenge.athletes.some(athlete=>athlete.id == user.id));
-        const openedChallenges = activeChallenges.filter(challenge=>!challenge.athletes.some(athlete=>athlete.id == user.id));
-        const closedChallenges = challenges.filter(challenge=>!moment().isBetween(moment(challenge.criteria.datetime.after),moment(challenge.criteria.datetime.before)));
+        const activeChallenges = challenges.filter(challenge=>moment().isBefore(moment(challenge.criteria.datetime.before)));
+        const joinedChallenges = activeChallenges.filter(challenge=>challenge.joined);
+        const openedChallenges = activeChallenges.filter(challenge=>!challenge.joined);
+        const closedChallenges = challenges.filter(challenge=>moment().isAfter(moment(challenge.criteria.datetime.before)));
         return (
             <div>
                 <ChallengeMenuItems title="JOINED CHALLENGES" challenges={joinedChallenges} pathname={pathname} />

@@ -1,5 +1,4 @@
 'use strict';
-
 const ObjectId = require('mongodb').ObjectId;
 
 class ChallengeRepository {
@@ -8,13 +7,7 @@ class ChallengeRepository {
     }
 
     getAll() {
-        return this._db.collection('challenges').find().toArray().then(items=> {
-            return items.map(item=> {
-                //UI uses id
-                item.id = item._id;
-                return item;
-            });
-        });
+        return this._db.collection('challenges').find().toArray();
     }
 
     get(id) {
@@ -22,15 +15,30 @@ class ChallengeRepository {
     }
 
     addAthlete(challengeID, athlete) {
-        return this._db.collection('challenges').updateOne({_id: ObjectId(challengeID)}, {$push: {athletes: athlete}});
+        return this._db.collection('challenges').findOneAndUpdate(
+            {_id: ObjectId(challengeID)},
+            {$push: {athletes: athlete}},
+            {returnOriginal: false}
+        ).then(item=>item.value);
     }
 
-    updateUserToken(userID, token) {
-        return this._db.collection('challenges').updateMany({athletes: {$elemMatch: {id: parseInt(userID)}}}, {
-            $set: {
-                "athletes.$.token": token
-            }
+    create(challenge) {
+        return this._db.collection('challenges').insertOne(challenge).then(item=> {
+            challenge._id = item.insertedId;
+            return challenge;
         });
+    }
+
+    update(id, challenge) {
+        return this._db.collection('challenges').findOneAndUpdate(
+            {_id: ObjectId(id)},
+            {$set: challenge},
+            {returnOriginal: false}
+        ).then(item=>item.value);
+    }
+
+    remove(challengeID, athleteID) {
+        return this._db.collection('challenges').removeOne({_id: ObjectId(challengeID), createdBy: athleteID});
     }
 }
 module.exports = ChallengeRepository;

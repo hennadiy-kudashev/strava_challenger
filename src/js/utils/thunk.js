@@ -6,7 +6,7 @@ export default function thunk({dispatch, getState}) {
         if (typeof action === 'function') {
             let potentialPromise = action(dispatch, getState);
             if (isPromise(potentialPromise)) {
-                potentialPromise.catch(createHandler(dispatch));
+                return potentialPromise.catch(createHandler(dispatch));
             }
         } else {
             next(action);

@@ -21,7 +21,7 @@ class MonthTable extends BaseView{
         const rows = super.getSortedAthletes().map((athlete, indexA)=> {
             const total = monthSummary.getTotal(athlete.activities, this.getThresholdCriterion());
             return [
-                <UserInfo key={indexA} userInfo={athlete.userInfo}/>,
+                <UserInfo key={indexA} userInfo={athlete.info}/>,
                 ...monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion())
                     .map((obj, index)=><Diff key={index} total={obj.monthTotal} diff={obj.monthDiff} criterion={this.getThresholdCriterion()} />),
                 <Diff key={indexA} total={total.total} diff={total.diff} criterion={this.getThresholdCriterion()} />

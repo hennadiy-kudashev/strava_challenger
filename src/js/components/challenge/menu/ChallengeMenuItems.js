@@ -13,7 +13,7 @@ const ChallengeMenuItems = ({title, challenges, pathname}) => {
             <li className="header">{title}</li>
             {
                 challenges.map(challenge => {
-                    return <ChallengeMenuItem key={challenge.id} active={isActive(challenge.id)} challenge={challenge}/>;
+                    return <ChallengeMenuItem key={challenge._id} active={isActive(challenge._id)} challenge={challenge}/>;
                 })
             }
         </ul>);

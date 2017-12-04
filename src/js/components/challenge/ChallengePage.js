@@ -10,6 +10,7 @@ import views from "./view/views";
 import Info from "./Info";
 import Progress from "./Progress";
 import JoinButton from "../layout/JoinButton";
+import AdminButtons from "./AdminButtons";
 
 class ChallengePage extends React.Component {
     constructor(props, context) {
@@ -22,7 +23,7 @@ class ChallengePage extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         //only load challenge for the first time and when path has changed
-        if (nextProps.challenge && nextProps.challenge.id !== (this.props.challenge ? this.props.challenge.id : '')) {
+        if (nextProps.challenge && nextProps.challenge._id !== (this.props.challenge ? this.props.challenge._id : '')) {
             this.loadChallenge(nextProps);
         }
     }
@@ -30,26 +31,27 @@ class ChallengePage extends React.Component {
     loadChallenge(props = this.props) {
         const {challenge, actions} = props;
         if (challenge) {
-            if (!challenge.isLoaded) {
-                actions.challengeActions.getChallenge(challenge.id, challenge.athletes, challenge.criteria);
+            if (!challenge.athletes) {
+                actions.challengeActions.getChallengeAthletes(challenge._id);
             }
         }
     }
 
     render() {
         const {challenge, user} = this.props;
-        if (challenge && challenge.isLoaded) {
+        if (challenge && challenge.athletes) {
             const labels = challenge.views.map(view=>views[view].label);
             return (
                 <Box title={challenge.displayName}>
                     <Info challenge={challenge}/>
                     <Progress challenge={challenge} user={user}/>
-                    <JoinButton challenge={challenge} user={user}/>
+                    <JoinButton challenge={challenge} />
+                    <AdminButtons challenge={challenge}/>
                     <Tabs labels={labels}>
                         {
                             challenge.views.map(view=> {
                                 const View = views[view].component;
-                                return (<TabPane key={challenge.id+view}>
+                                return (<TabPane key={challenge._id+view}>
                                     <View challenge={challenge}/>
                                 </TabPane>);
                             })
@@ -72,7 +74,7 @@ function mapStateToProps(state, ownProps) {
     let challengeID = ownProps.params.id;
     let challenge;
     if (challengeID && state.challenges.length > 0) {
-        challenge = state.challenges.find(t => t.id === challengeID);
+        challenge = state.challenges.find(t => t._id === challengeID);
     }
     return {
         challenge: challenge,

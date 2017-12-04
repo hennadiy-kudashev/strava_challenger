@@ -45,6 +45,34 @@ class FetchApi {
             body: this.bodyConverter(body)
         }).then(status).then(json);
     }
+
+    /**
+     * Make PUT ajax request.
+     * @param url - requested url
+     * @param body - object {key: value}
+     * @returns {Promise.<TResult>}
+     */
+    put(url, body) {
+        return fetch(url, {
+            method: 'put',
+            headers: this.headers,
+            body: this.bodyConverter(body)
+        }).then(status).then(json);
+    }
+    
+    /**
+     * Make DELETE ajax request.
+     * @param url - requested url
+     * @param body - object {key: value}
+     * @returns {Promise.<TResult>}
+     */
+    remove(url, body = {}) {
+        return fetch(url, {
+            method: 'delete',
+            headers: this.headers,
+            body: this.bodyConverter(body)
+        }).then(status).then(json);
+    }
 }
 
 export default FetchApi;

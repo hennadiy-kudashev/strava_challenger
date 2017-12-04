@@ -6,7 +6,7 @@ const List = ({challenges, user}) => {
         <ul className="products-list product-list-in-box">
             {
                 challenges.map(challenge =>
-                    <ListItem key={challenge.id} challenge={challenge} user={user}/>
+                    <ListItem key={challenge._id} challenge={challenge} user={user}/>
                 )
             }
         </ul>

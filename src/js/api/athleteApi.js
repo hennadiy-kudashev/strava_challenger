@@ -21,12 +21,14 @@ class AthleteApi extends StravaApi {
      * Returns activities for given range.
      * @param {Date} before
      * @param {Date} after
+     * @param {String} type
      * @returns {Promise.<Array>}
      */
-    getActivities(after, before) {
+    getActivities(after, before, type = 'Run') {
         const PAGE_SIZE = 200; //max allowed by Strava.
         const PAGE_NUMBER = 1;
-        return this._getActivitiesRecursion(after, before, PAGE_SIZE, PAGE_NUMBER, []);
+        return this._getActivitiesRecursion(after, before, PAGE_SIZE, PAGE_NUMBER, [])
+            .then(activities=>activities.filter(a=> a.type === type));
     }
     
     _getActivitiesRecursion(after, before, pageSize, pageNumber, prevActivities){

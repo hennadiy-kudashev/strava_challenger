@@ -18,8 +18,8 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
-    module: { //Обновлено
-        preLoaders: [ //добавили ESlint в preloaders
+    module: {
+        preLoaders: [
             {
                 test: /\.js$/,
                 loaders: ['eslint'],
@@ -28,7 +28,7 @@ module.exports = {
                 ]
             }
         ],
-        loaders: [ //добавили babel-loader
+        loaders: [
             {
                 loaders: ['react-hot', 'babel-loader'],
                 include: [

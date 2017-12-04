@@ -2,22 +2,19 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const api = require('./api');
-
-//set env variable MONGOLAB_URI locally.
-const mongoUrl = process.env.MONGOLAB_URI;
-
+const config = require('./config');
 
 module.exports = function (app) {
     // configure app to use bodyParser(). This will let us get the data from a POST
     app.use(bodyParser.json()); //for parsing application/json
     app.use(bodyParser.urlencoded({extended: true})); //for parsing application/x-www-form-urlencoded
 
-    if (!mongoUrl){
+    if (!config.mongoUrl){
         console.error('Enviroment variable MONGOLAB_URI should be specified.');
         return;
     }
     
-    MongoClient.connect(mongoUrl, (err, database) => {
+    MongoClient.connect(config.mongoUrl, (err, database) => {
         if (err) return console.log(err);
         console.log('Connection to mongo success.');
 
@@ -27,13 +24,11 @@ module.exports = function (app) {
             res.sendFile(path.join(__dirname, './../../index.html'));
         });
 
-        const port = process.env.PORT || 3000;
-
-        app.listen(port, (error) => {
+        app.listen(config.port, (error) => {
             if (error) {
                 console.error(error);
             } else {
-                console.info('Listening on port %s.', port);
+                console.info('Listening on port %s.', config.port);
             }
         });
     });
