@@ -1,5 +1,5 @@
 import React from "react";
-import UserApi from "../../api/userApi";
+import AuthApi from "../../api/authApi";
 
 
 class LoginButton extends React.Component {
@@ -11,7 +11,7 @@ class LoginButton extends React.Component {
     }
 
     componentWillMount() {
-        new UserApi().getUrl().then(({url})=> {
+        new AuthApi().getUrl().then(({url})=> {
             this.setState({url});
         });
     }

@@ -36,12 +36,9 @@ class CreatePage extends React.Component {
 
     onSave(e) {
         e.preventDefault();
-        const state = this.state.challenge;
-        const challenge = Object.assign({}, state, {
-            createdBy: this.props.user.id
-        });
+        const challenge = this.state.challenge;
         this.props.actions.createChallenge(challenge).then((challenge)=>{
-            browserHistory.push('/challenge/' + challenge.id);
+            browserHistory.push('/challenge/' + challenge._id);
         });
     }
 
@@ -57,15 +54,8 @@ class CreatePage extends React.Component {
 }
 
 CreatePage.propTypes = {
-    user: PropTypes.object,
     actions: PropTypes.object
 };
-
-function mapStateToProps(state, ownProps) {
-    return {
-        user: state.auth.user
-    };
-}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -73,4 +63,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePage);
+export default connect(null, mapDispatchToProps)(CreatePage);

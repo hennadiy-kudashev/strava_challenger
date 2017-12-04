@@ -7,25 +7,33 @@ import Spinner from "../../shared/Spinner";
 import {browserHistory} from "react-router";
 import {Alert} from "react-bootstrap";
 
+const toState = ({displayName, description, views, criteria, 'private': _private})=>({
+    displayName,
+    description,
+    views,
+    criteria,
+    private: _private
+});
 class EditPage extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            challenge: this.props.challenge
+            challenge: toState(this.props.challenge || {})
         };
         this.onSave = this.onSave.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({challenge: Object.assign({}, nextProps.challenge)});
+        this.setState({challenge: Object.assign({}, toState(nextProps.challenge))});
     }
 
     onSave(e) {
         e.preventDefault();
         const {challenge} = this.state;
-        this.props.actions.editChallenge(challenge).then(()=> {
-            browserHistory.push('/challenge/' + challenge.id);
+        const challengeID = this.props.params.id;
+        this.props.actions.editChallenge(challengeID, challenge).then(()=> {
+            browserHistory.push('/challenge/' + challengeID);
         });
     }
 
@@ -39,7 +47,7 @@ class EditPage extends React.Component {
         if (!challenge) {
             return (<Spinner/>);
         }
-        if (challenge.createdBy !== this.props.user.id){
+        if (!this.props.challenge.canEdit){
          return (<Alert bsStyle="info">You are not authorized to edit this challenge.</Alert>);
         }
 
@@ -48,7 +56,7 @@ class EditPage extends React.Component {
 }
 
 EditPage.propTypes = {
-    user: PropTypes.object,
+    params: PropTypes.object,
     challenge: PropTypes.object,
     actions: PropTypes.object
 };
@@ -57,8 +65,7 @@ function mapStateToProps(state, ownProps) {
     const challengeID = ownProps.params.id;
     if (challengeID && state.challenges.length > 0) {
         return {
-            user: state.auth.user,
-            challenge: state.challenges.find(t=>t.id === challengeID)
+            challenge: state.challenges.find(t=>t._id === challengeID)
         };
     }
     return {};

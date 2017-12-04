@@ -4,13 +4,13 @@ import PeriodSummary from '../../logic/periodSummary';
 import thresholds from './view/thresholds';
 
 const Progress = ({challenge, user}) => {
-    const joinedAthlete = challenge.athletes.find(a=>a.id === user.id);
+    const joinedAthlete = challenge.athletes.find(a=>a.info.id === user.id);
     if (!joinedAthlete){
         return (<div/>);
     }
     const thresholdCriteria = Object.keys(challenge.criteria.threshold)[0];
     const threshold = challenge.criteria.threshold[thresholdCriteria];
-    const achieved = new TotalSummary(challenge.athletes.find(a=>a.id == user.id).activities).getByCriterion(thresholdCriteria);
+    const achieved = new TotalSummary(joinedAthlete.activities).getByCriterion(thresholdCriteria);
     const percentage = (achieved/threshold) * 100;
     const periodSummary = new PeriodSummary(challenge.criteria.datetime.after, challenge.criteria.datetime.before);
 

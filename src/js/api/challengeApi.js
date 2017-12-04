@@ -1,5 +1,4 @@
 import ServerApi from "./serverApi";
-import ChallengeDTO from './challengeDTO';
 
 class ChallengeApi extends ServerApi {
     constructor() {
@@ -7,21 +6,23 @@ class ChallengeApi extends ServerApi {
     }
 
     getAll() {
-        return super.get('/api/challenges').then(items=>items.map(item=>new ChallengeDTO(item).fromServer()));
+        return super.get('/api/challenges');
     }
 
-    addAthlete(challengeID, athlete) {
-        return super.post(`/api/challenges/${challengeID}`, athlete);
+    getAthletes(challengeID) {
+        return super.get(`/api/challenges/${challengeID}/athletes`);
+    }
+
+    addAthlete(challengeID) {
+        return super.put(`/api/challenges/${challengeID}/athletes`);
     }
 
     create(challenge){
-        return super.put(`/api/challenges`, new ChallengeDTO(challenge).toServer())
-            .then(item=>new ChallengeDTO(item).fromServer());
+        return super.put(`/api/challenges`, challenge);
     }
 
-    update(challenge){
-        return super.post(`/api/challenges`, new ChallengeDTO(challenge).toServer())
-            .then(item=>new ChallengeDTO(item).fromServer());
+    update(challengeID, challenge){
+        return super.post(`/api/challenges/${challengeID}`, challenge);
     }
     
     remove(challengeID){

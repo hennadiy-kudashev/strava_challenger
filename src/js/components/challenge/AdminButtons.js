@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import * as challengeActions from "../../actions/challengeActions";
 
 class AdminButtons extends React.Component {
-    constructor(props, context) {
+    constructor(props) {
         super(props);
         this.removeChallenge = this.removeChallenge.bind(this);
     }
@@ -14,26 +14,25 @@ class AdminButtons extends React.Component {
     removeChallenge(e) {
         e.preventDefault();
         const {challenge, actions} = this.props;
-        actions.removeChallenge(challenge.id).then(()=>{
+        actions.removeChallenge(challenge._id).then(()=>{
             browserHistory.push('/dashboard');
         });
     }
 
     render() {
-        const {user, challenge} = this.props;
-        if (challenge.createdBy !== user.id){
+        const { challenge} = this.props;
+        if (!challenge.canEdit){
             return null;
         }
         return (<div>
             <Button type="button" bsClass="btn btn-default pull-right" onClick={this.removeChallenge}>Remove</Button>
-            <Link className="btn btn-default pull-right" to={"/challenge/edit/"+ challenge.id}>Edit</Link>
+            <Link className="btn btn-default pull-right" to={"/challenge/edit/"+ challenge._id}>Edit</Link>
         </div>);
     }
 }
 
 AdminButtons.propTypes = {
     challenge: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
 };
 

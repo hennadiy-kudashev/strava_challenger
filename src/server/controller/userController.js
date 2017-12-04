@@ -1,6 +1,6 @@
-const ChallengeRepository = require('../repository/challengeRepository');
 const UserRepository = require('../repository/userRepository');
-const StravaService = require('../service/stravaService');
+const UserDTO = require('../dto/userDTO');
+
 function wrap(promise, response) {
     promise.then(
         result=> {
@@ -12,51 +12,23 @@ function wrap(promise, response) {
 }
 
 module.exports.register = function (router, db) {
-    const challengeRepository = new ChallengeRepository(db);
     const userRepository = new UserRepository(db);
-    const stravaService = new StravaService();
-
-
-    router.route('/users/auth')
-        .get(function (request, response) {
-            const redirectURL = request.query.redirectURL;
-            stravaService.getRequestAccessURL(redirectURL).then(data=> {
-                response.status(200).send(data);
-            }, error=> {
-                response.status(500).send({error});
-            });
-        })
-        .post(function (request, response) {
-            const code = request.body.code;
-            stravaService.getTokenWithAthlete(code).then(data=> {
-                const athlete = data.athlete;
-                const access_token = data.access_token;
-                challengeRepository.updateUserToken(athlete.id, access_token).then(()=> {
-                    response.status(201).send(data);
-                }, error=> {
-                    response.status(500).send({error});
-                });
-                // userRepository.create(athlete).then((user)=> {
-                //     response.status(201).send(data);
-                // }, error=> {
-                //     response.status(500).send({error});
-                // });
-            }, error=> {
-                response.status(500).send({error});
-            });
-        });
 
     router.route('/users')
-        .put(function (request, response) {
+        .get(function (request, response) {
+            const userID = request.userID;
+            wrap(userRepository.get(userID).then(user=>UserDTO.create(user)), response);
+        });
+        /*.put(function (request, response) {
             const user = request.body;
             userRepository.create(user).then((user)=> {
                 response.status(201).send(user);
             }, error=> {
                 response.status(500).send({error});
             });
-        });
+        });*/
 
-    router.route('/users/:userID')
+    /*router.route('/users/:userID')
         .get(function (request, response) {
             const userID = request.params.userID;
             wrap(userRepository.get(userID), response);
@@ -69,5 +41,5 @@ module.exports.register = function (router, db) {
             }, error=> {
                 response.status(500).send({error});
             });
-        });
+        });*/
 };

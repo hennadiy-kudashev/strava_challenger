@@ -46,7 +46,7 @@ class MonthChart extends BaseView{
                 ]
             };
             return [
-                <UserInfo key={indexA} userInfo={athlete.userInfo}/>,
+                <UserInfo key={indexA} userInfo={athlete.info}/>,
                 <Line key={indexA} data={data} width="800" height="200"/>
             ];
         });

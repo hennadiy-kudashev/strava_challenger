@@ -11,20 +11,16 @@ class JoinButton extends React.Component {
 
     joinChallenge(e) {
         e.preventDefault();
-        const {user, challenge, actions} = this.props;
-        actions.challengeActions.getJoinedAthlete(challenge.id, challenge.criteria, user);
+        const {challenge, actions} = this.props;
+        actions.challengeActions.joinChallenge(challenge._id);
     }
 
     render() {
-        const {user, challenge} = this.props;
-        const isJoined = challenge.athletes
-            .map(athlete => athlete.id)
-            .includes(user.id);
-
+        const {challenge} = this.props;
         const btn = (<a href="#" onClick={this.joinChallenge} className="btn btn-default pull-right">Join Challenge</a>);
         const btnJoined = (<div className="btn btn-default disabled pull-right">Joined</div>);
 
-        return isJoined ? btnJoined : btn;
+        return challenge.joined ? btnJoined : btn;
     }
 }
 
@@ -38,7 +34,6 @@ function mapDispatchToProps(dispatch) {
 
 JoinButton.propTypes = {
     challenge: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
 };
 
