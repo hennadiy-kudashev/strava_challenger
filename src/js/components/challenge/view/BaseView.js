@@ -1,5 +1,6 @@
 import React, {PropTypes} from "react";
 import Sorter from "../../../logic/sorter";
+import thresholds from './thresholds';
 
 class BaseView extends React.Component {
     constructor(props, context) {
@@ -14,6 +15,14 @@ class BaseView extends React.Component {
         return Object.keys(this.getChallenge().criteria.threshold)[0];
     }
 
+    getThresholdValue(){
+        return this.getChallenge().criteria.threshold[this.getThresholdCriterion()];
+    }
+
+    getThreshold(){
+        return thresholds[this.getThresholdCriterion()];
+    }
+    
     getSortedAthletes() {
         const sorter = new Sorter(this.getThresholdCriterion());
         return this.getChallenge().athletes.sort(sorter.getSortFn());

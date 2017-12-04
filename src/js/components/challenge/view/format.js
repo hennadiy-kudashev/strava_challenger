@@ -35,10 +35,10 @@ export function Diff({total, diff, criterion}) {
     </div>);
 }
 
-export function Unit({unit, criterion}) {
+export function Unit({unit, criterion, ...props}) {
     if (unit == 0) {
         return (<span />);
     }
     const Component = thresholds[criterion].component;
-    return (<Component metres={unit}/>);
+    return (<Component metres={unit} {...props} />);
 }
