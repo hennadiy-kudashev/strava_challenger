@@ -49,30 +49,34 @@ module.exports.register = function (router, db) {
                 response.status(500).send({error});
             });
         });
+    const getUsersWithActivities = async(athletes, criteria) => {
+        const users = await Promise.all(athletes.map(athlete=> userRepository.getByAthleteID(athlete.id)));
+        return await Promise.all(users.map(user=> {
+            return new StravaService(user.accessToken).getActivities(
+                new Date(criteria.datetime.after),
+                new Date(criteria.datetime.before),
+                criteria.type)
+                .then(activities=> {
+                    return {
+                        info: AthleteInfoDTO.create(user),
+                        activities: activities.map(activity=> ActivityDTO.create(activity))
+                    }
+                }).catch(error=> {
+                    //error in case of after datetime criterion is bigger than now
+                    console.error(error);
+                    return {
+                        info: AthleteInfoDTO.create(user),
+                        activities: []
+                    }
+                });
+        }));
+    };
     router.route('/challenges/:challengeID/athletes')
         .get(async(request, response) => {
             try {
                 const challengeID = request.params.challengeID;
                 const {athletes = [], criteria} = await challengeRepository.get(challengeID);
-                const users = await Promise.all(athletes.map(athlete=> userRepository.getByAthleteID(athlete.id)));
-                const usersWithActivities = await Promise.all(users.map(user=> {
-                    return new StravaService(user.accessToken).getActivities(
-                        new Date(criteria.datetime.after),
-                        new Date(criteria.datetime.before),
-                        criteria.type)
-                        .then(activities=> {
-                            return {
-                                info: AthleteInfoDTO.create(user),
-                                activities: activities.map(activity=> ActivityDTO.create(activity))
-                            }
-                        }).catch(error=> {
-                            console.error(error);
-                            return {
-                                info: AthleteInfoDTO.create(user),
-                                activities: []
-                            }
-                        });
-                }));
+                const usersWithActivities = await getUsersWithActivities(athletes, criteria);
                 response.status(200).send(usersWithActivities);
             } catch (error) {
                 response.status(500).send({error});
@@ -83,16 +87,8 @@ module.exports.register = function (router, db) {
                 const challengeID = request.params.challengeID;
                 const athleteID = request.strava.athleteID;
                 const { criteria } = await challengeRepository.addAthlete(challengeID, {id: athleteID});
-                const user = await userRepository.getByAthleteID(athleteID);
-                const activities = await new StravaService(user.accessToken).getActivities(
-                    new Date(criteria.datetime.after),
-                    new Date(criteria.datetime.before),
-                    criteria.type
-                );
-                response.status(200).send({
-                    info: AthleteInfoDTO.create(user),
-                    activities: activities.map(activity=> ActivityDTO.create(activity))
-                });
+                const usersWithActivities = await getUsersWithActivities([{id: athleteID}], criteria);
+                response.status(200).send(usersWithActivities[0]);
             } catch (error) {
                 response.status(500).send({error});
             }
