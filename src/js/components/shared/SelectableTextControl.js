@@ -30,7 +30,7 @@ const SelectableTextControl = ({items, placeholder, selectedItem, textValue, onC
                     })
                 }
             </DropdownButton>
-            <FormControl type="text" placeholder={placeholder} value={textValue} onChange={onTextChanged(selectedItem, onChange)}/>
+            <FormControl type="number" placeholder={placeholder} value={textValue} onChange={onTextChanged(selectedItem, onChange)}/>
         </InputGroup>
     );
 };
