@@ -23,8 +23,8 @@ class ChallengeMenu extends React.Component {
         const closedChallenges = challenges.filter(challenge=>moment().isAfter(moment(challenge.criteria.datetime.before)));
         return (
             <div>
-                <ChallengeMenuItems title="JOINED CHALLENGES" challenges={joinedChallenges} pathname={pathname} />
-                <ChallengeMenuItems title="OPENED CHALLENGES" challenges={openedChallenges} pathname={pathname} />
+                <ChallengeMenuItems title="JOINED CHALLENGES" challenges={joinedChallenges} pathname={pathname} openedInitially/>
+                <ChallengeMenuItems title="OPENED CHALLENGES" challenges={openedChallenges} pathname={pathname} openedInitially/>
                 <ChallengeMenuItems title="CLOSED CHALLENGES" challenges={closedChallenges} pathname={pathname} />
             </div>
         );

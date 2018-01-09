@@ -224,3 +224,10 @@ body {
   }
 }
 
+.collapse {
+  display: none !important;
+  &.in {
+    display: block !important;
+  }
+}
+

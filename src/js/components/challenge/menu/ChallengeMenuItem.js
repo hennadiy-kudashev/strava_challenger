@@ -5,6 +5,7 @@ const ChallengeMenuItem = ({challenge, active}) => {
     return (
         <li className={active ? 'active' : ''}>
             <Link to={"/challenge/"+ challenge._id}>
+                <i className="fa fa-trophy"/>
                 <span>{challenge.displayName}</span>
             </Link>
         </li>
