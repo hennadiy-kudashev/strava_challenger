@@ -26,7 +26,7 @@ module.exports.register = function (router, db) {
                         athleteID : user.id,
                         userID: user._id
                     };
-                    var token = jwt.sign(payload, config.secret, {
+                    const token = jwt.sign(payload, config.secret, {
                         expiresIn: 86400 // expires in 24 hours
                     });
                     response.status(201).send({ token, user: UserDTO.create(user)});
