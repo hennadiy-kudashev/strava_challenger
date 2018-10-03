@@ -6,15 +6,15 @@ class AssessTokenStorage {
     }
 
     static get() {
-        return sessionStorage.getItem(KEY);
+        return localStorage.getItem(KEY);
     }
 
     static set(accessToken) {
-        sessionStorage.setItem(KEY, accessToken);
+      localStorage.setItem(KEY, accessToken);
     }
 
     static remove() {
-        sessionStorage.removeItem(KEY);
+      localStorage.removeItem(KEY);
     }
 }
 

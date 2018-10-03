@@ -50,7 +50,7 @@ module.exports.register = function (router, db) {
             });
         });
     const getUsersWithActivities = async(athletes, criteria) => {
-        const users = await Promise.all(athletes.map(athlete=> userRepository.getByAthleteID(athlete.id)));
+        const users = await Promise.all(athletes.map(athlete => userRepository.getByAthleteID(athlete.id)));
         return await Promise.all(users.map(user=> {
             return new StravaService(user.accessToken).getActivities(
                 new Date(criteria.datetime.after),
