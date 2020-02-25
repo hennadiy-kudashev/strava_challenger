@@ -8,7 +8,7 @@ class StravaService {
     }
 
     static getRequestAccessURL() {
-        return Promise.resolve({url: strava.oauth.getRequestAccessURL({scope: 'view_private'})});
+        return Promise.resolve({url: strava.oauth.getRequestAccessURL({scope: 'activity:read'})});
     }
 
     static getTokenWithAthlete(code) {
@@ -74,7 +74,7 @@ class StravaService {
             if (before){
                 args.before = before.getTime() / 1000;
             }
-            
+
             strava.athlete.listActivities(args, function (error, payload, limits) {
                 if (error) {
                     reject(error);
