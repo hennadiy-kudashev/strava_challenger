@@ -13,12 +13,12 @@ module.exports = function (app) {
         console.error('Enviroment variable MONGOLAB_URI should be specified.');
         return;
     }
-    
-    MongoClient.connect(config.mongoUrl, (err, database) => {
+
+    MongoClient.connect(config.mongoUrl, (err, client) => {
         if (err) return console.log(err);
         console.log('Connection to mongo success.');
 
-        api.register(app, database);
+        api.register(app, client.db());
 
         app.get('/*', function (req, res) {
             res.sendFile(path.join(__dirname, './../../index.html'));
