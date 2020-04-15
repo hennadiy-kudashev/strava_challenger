@@ -25,7 +25,9 @@ module.exports.register = function (app, db) {
                 } else {
                     req.strava = {
                         athleteID: decoded.athleteID,
-                        accessToken: decoded.accessToken
+                        accessToken: decoded.accessToken,
+                        refreshToken: decoded.refreshToken,
+                        expiresAt: decoded.expiresAt,
                     };
                     req.userID = decoded.userID;
                     res.contentType('application/json');

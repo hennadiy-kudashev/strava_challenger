@@ -14,7 +14,7 @@
   },
   "engines": {
     "node": "11.10.1",
-    "npm": "5.4.2"
+    "npm": "6.7.0"
   },
   "author": "Hennadiy Kudashev, Yaroslav Kuzyo",
   "license": "MIT",
@@ -85,6 +85,6 @@
     "react-toastr": "2.8.2",
     "react-tooltip": "3.3.0",
     "redux": "^3.5.2",
-    "strava-v3": "^1.14.0"
+    "strava-v3": "^2.0.5"
   }
 }

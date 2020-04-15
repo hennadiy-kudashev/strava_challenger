@@ -6,7 +6,7 @@ const UserDTO = require('../dto/userDTO');
 
 module.exports.register = function (router, db) {
     const userRepository = new UserRepository(db);
-    
+
     router.route('/auth')
         .get(function (request, response) {
             StravaService.getRequestAccessURL().then(data=> {
@@ -20,9 +20,13 @@ module.exports.register = function (router, db) {
             StravaService.getTokenWithAthlete(code).then(data=> {
                 const athlete = data.athlete;
                 const accessToken = data.access_token;
-                userRepository.createOrUpdate({accessToken, ...athlete}).then(user => {
+                const refreshToken = data.refresh_token;
+                const expiresAt = data.expires_at;
+                userRepository.createOrUpdate({accessToken, refreshToken, expiresAt, ...athlete}).then(user => {
                     const payload = {
                         accessToken,
+                        refreshToken,
+                        expiresAt,
                         athleteID : user.id,
                         userID: user._id
                     };
