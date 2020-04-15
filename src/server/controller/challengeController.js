@@ -59,14 +59,14 @@ module.exports.register = function (router, db) {
         return {
           info: AthleteInfoDTO.create(user),
           activities: activities.map(activity => ActivityDTO.create(activity))
-        }
+        };
       }).catch(error => {
         //error in case of after datetime criterion is bigger than now
         console.error(error);
         return {
           info: AthleteInfoDTO.create(user),
           activities: []
-        }
+        };
       });
   };
   const getUsersWithActivities = async (athletes, criteria) => {
@@ -87,8 +87,8 @@ module.exports.register = function (router, db) {
             return {
               info: AthleteInfoDTO.create(user),
               activities: []
-            }
-          })
+            };
+          });
       }
       return getActivities(user, criteria);
     }));
@@ -114,5 +114,5 @@ module.exports.register = function (router, db) {
       } catch (error) {
         response.status(500).send({ error });
       }
-    })
+    });
 };
