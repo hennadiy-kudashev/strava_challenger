@@ -1,6 +1,8 @@
 import TotalTable from "./TotalTable";
 import MonthTable from "./MonthTable";
 import MonthChart from "./MonthChart";
+import WeeklyTable from "./WeeklyTable";
+import WeeklyChart from "./WeeklyChart";
 
 //View should be extended from BaseView
 const views = {
@@ -15,6 +17,14 @@ const views = {
     monthChart: {
         label: 'Monthly Chart',
         component: MonthChart
+    },
+    weeklyTable: {
+        label: 'Weekly Table',
+        component: WeeklyTable
+    },
+    weeklyChart: {
+        label: 'Weekly Chart',
+        component: WeeklyChart
     }
 };
 
