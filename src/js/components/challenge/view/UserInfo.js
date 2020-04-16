@@ -8,7 +8,7 @@ const UserInfo = ({ userInfo }) => {
         {userInfo.firstname} {userInfo.lastname}
       </a>
       <div className="description">
-        {[userInfo.city, userInfo.state, userInfo.country].join(', ')}
+        {[userInfo.city, userInfo.state, userInfo.country].filter(t=>!!t).join(', ')}
       </div>
     </div>);
 };
