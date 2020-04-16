@@ -20,8 +20,8 @@ const Progress = ({challenge, user}) => {
     return (
         <div className="progress-group">
             <span className="progress-text">{label}</span>
-            <span className="progress-number"><b><Component metres={achieved}/></b>/<Component
-                metres={threshold}/></span>
+            <span className="progress-number"><b><Component unit={achieved}/></b>/<Component
+                unit={threshold}/></span>
             <div className="progress">
                 <div className="progress-bar progress-bar-primary progress-bar-striped"
                      style={{width: (percentage > 100 ? 100: percentage) + '%'}}>{percentageLabel}</div>

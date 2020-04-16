@@ -3,42 +3,43 @@
 import React from "react";
 import thresholds from "./thresholds";
 
-export function Kilometre({metres, colored}) {
-    const positive = metres > 0;
-    const sign = colored ? (positive ? '+' : '-') : '';
-    const additionalClass = colored ? (positive ? 'text-green' : 'text-red') : '';
-    return (<span className={`nowrap ${additionalClass}`}>{sign}{Math.abs(Math.round(metres / 1000))} km</span>);
+function Base({ unit, children, colored }) {
+  const positive = unit > 0;
+  const sign = colored ? (positive ? '+' : '-') : '';
+  const additionalClass = colored ? (positive ? 'text-green' : 'text-red') : '';
+  return (<span className={`nowrap ${additionalClass}`}>{sign}{children}</span>);
 }
 
-export function Metre({metres, colored}) {
-    const positive = metres > 0;
-    const sign = colored ? (positive ? '+' : '-') : '';
-    const additionalClass = colored ? (positive ? 'text-green' : 'text-red') : '';
-    return (<span className={`nowrap ${additionalClass}`}>{sign}{Math.abs(Math.round(metres))} m</span>);
+export function Kilometre({ unit: metres, colored }) {
+  return (<Base unit={metres} colored={colored}>{Math.abs(Math.round(metres / 1000))} km</Base>);
 }
 
-export function Time({seconds}) {
-    const hr = Math.floor(seconds / 3600);
-    const min = Math.floor((seconds - (hr * 3600)) / 60);
-    return (<span className="nowrap">{hr}h {min}m</span>);
+export function Metre({ unit: metres, colored }) {
+  return (<Base unit={metres} colored={colored}>{Math.abs(Math.round(metres))} m</Base>);
 }
 
-export function Diff({total, diff, criterion}) {
-    if (total == 0) {
-        return (<span />);
-    }
-    const Component = thresholds[criterion].component;
-    return (<div>
-        <Component metres={total}/>
-        <br />
-        <Component metres={diff} colored/>
-    </div>);
+export function Time({ unit: seconds, colored }) {
+  const hr = Math.floor(seconds / 3600);
+  const min = Math.floor((seconds - (hr * 3600)) / 60);
+  return (<Base unit={seconds} colored={colored}>{Math.abs(hr)}h {min}m</Base>);
 }
 
-export function Unit({unit, criterion, ...props}) {
-    if (unit == 0) {
-        return (<span />);
-    }
-    const Component = thresholds[criterion].component;
-    return (<Component metres={unit} {...props} />);
+export function Diff({ total, diff, criterion }) {
+  if (total == 0) {
+    return (<span/>);
+  }
+  const Component = thresholds[criterion].component;
+  return (<div>
+    <Component unit={total}/>
+    <br/>
+    <Component unit={diff} colored/>
+  </div>);
+}
+
+export function Unit({ unit, criterion, ...props }) {
+  if (unit == 0) {
+    return (<span/>);
+  }
+  const Component = thresholds[criterion].component;
+  return (<Component unit={unit} {...props} />);
 }

@@ -44,7 +44,7 @@ class EditPage extends React.Component {
 
     render() {
         const {challenge} = this.state;
-        if (!challenge) {
+        if (!this.props.challenge) {
             return (<Spinner/>);
         }
         if (!this.props.challenge.canEdit){

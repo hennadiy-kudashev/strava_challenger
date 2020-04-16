@@ -31,7 +31,7 @@ class MonthChart extends BaseView{
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion()).map(t=> threshold.convert(t.monthNorm))
+                        data: monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion()).map(t=> threshold.toDisplayUnit(t.monthNorm))
                     },
                     {
                         label: `Actual, ${threshold.unit}`,
@@ -41,7 +41,7 @@ class MonthChart extends BaseView{
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion()).map(t=> threshold.convert(t.monthTotal))
+                        data: monthSummary.getMonthsDiff(athlete.activities, this.getThresholdCriterion()).map(t=> threshold.toDisplayUnit(t.monthTotal))
                     }
                 ]
             };

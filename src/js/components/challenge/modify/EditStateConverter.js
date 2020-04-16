@@ -24,7 +24,7 @@ const EditStateConverter = {
             description: state.description,
             views: state.views,
             criteria: {
-                types: state.criteria_types.map(type=>type.value),
+                types: state.criteria_types,
                 datetime: {
                     after: state.criteria_datetime.startDate.format(),
                     before: state.criteria_datetime.endDate.format()

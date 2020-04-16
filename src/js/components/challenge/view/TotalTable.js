@@ -20,9 +20,9 @@ class TotalTable extends BaseView {
             return [
                 <UserInfo key={index} userInfo={athlete.info}/>,
                 totalSummary.getRunCount(),
-                <Kilometre key={index} metres={totalSummary.getDistance()}/>,
-                <Metre key={index} metres={totalSummary.getElevGain()}/>,
-                <Time key={index} seconds={totalSummary.getTime()}/>,
+                <Kilometre key={index} unit={totalSummary.getDistance()}/>,
+                <Metre key={index} unit={totalSummary.getElevGain()}/>,
+                <Time key={index} unit={totalSummary.getTime()}/>,
                 <Unit key={index} unit={totalSummary.getByCriterion(criterion)-this.getThresholdValue()}
                       criterion={criterion} colored/>
             ];

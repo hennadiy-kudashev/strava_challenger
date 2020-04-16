@@ -21,7 +21,7 @@ const Info = ({challenge}) => {
             <dt>Participants</dt>
             <dd>{challenge.athletes.length}</dd>
             <dt>Threshold {thresholdItem.label}</dt>
-            <dd>{thresholdItem.convert(threshold)} {thresholdItem.unit}</dd>
+            <dd>{thresholdItem.toDisplayUnit(threshold)} {thresholdItem.unit}</dd>
         </dl>
     );
 };
