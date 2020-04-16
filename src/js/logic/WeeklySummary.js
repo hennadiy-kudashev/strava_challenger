@@ -12,10 +12,18 @@ class WeeklySummary extends UnitSummary {
     let weeks = [];
 
     while (dateEnd > dateStart) {
+      let weekStart = dateStart.clone().startOf('week');
+      if (weekStart.isBefore(moment(this.start))){
+        weekStart = moment(this.start);
+      }
+      let weekEnd = dateStart.clone().endOf('week');
+      if (weekEnd.isAfter(moment(this.end))){
+        weekEnd = moment(this.end);
+      }
       weeks.push({
-        start: dateStart.clone().startOf('week'),
-        end: dateStart.clone().endOf('week'),
-        label: `${dateStart.clone().startOf('week').format('DD')} - ${dateStart.clone().endOf('week').format('DD')} ${dateStart.clone().endOf('week').format('MMM')}`,
+        start: weekStart,
+        end: weekEnd,
+        label: `${weekStart.format('DD')} - ${weekEnd.format('DD')} ${weekEnd.format('MMM')}`,
       });
       dateStart.add(1, 'week');
     }

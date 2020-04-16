@@ -33,12 +33,14 @@ class UnitSummary {
   getPeriodDiff(activities, criterion) {
     return this.getPeriods()
       .map(period => {
-        const total = TotalSummary.create(activities, period.start, period.end).getByCriterion(criterion);
+        const totalSummary = TotalSummary.create(activities, period.start, period.end);
+        const total = totalSummary.getByCriterion(criterion);
         const norm = this.getPeriodNorm(period);
         return {
           monthTotal: total,
           monthDiff: total - norm,
-          monthNorm: norm
+          monthNorm: norm,
+          activitiesCount: totalSummary.getRunCount()
         };
       });
   }
