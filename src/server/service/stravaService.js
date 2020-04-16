@@ -34,11 +34,12 @@ class StravaService {
     });
   }
 
-  getActivities(after, before, type) {
+  getActivities(after, before, types) {
     const PAGE_SIZE = 200; //max allowed by Strava.
     const PAGE_NUMBER = 1;
     return this._getActivitiesRecursion(after, before, PAGE_SIZE, PAGE_NUMBER, [])
-      .then(activities => activities.filter(a => a.type === type));
+      //restrict types if something is selected
+      .then(activities => activities.filter(a => types.length > 0 ? types.includes(a.type) : true));
   }
 
   _getActivitiesRecursion(after, before, pageSize, pageNumber, prevActivities) {

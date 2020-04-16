@@ -54,7 +54,7 @@ module.exports.register = function (router, db) {
     return new StravaService(user.accessToken).getActivities(
       new Date(criteria.datetime.after),
       new Date(criteria.datetime.before),
-      criteria.type)
+      criteria.types || [criteria.type])
       .then(activities => {
         return {
           info: AthleteInfoDTO.create(user),
@@ -80,7 +80,7 @@ module.exports.register = function (router, db) {
             const expiresAt = data.expires_at;
             return userRepository.update(user._id, { accessToken, refreshToken, expiresAt })
               .then(updatedUser => {
-                return  getActivities(updatedUser, criteria);
+                return getActivities(updatedUser, criteria);
               });
           }).catch(error => {
             console.error(`Token for athlete '${user.firstname} ${user.lastname}' is not refreshable`);

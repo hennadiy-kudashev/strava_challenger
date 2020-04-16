@@ -6,7 +6,7 @@ const EditStateConverter = {
             displayName: challenge.displayName,
             description: challenge.description,
             views: challenge.views,
-            criteria_type: challenge.criteria.type,
+            criteria_types: challenge.criteria.types || [challenge.criteria.type],
             criteria_datetime: {
                 startDate: moment(challenge.criteria.datetime.after),
                 endDate: moment(challenge.criteria.datetime.before)
@@ -24,7 +24,7 @@ const EditStateConverter = {
             description: state.description,
             views: state.views,
             criteria: {
-                type: state.criteria_type,
+                types: state.criteria_types.map(type=>type.value),
                 datetime: {
                     after: state.criteria_datetime.startDate.format(),
                     before: state.criteria_datetime.endDate.format()

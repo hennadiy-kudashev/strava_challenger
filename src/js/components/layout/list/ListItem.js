@@ -9,7 +9,7 @@ const ListItem = ({challenge, user}) => {
                 <i className="fa fa-trophy fa-2x"></i>
             </div>
             <div className="product-info">
-                <Link to={"/challenge/"+ challenge.id} className="product-title">
+                <Link to={"/challenge/"+ challenge._id} className="product-title">
                     <span>{challenge.displayName}</span>
                 </Link>
                 <JoinButton user={user} challenge={challenge}/>

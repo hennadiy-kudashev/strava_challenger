@@ -12,7 +12,7 @@ class TotalTable extends BaseView {
 
     render() {
         const threshold = this.getThreshold();
-        const columns = ['Athlete', 'Runs', 'Distance', 'Elev Gain', 'Time', `Diff (${threshold.label})`];
+        const columns = ['Athlete', 'Activities', 'Distance', 'Elev Gain', 'Time', `Diff (${threshold.label})`];
 
         const criterion = this.getThresholdCriterion();
         const rows = super.getSortedAthletes().map((athlete, index)=> {
