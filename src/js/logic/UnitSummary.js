@@ -1,11 +1,13 @@
 import TotalSummary from "./totalSummary";
 import PeriodSummary from "./periodSummary";
+import BY from "../components/challenge/view/thresholdBy";
 
 class UnitSummary {
-  constructor(start, end, threshold) {
+  constructor(start, end, threshold, by) {
     this.start = start;
     this.end = end;
     this.threshold = threshold;
+    this.by = by;
   }
 
   getPeriods() {
@@ -36,11 +38,14 @@ class UnitSummary {
         const totalSummary = TotalSummary.create(activities, period.start, period.end);
         const total = totalSummary.getByCriterion(criterion);
         const norm = this.getPeriodNorm(period);
+        const periodSummary = new PeriodSummary(period.start, period.end);
         return {
           monthTotal: total,
           monthDiff: total - norm,
           monthNorm: norm,
-          activitiesCount: totalSummary.getRunCount()
+          activitiesCount: totalSummary.getRunCount(),
+          label: period.label,
+          summary: periodSummary.getSummary()
         };
       });
   }
@@ -64,8 +69,16 @@ class UnitSummary {
   }
 
   getDayNorm() {
-    const days = new PeriodSummary(this.start, this.end).getDays();
-    return this.threshold / days;
+    if (this.by === BY.TOTAL) {
+      const days = new PeriodSummary(this.start, this.end).getDays();
+      return this.threshold / days;
+    } else if (this.by === BY.WEEK) {
+      return this.threshold / 7;
+    } else if (this.by === BY.MONTH) {
+      return this.threshold / 30;
+    } else {
+      throw 'unsupported by type: ' + this.by;
+    }
   }
 }
 

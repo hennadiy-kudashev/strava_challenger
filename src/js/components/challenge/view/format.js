@@ -20,7 +20,7 @@ export function Metre({ unit: metres, colored }) {
 
 export function Time({ unit: seconds, colored }) {
   const hr = Math.floor(seconds / 3600);
-  const min = Math.floor((seconds - (hr * 3600)) / 60);
+  const min = Math.round((seconds - (hr * 3600)) / 60);
   return (<Base unit={seconds} colored={colored}>{Math.abs(hr)}h {min}m</Base>);
 }
 

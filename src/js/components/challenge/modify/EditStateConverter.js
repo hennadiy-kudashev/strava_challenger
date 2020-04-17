@@ -1,4 +1,5 @@
 import moment from "moment";
+import thresholdBy from "../view/thresholdBy";
 
 const EditStateConverter = {
     fromAPI: (challenge) => {
@@ -13,7 +14,8 @@ const EditStateConverter = {
             },
             criteria_threshold: {
                 name: Object.keys(challenge.criteria.threshold)[0],
-                value: challenge.criteria.threshold[Object.keys(challenge.criteria.threshold)[0]]
+                value: challenge.criteria.threshold[Object.keys(challenge.criteria.threshold)[0]],
+                by: challenge.criteria.threshold.by || thresholdBy.TOTAL
             },
             private: challenge.private
         };
@@ -30,7 +32,8 @@ const EditStateConverter = {
                     before: state.criteria_datetime.endDate.format()
                 },
                 threshold: {
-                    [state.criteria_threshold.name]: state.criteria_threshold.value
+                    [state.criteria_threshold.name]: state.criteria_threshold.value,
+                    by: state.criteria_threshold.by
                 }
             },
             private: state.private

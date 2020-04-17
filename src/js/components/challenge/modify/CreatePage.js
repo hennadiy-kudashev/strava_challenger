@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 import * as challengeActions from "../../../actions/challengeActions";
 import views from "../view/views";
 import thresholds from "../view/thresholds";
+import thresholdBy from "../view/thresholdBy";
 import moment from "moment";
 import {browserHistory} from "react-router";
 import EditForm from "./EditForm";
@@ -23,7 +24,8 @@ class CreatePage extends React.Component {
                         before: moment().hour(23).minute(59).second(0).format()
                     },
                     threshold: {
-                        [Object.keys(thresholds)[0]]: 0
+                        [Object.keys(thresholds)[0]]: 0,
+                        by: thresholdBy.TOTAL
                     }
                 },
                 private: true

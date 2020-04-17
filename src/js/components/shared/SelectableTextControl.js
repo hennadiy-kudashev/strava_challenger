@@ -1,46 +1,69 @@
-import React, {PropTypes} from "react";
-import {InputGroup, FormControl, DropdownButton, MenuItem} from "react-bootstrap";
+import React, { PropTypes } from "react";
+import { DropdownButton, FormControl, InputGroup, MenuItem } from "react-bootstrap";
 
-const onMenuItemSelected = (textValue, onChange)=> {
-    return (item) => {
-        onChange({
-            selectedItem: item, 
-            textValue: textValue
-        });
-    };
+const onLeftMenuItemSelected = (textValue, rightSelectedItem, onChange) => {
+  return (item) => {
+    onChange({
+      leftSelectedItem: item,
+      rightSelectedItem: rightSelectedItem,
+      textValue: textValue
+    });
+  };
 };
 
-const onTextChanged = (selectedItem, onChange)=> {
-    return (e) => {
-        onChange({
-            selectedItem: selectedItem,
-            textValue: parseInt(e.target.value)
-        });
-    };
+const onRightMenuItemSelected = (textValue, leftSelectedItem, onChange) => {
+  return (item) => {
+    onChange({
+      leftSelectedItem: leftSelectedItem,
+      rightSelectedItem: item,
+      textValue: textValue
+    });
+  };
 };
 
-const SelectableTextControl = ({items, placeholder, selectedItem, textValue, onChange}) => {
-    return (
-        <InputGroup>
-            <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon" title={selectedItem.label}>
-                {
-                    items.map(item=> {
-                        return (<MenuItem key={item.key} eventKey={item}
-                                          onSelect={onMenuItemSelected(textValue, onChange)}>{item.label}</MenuItem>);
-                    })
-                }
-            </DropdownButton>
-            <FormControl type="number" placeholder={placeholder} value={textValue} onChange={onTextChanged(selectedItem, onChange)}/>
-        </InputGroup>
-    );
+const onTextChanged = (leftSelectedItem, rightSelectedItem, onChange) => {
+  return (e) => {
+    onChange({
+      leftSelectedItem: leftSelectedItem,
+      rightSelectedItem: rightSelectedItem,
+      textValue: parseInt(e.target.value)
+    });
+  };
+};
+
+const SelectableTextControl = ({ leftItems, rightItems, placeholder, leftSelectedItem, rightSelectedItem, textValue, onChange }) => {
+  return (
+    <InputGroup>
+      <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon" title={leftSelectedItem.label}>
+        {
+          leftItems.map(item => {
+            return (<MenuItem key={item.key} eventKey={item}
+                              onSelect={onLeftMenuItemSelected(textValue, rightSelectedItem, onChange)}>{item.label}</MenuItem>);
+          })
+        }
+      </DropdownButton>
+      <FormControl type="number" placeholder={placeholder} value={textValue}
+                   onChange={onTextChanged(leftSelectedItem, rightSelectedItem, onChange)}/>
+      <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon1" title={rightSelectedItem.label}>
+        {
+          rightItems.map(item => {
+            return (<MenuItem key={item.key} eventKey={item}
+                              onSelect={onRightMenuItemSelected(textValue, leftSelectedItem, onChange)}>{item.label}</MenuItem>);
+          })
+        }
+      </DropdownButton>
+    </InputGroup>
+  );
 };
 
 SelectableTextControl.propTypes = {
-    items: PropTypes.array.isRequired,
-    placeholder: PropTypes.string,
-    selectedItem: PropTypes.object,
-    textValue: PropTypes.number,
-    onChange: PropTypes.func
+  leftItems: PropTypes.array.isRequired,
+  rightItems: PropTypes.array.isRequired,
+  placeholder: PropTypes.string,
+  leftSelectedItem: PropTypes.object,
+  rightSelectedItem: PropTypes.object,
+  textValue: PropTypes.number,
+  onChange: PropTypes.func
 };
 
 export default SelectableTextControl;

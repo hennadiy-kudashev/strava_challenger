@@ -7,6 +7,7 @@ import MultiSelect from "../../shared/MultiSelect";
 import Box from "../../layout/Box";
 import views from "../view/views";
 import thresholds from "../view/thresholds";
+import thresholdBYs from "../view/thresholdBYs";
 import activityTypes from "../../../api/activityTypes";
 import EditStateConverter from './EditStateConverter';
 
@@ -15,6 +16,9 @@ const checkboxListItems = Object.keys(views).map(key => {
 });
 const thresholdItems = Object.keys(thresholds).map(key => {
   return { key, label: `${thresholds[key].label} (${thresholds[key].unit})` };
+});
+const thresholdByItems = Object.keys(thresholdBYs).map(key => {
+  return { key, label: thresholdBYs[key].label };
 });
 const activityTypeItems = activityTypes.map(type => {
   return { value: type, label: type };
@@ -64,12 +68,18 @@ const EditForm = ({ operation, challenge, onChange, onSave }) => {
         <br/>
         Threshold
         <SelectableTextControl placeholder="Enter threshold"
-                               items={thresholdItems}
-                               selectedItem={thresholdItems.find(item => item.key === state.criteria_threshold.name)}
+                               leftItems={thresholdItems}
+                               leftSelectedItem={thresholdItems.find(item => item.key === state.criteria_threshold.name)}
+                               rightItems={thresholdByItems}
+                               rightSelectedItem={thresholdByItems.find(item => item.key === state.criteria_threshold.by)}
                                textValue={thresholds[state.criteria_threshold.name].toDisplayUnit(state.criteria_threshold.value)}
                                onChange={handlerChangeFor(state, onChange, 'criteria_threshold', e => {
-                                 const threshold = thresholds[e.selectedItem.key];
-                                 return { name: e.selectedItem.key, value: threshold.toActivityUnit(e.textValue) };
+                                 const threshold = thresholds[e.leftSelectedItem.key];
+                                 return {
+                                   name: e.leftSelectedItem.key,
+                                   by: e.rightSelectedItem.key,
+                                   value: threshold.toActivityUnit(e.textValue)
+                                 };
                                })}/>
       </FormGroup>
       <Checkbox checked={state.private} onChange={handlerChangeFor(state, onChange, 'private', e => e.target.checked)}>Private

@@ -15,7 +15,9 @@ class UnitChart extends BaseView {
     const unitSummary = new this.unitClass(
       this.getChallenge().criteria.datetime.after,
       this.getChallenge().criteria.datetime.before,
-      this.getChallenge().criteria.threshold[this.getThresholdCriterion()]);
+      this.getChallenge().criteria.threshold[this.getThresholdCriterion()],
+      this.getChallenge().criteria.threshold.by
+    );
 
     const threshold = thresholds[this.getThresholdCriterion()];
     const columns = ['Athlete', threshold.label];
