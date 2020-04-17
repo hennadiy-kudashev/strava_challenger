@@ -4,6 +4,7 @@ import Table from "../../layout/table/Table";
 import { Diff, Unit } from './format';
 import BaseView from './BaseView';
 import Tooltip from '../../layout/Tooltip';
+import BY from "./thresholdBy";
 
 class UnitTable extends BaseView {
   constructor(props, context, unitClass) {
@@ -16,7 +17,7 @@ class UnitTable extends BaseView {
       this.getChallenge().criteria.datetime.after,
       this.getChallenge().criteria.datetime.before,
       this.getChallenge().criteria.threshold[this.getThresholdCriterion()],
-      this.getChallenge().criteria.threshold.by
+      this.getChallenge().criteria.threshold.by || BY.TOTAL
     );
 
     const columns = ['Athlete'].concat(unitSummary.getPeriodLabels()).concat(['Total']);
