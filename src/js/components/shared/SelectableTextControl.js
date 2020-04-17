@@ -34,6 +34,7 @@ const onTextChanged = (leftSelectedItem, rightSelectedItem, onChange) => {
 const SelectableTextControl = ({ leftItems, rightItems, placeholder, leftSelectedItem, rightSelectedItem, textValue, onChange }) => {
   return (
     <InputGroup>
+      {leftItems &&
       <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon" title={leftSelectedItem.label}>
         {
           leftItems.map(item => {
@@ -41,9 +42,10 @@ const SelectableTextControl = ({ leftItems, rightItems, placeholder, leftSelecte
                               onSelect={onLeftMenuItemSelected(textValue, rightSelectedItem, onChange)}>{item.label}</MenuItem>);
           })
         }
-      </DropdownButton>
+      </DropdownButton>}
       <FormControl type="number" placeholder={placeholder} value={textValue}
                    onChange={onTextChanged(leftSelectedItem, rightSelectedItem, onChange)}/>
+      {rightItems &&
       <DropdownButton componentClass={InputGroup.Button} id="input-dropdown-addon1" title={rightSelectedItem.label}>
         {
           rightItems.map(item => {
@@ -51,14 +53,14 @@ const SelectableTextControl = ({ leftItems, rightItems, placeholder, leftSelecte
                               onSelect={onRightMenuItemSelected(textValue, leftSelectedItem, onChange)}>{item.label}</MenuItem>);
           })
         }
-      </DropdownButton>
+      </DropdownButton>}
     </InputGroup>
   );
 };
 
 SelectableTextControl.propTypes = {
-  leftItems: PropTypes.array.isRequired,
-  rightItems: PropTypes.array.isRequired,
+  leftItems: PropTypes.array,
+  rightItems: PropTypes.array,
   placeholder: PropTypes.string,
   leftSelectedItem: PropTypes.object,
   rightSelectedItem: PropTypes.object,

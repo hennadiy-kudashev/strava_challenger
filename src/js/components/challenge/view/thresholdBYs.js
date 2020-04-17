@@ -7,11 +7,11 @@ const thresholdBy = {
     label: 'for all period',
   },
   [BY.WEEK]: {
-    label: 'by week',
+    label: 'per week',
     summaryClass: WeeklySummary,
   },
   [BY.MONTH]: {
-    label: 'by month',
+    label: 'per month',
     summaryClass: MonthSummary,
   }
 };

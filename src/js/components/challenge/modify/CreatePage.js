@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as challengeActions from "../../../actions/challengeActions";
 import views from "../view/views";
-import thresholds from "../view/thresholds";
+import thresholds, { THRESHOLD_CRITERION } from "../view/thresholds";
 import thresholdBy from "../view/thresholdBy";
 import moment from "moment";
 import {browserHistory} from "react-router";
@@ -24,8 +24,16 @@ class CreatePage extends React.Component {
                         before: moment().hour(23).minute(59).second(0).format()
                     },
                     threshold: {
-                        [Object.keys(thresholds)[0]]: 0,
+                        [THRESHOLD_CRITERION.DISTANCE]: 0,
                         by: thresholdBy.TOTAL
+                    },
+                    minActivities:{
+                      value: 0,
+                      by: thresholdBy.TOTAL
+                    },
+                    activityLength: {
+                      criterion: THRESHOLD_CRITERION.DISTANCE,
+                      value: 0
                     }
                 },
                 private: true

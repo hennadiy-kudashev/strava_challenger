@@ -66,7 +66,7 @@ const EditForm = ({ operation, challenge, onChange, onSave }) => {
           endDate={state.criteria_datetime.endDate}
           onChange={handlerChangeFor(state, onChange, 'criteria_datetime', e => e)}/>
         <br/>
-        Threshold
+        Each participant should accomplish minimum
         <SelectableTextControl placeholder="Enter threshold"
                                leftItems={thresholdItems}
                                leftSelectedItem={thresholdItems.find(item => item.key === state.criteria_threshold.name)}
@@ -78,6 +78,31 @@ const EditForm = ({ operation, challenge, onChange, onSave }) => {
                                  return {
                                    name: e.leftSelectedItem.key,
                                    by: e.rightSelectedItem.key,
+                                   value: threshold.toActivityUnit(e.textValue)
+                                 };
+                               })}/>
+        <br/>
+        Each participant should accomplish minimum activities
+        <SelectableTextControl placeholder="Enter min activities"
+                               rightItems={thresholdByItems}
+                               rightSelectedItem={thresholdByItems.find(item => item.key === state.criteria_min_activities.by)}
+                               textValue={state.criteria_min_activities.value}
+                               onChange={handlerChangeFor(state, onChange, 'criteria_min_activities', e => {
+                                 return {
+                                   by: e.rightSelectedItem.key,
+                                   value: e.textValue
+                                 };
+                               })}/>
+        <br/>
+        Each activity should have minimum
+        <SelectableTextControl placeholder="Enter min threshold"
+                               leftItems={thresholdItems}
+                               leftSelectedItem={thresholdItems.find(item => item.key === state.criteria_activity_length.name)}
+                               textValue={thresholds[state.criteria_activity_length.name].toDisplayUnit(state.criteria_activity_length.value)}
+                               onChange={handlerChangeFor(state, onChange, 'criteria_activity_length', e => {
+                                 const threshold = thresholds[e.leftSelectedItem.key];
+                                 return {
+                                   name: e.leftSelectedItem.key,
                                    value: threshold.toActivityUnit(e.textValue)
                                  };
                                })}/>

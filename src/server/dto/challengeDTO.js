@@ -1,5 +1,5 @@
 module.exports.create = function (athleteID, {_id, description, displayName, criteria, views, athletes = [], createdBy, 'private': _private}) {
-    //to filter out private challenges requested by other user. 
+    //to filter out private challenges requested by other user.
     if (_private && createdBy !== athleteID){
         return null;
     }
