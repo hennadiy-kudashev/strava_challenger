@@ -25,7 +25,7 @@ const Progress = ({ challenge, user }) => {
       challenge.criteria.minActivities
     );
     return (<div>
-        {unitSummary.getPeriodDiff(joinedAthlete.activities, thresholdCriteria).map(({ label, monthTotal, monthNorm, summary, isCompleted }) => {
+        {unitSummary.getPeriodDiff(joinedAthlete.activities, thresholdCriteria).map(({ label, monthTotal, monthNorm, summary, isFailed }) => {
           return (
             <ProgressBar
               key={label}
@@ -34,7 +34,7 @@ const Progress = ({ challenge, user }) => {
               Component={Component}
               label={`${thresholdLabel} ${label}`}
               summary={summary}
-              isCompleted={isCompleted}
+              isFailed={isFailed}
             />
           );
         })}
@@ -50,7 +50,7 @@ const Progress = ({ challenge, user }) => {
       Component={Component}
       label={thresholdLabel}
       summary={periodSummary.getSummary()}
-      isCompleted={periodSummary.isEnded() ? achieved >= threshold : true}
+      isFailed={periodSummary.isEnded() ? achieved < threshold : false}
     />
   );
 };

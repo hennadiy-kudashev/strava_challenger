@@ -66,7 +66,7 @@ class UnitSummary {
           summary: periodSummary.getSummary(),
           activitiesCount,
           minActivities,
-          isCompleted: periodSummary.isEnded() ? (total >= norm && activitiesCount >= minActivities) : true
+          isFailed: periodSummary.isEnded() ? !(total >= norm && activitiesCount >= minActivities) : false
         };
       });
   }
