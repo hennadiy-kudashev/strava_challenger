@@ -56,7 +56,7 @@ ChallengeMenuItems.propTypes = {
     title: PropTypes.string.isRequired,
     challenges: PropTypes.array.isRequired,
     pathname: PropTypes.string.isRequired,
-    openedInitially: PropTypes.boolean
+    openedInitially: PropTypes.bool
 };
 
 ChallengeMenuItems.defaultProps = {
