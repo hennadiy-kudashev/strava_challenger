@@ -50,7 +50,7 @@ const Progress = ({ challenge, user }) => {
       Component={Component}
       label={thresholdLabel}
       summary={periodSummary.getSummary()}
-      isCompleted={achieved >= threshold}
+      isCompleted={periodSummary.isEnded() ? achieved >= threshold : true}
     />
   );
 };
