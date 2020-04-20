@@ -43,3 +43,15 @@ export function Unit({ unit, criterion, ...props }) {
   const Component = thresholds[criterion].component;
   return (<Component unit={unit} {...props} />);
 }
+
+export function MinActivities({ value, min }) {
+  if (min === 0) {
+    return (<span/>);
+  }
+  const additionalClass = value >= min ? 'text-green' : 'text-red';
+  return (<div>
+    <span className={additionalClass}>{value}</span>
+    {' '}of{' '}
+    <span>{min} activities</span>
+  </div>);
+}

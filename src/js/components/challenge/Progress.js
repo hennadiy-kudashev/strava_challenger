@@ -2,7 +2,6 @@ import React, { PropTypes } from "react";
 import TotalSummary from "../../logic/totalSummary";
 import PeriodSummary from "../../logic/periodSummary";
 import thresholds from "./view/thresholds";
-import BY from "./view/thresholdBy";
 import thresholdBYs from "./view/thresholdBYs";
 import ProgressBar from "./ProgressBar";
 
@@ -15,12 +14,18 @@ const Progress = ({ challenge, user }) => {
   const threshold = challenge.criteria.threshold[thresholdCriteria];
   const thresholdLabel = thresholds[thresholdCriteria].label;
   const Component = thresholds[thresholdCriteria].component;
-  const by = challenge.criteria.threshold.by || BY.TOTAL;
+  const by = challenge.criteria.threshold.by;
   const summaryClass = thresholdBYs[by].summaryClass;
   if (summaryClass) {
-    const unitSummary = new summaryClass(challenge.criteria.datetime.after, challenge.criteria.datetime.before, threshold, by);
+    const unitSummary = new summaryClass(
+      challenge.criteria.datetime.after,
+      challenge.criteria.datetime.before,
+      threshold,
+      by,
+      challenge.criteria.minActivities
+    );
     return (<div>
-        {unitSummary.getPeriodDiff(joinedAthlete.activities, thresholdCriteria).map(({ label, monthTotal, monthNorm, summary }) => {
+        {unitSummary.getPeriodDiff(joinedAthlete.activities, thresholdCriteria).map(({ label, monthTotal, monthNorm, summary, isCompleted }) => {
           return (
             <ProgressBar
               key={label}
@@ -29,6 +34,7 @@ const Progress = ({ challenge, user }) => {
               Component={Component}
               label={`${thresholdLabel} ${label}`}
               summary={summary}
+              isCompleted={isCompleted}
             />
           );
         })}
@@ -44,6 +50,7 @@ const Progress = ({ challenge, user }) => {
       Component={Component}
       label={thresholdLabel}
       summary={periodSummary.getSummary()}
+      isCompleted={achieved >= threshold}
     />
   );
 };

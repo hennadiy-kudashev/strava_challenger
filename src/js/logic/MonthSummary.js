@@ -2,8 +2,8 @@ import moment from "moment";
 import UnitSummary from "./UnitSummary";
 
 class MonthSummary extends UnitSummary {
-  constructor(start, end, threshold, by) {
-    super(start, end, threshold, by);
+  constructor(start, end, threshold, by, minActivities) {
+    super(start, end, threshold, by, minActivities);
   }
 
   getPeriods() {

@@ -3,11 +3,12 @@ import PeriodSummary from "./periodSummary";
 import BY from "../components/challenge/view/thresholdBy";
 
 class UnitSummary {
-  constructor(start, end, threshold, by) {
+  constructor(start, end, threshold, by, minActivities) {
     this.start = start;
     this.end = end;
     this.threshold = threshold;
     this.by = by;
+    this.minActivities = minActivities;
   }
 
   getPeriods() {
@@ -21,16 +22,32 @@ class UnitSummary {
 
   getPeriodNorm(period) {
     const periodSummary = new PeriodSummary(period.start, period.end);
+    const dayNorm = this.getDayNormUnit(this.threshold, this.by);
     if (periodSummary.isEnded()) {
-      return this.getDayNorm() * periodSummary.getDays();
+      return dayNorm * periodSummary.getDays();
     }
     if (periodSummary.isNotStarted()) {
       return 0;
     }
     if (periodSummary.isBetween()) {
-      return this.getDayNorm() * periodSummary.getDaysPast();
+      return dayNorm * periodSummary.getDaysPast();
     }
   }
+
+  getMinActivitiesNorm(period) {
+    const periodSummary = new PeriodSummary(period.start, period.end);
+    const dayNorm = this.getDayNormUnit(this.minActivities.value, this.minActivities.by);
+    if (periodSummary.isEnded()) {
+      return Math.round(dayNorm * periodSummary.getDays());
+    }
+    if (periodSummary.isNotStarted()) {
+      return 0;
+    }
+    if (periodSummary.isBetween()) {
+      return Math.floor(dayNorm * periodSummary.getDaysPast());
+    }
+  }
+
 
   getPeriodDiff(activities, criterion) {
     return this.getPeriods()
@@ -39,13 +56,17 @@ class UnitSummary {
         const total = totalSummary.getByCriterion(criterion);
         const norm = this.getPeriodNorm(period);
         const periodSummary = new PeriodSummary(period.start, period.end);
+        const activitiesCount = totalSummary.getRunCount();
+        const minActivities = this.getMinActivitiesNorm(period);
         return {
           monthTotal: total,
           monthDiff: total - norm,
           monthNorm: norm,
-          activitiesCount: totalSummary.getRunCount(),
           label: period.label,
-          summary: periodSummary.getSummary()
+          summary: periodSummary.getSummary(),
+          activitiesCount,
+          minActivities,
+          isCompleted: periodSummary.isEnded() ? (total >= norm && activitiesCount >= minActivities) : true
         };
       });
   }
@@ -68,14 +89,14 @@ class UnitSummary {
     return this.getPeriodsNorm().reduce((a, b) => a + b, 0);
   }
 
-  getDayNorm() {
-    if (this.by === BY.TOTAL) {
+  getDayNormUnit(value, by) {
+    if (by === BY.TOTAL) {
       const days = new PeriodSummary(this.start, this.end).getDays();
-      return this.threshold / days;
-    } else if (this.by === BY.WEEK) {
-      return this.threshold / 7;
-    } else if (this.by === BY.MONTH) {
-      return this.threshold / 30;
+      return value / days;
+    } else if (by === BY.WEEK) {
+      return value / 7;
+    } else if (by === BY.MONTH) {
+      return value / 30;
     } else {
       throw 'unsupported by type: ' + this.by;
     }

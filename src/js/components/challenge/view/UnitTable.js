@@ -1,7 +1,7 @@
 import React from "react";
 import UserInfo from "./UserInfo";
 import Table from "../../layout/table/Table";
-import { Diff, Unit } from './format';
+import { Diff, Unit, MinActivities } from './format';
 import BaseView from './BaseView';
 import Tooltip from '../../layout/Tooltip';
 import BY from "./thresholdBy";
@@ -17,7 +17,8 @@ class UnitTable extends BaseView {
       this.getChallenge().criteria.datetime.after,
       this.getChallenge().criteria.datetime.before,
       this.getChallenge().criteria.threshold[this.getThresholdCriterion()],
-      this.getChallenge().criteria.threshold.by || BY.TOTAL
+      this.getChallenge().criteria.threshold.by,
+      this.getChallenge().criteria.minActivities
     );
 
     const columns = ['Athlete'].concat(unitSummary.getPeriodLabels()).concat(['Total']);
@@ -27,8 +28,10 @@ class UnitTable extends BaseView {
       return [
         <UserInfo key={indexA} userInfo={athlete.info}/>,
         ...unitSummary.getPeriodDiff(athlete.activities, this.getThresholdCriterion())
-          .map((obj, index) => <Diff key={index} total={obj.monthTotal} diff={obj.monthDiff}
-                                     criterion={this.getThresholdCriterion()}/>),
+          .map((obj, index) => <span key={index}>
+            <Diff total={obj.monthTotal} diff={obj.monthDiff} criterion={this.getThresholdCriterion()}/>
+            <MinActivities value={obj.activitiesCount} min={obj.minActivities}/>
+          </span>),
         <Diff key={indexA} total={total.total} diff={total.diff} criterion={this.getThresholdCriterion()}/>
       ];
     });

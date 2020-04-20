@@ -8,7 +8,7 @@ const EditStateConverter = {
             displayName: challenge.displayName,
             description: challenge.description,
             views: challenge.views,
-            criteria_types: challenge.criteria.types || [challenge.criteria.type],
+            criteria_types: challenge.criteria.types,
             criteria_datetime: {
                 startDate: moment(challenge.criteria.datetime.after),
                 endDate: moment(challenge.criteria.datetime.before)
@@ -16,15 +16,15 @@ const EditStateConverter = {
             criteria_threshold: {
                 name: Object.keys(challenge.criteria.threshold)[0],
                 value: challenge.criteria.threshold[Object.keys(challenge.criteria.threshold)[0]],
-                by: challenge.criteria.threshold.by || thresholdBy.TOTAL
+                by: challenge.criteria.threshold.by
             },
             criteria_min_activities: {
-                value: challenge.criteria.minActivities ? challenge.criteria.minActivities.value: 0,
-                by: challenge.criteria.minActivities ? challenge.criteria.minActivities.by: thresholdBy.TOTAL,
+                value: challenge.criteria.minActivities.value,
+                by: challenge.criteria.minActivities.by,
             },
             criteria_activity_length: {
-                name: challenge.criteria.activityLength ? challenge.criteria.activityLength.criterion: THRESHOLD_CRITERION.DISTANCE,
-                value: challenge.criteria.activityLength ? challenge.criteria.activityLength.value: 0,
+                name: challenge.criteria.activityLength.criterion,
+                value: challenge.criteria.activityLength.value,
             },
             private: challenge.private
         };

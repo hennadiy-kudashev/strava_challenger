@@ -2,11 +2,16 @@ import moment from "moment";
 import UnitSummary from "./UnitSummary";
 
 class WeeklySummary extends UnitSummary {
-  constructor(start, end, threshold, by) {
-    super(start, end, threshold, by);
+  constructor(start, end, threshold, by, minActivities) {
+    super(start, end, threshold, by, minActivities);
   }
 
   getPeriods() {
+    moment.locale('en', {
+      week: {
+        dow: 1
+      }
+    });
     let dateStart = moment(this.start);
     let dateEnd = moment(this.end);
     let weeks = [];

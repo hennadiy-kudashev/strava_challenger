@@ -3,7 +3,6 @@ import UserInfo from "./UserInfo";
 import Table from "../../layout/table/Table";
 import { Line } from "react-chartjs";
 import thresholds from './thresholds';
-import BY from './thresholdBy';
 import BaseView from './BaseView';
 
 class UnitChart extends BaseView {
@@ -17,7 +16,8 @@ class UnitChart extends BaseView {
       this.getChallenge().criteria.datetime.after,
       this.getChallenge().criteria.datetime.before,
       this.getChallenge().criteria.threshold[this.getThresholdCriterion()],
-      this.getChallenge().criteria.threshold.by || BY.TOTAL
+      this.getChallenge().criteria.threshold.by,
+      this.getChallenge().criteria.minActivities,
     );
 
     const threshold = thresholds[this.getThresholdCriterion()];
