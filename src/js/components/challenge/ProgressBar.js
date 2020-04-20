@@ -3,7 +3,7 @@ import React, { PropTypes } from "react";
 const ProgressBar = ({ label, achieved, threshold, Component, summary, isFailed }) => {
   const percentage = Math.round((achieved / threshold) * 100);
   const percentageLabel = percentage >= 100 ? `Completed: ${percentage}%` : (`${isFailed ? 'Failed: ' : ''}${percentage}%`);
-  const className = isFailed ?  "progress-bar-red": "progress-bar-primary";
+  const className = isFailed ?  "progress-bar-failed": "progress-bar-primary";
   return (
     <div className="progress-group">
       <span className="progress-text">{label}</span>

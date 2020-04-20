@@ -8,7 +8,7 @@ const Info = ({ challenge }) => {
   const thresholdCriteria = Object.keys(challenge.criteria.threshold)[0];
   const threshold = challenge.criteria.threshold[thresholdCriteria];
   const thresholdItem = thresholds[thresholdCriteria];
-  const activityType = challenge.criteria.types.join(', ');
+  const activityType = challenge.criteria.types.length > 0 ? challenge.criteria.types.join(', ') : 'any';
   const by = thresholdBYs[challenge.criteria.threshold.by];
   const minActivities = challenge.criteria.minActivities.value;
   const minActivitiesBy = thresholdBYs[challenge.criteria.minActivities.by];

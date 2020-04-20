@@ -3,6 +3,7 @@ import MonthTable from "./MonthTable";
 import MonthChart from "./MonthChart";
 import WeeklyTable from "./WeeklyTable";
 import WeeklyChart from "./WeeklyChart";
+import ActivityTypesTable from "./ActivityTypesTable";
 
 //View should be extended from BaseView
 const views = {
@@ -25,7 +26,11 @@ const views = {
     weeklyChart: {
         label: 'Weekly Chart',
         component: WeeklyChart
-    }
+    },
+    activityTypes: {
+        label: 'Activity Types',
+        component: ActivityTypesTable
+    },
 };
 
 export default views;
