@@ -28,9 +28,5 @@ services:
       - node
     depends_on:
       - node
-    environment:
-      - NGROK_AUTH=1Y29mHeyZVXDjF4oFjjC04SVHR9_3rzN5vw13Rho95pAaTnnu
-      - NGROK_SUBDOMAIN=pmchallenge
-      - NGROK_PROTOCO=http
-      - NGROK_REGION=eu
-      - NGROK_PORT=node:3000
+    env_file:
+      - .env_docker
