@@ -1,12 +1,12 @@
-import React, {PropTypes} from "react";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
+import React, { PropTypes } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import * as challengeActions from "../../../actions/challengeActions";
 import views from "../view/views";
-import thresholds, { THRESHOLD_CRITERION } from "../view/thresholds";
+import { THRESHOLD_CRITERION } from "../view/thresholds";
 import thresholdBy from "../view/thresholdBy";
 import moment from "moment";
-import {browserHistory} from "react-router";
+import { browserHistory } from "react-router";
 import EditForm from "./EditForm";
 
 class CreatePage extends React.Component {
@@ -36,7 +36,8 @@ class CreatePage extends React.Component {
                       value: 0
                     }
                 },
-                private: true
+                private: true,
+                club: undefined
             }
         };
         this.onSave = this.onSave.bind(this);

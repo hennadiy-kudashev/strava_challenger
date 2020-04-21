@@ -10,6 +10,7 @@ import thresholds from "../view/thresholds";
 import thresholdBYs from "../view/thresholdBYs";
 import activityTypes from "../../../api/activityTypes";
 import EditStateConverter from './EditStateConverter';
+import ClubSelect from "./ClubSelect";
 
 const checkboxListItems = Object.keys(views).map(key => {
   return { key, label: views[key].label };
@@ -107,8 +108,20 @@ const EditForm = ({ operation, challenge, onChange, onSave }) => {
                                  };
                                })}/>
       </FormGroup>
-      <Checkbox checked={state.private} onChange={handlerChangeFor(state, onChange, 'private', e => e.target.checked)}>Private
-        challenge (only visible to me)</Checkbox>
+      <FormGroup>
+        <ControlLabel>Visibility</ControlLabel>
+        <br/>
+        Only visible to club members
+        <ClubSelect
+          value={state.club}
+          onChange={handlerChangeFor(state, onChange, 'club', e => e)}
+        />
+        <Checkbox
+          checked={state.private}
+
+          onChange={handlerChangeFor(state, onChange, 'private', e => e.target.checked)}
+        >Private challenge (only visible to me)</Checkbox>
+      </FormGroup>
       <Button type="submit" onClick={onSave}>{operation}</Button>
     </Box>
   );

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const challengeController = require('./controller/challengeController');
 const userController = require('./controller/userController');
 const authController = require('./controller/authController');
+const clubController = require('./controller/clubController');
 const config = require('./config');
 
 module.exports.register = function (app, db) {
@@ -43,5 +44,6 @@ module.exports.register = function (app, db) {
 
     challengeController.register(router, db);
     userController.register(router, db);
+    clubController.register(router, db);
     app.use('/api', router);
 };

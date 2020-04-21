@@ -20,9 +20,29 @@ module.exports.register = function (router, db) {
   const challengeRepository = new ChallengeRepository(db);
   const userRepository = new UserRepository(db);
   router.route('/challenges')
-    .get(function (request, response) {
-      const athleteID = request.strava.athleteID;
-      wrap(challengeRepository.getAll().then(items => items.map(item => challengeDTO.create(athleteID, item)).filter(t => !!t)), response);
+    .get(async (request, response) => {
+      try {
+        const userID = request.userID;
+        const user = await userRepository.get(userID);
+        const athleteID = request.strava.athleteID;
+        const challenges = await challengeRepository.getAll();
+        const visibleChallenges = challenges
+          .filter(item => {
+            //to filter out private challenges requested by other user.
+            if (item.private && item.createdBy !== athleteID) {
+              return false;
+            }
+            //to filter out challenges with club restriction
+            if (item.club && !(user.clubs || []).includes(item.club.id)) {
+              return false;
+            }
+            return true;
+          })
+          .map(item => challengeDTO.create(athleteID, item));
+        response.json(visibleChallenges);
+      } catch (error) {
+        response.status(500).send({ error });
+      }
     })
     .put(function (request, response) {
       const challenge = request.body;

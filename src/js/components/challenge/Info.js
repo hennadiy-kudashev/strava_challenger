@@ -14,6 +14,7 @@ const Info = ({ challenge }) => {
   const minActivitiesBy = thresholdBYs[challenge.criteria.minActivities.by];
   const activityLength = challenge.criteria.activityLength.value;
   const activityLengthCriterion = thresholds[challenge.criteria.activityLength.criterion];
+  const club = challenge.club;
   return (
     <dl className="dl-horizontal">
       <dt>Description</dt>
@@ -33,6 +34,10 @@ const Info = ({ challenge }) => {
       {activityLength > 0 && <dt>Min activity length ({activityLengthCriterion.label})</dt>}
       {activityLength > 0 &&
       <dd>{activityLengthCriterion.toDisplayUnit(activityLength)} {activityLengthCriterion.unit}</dd>}
+      <dt>Private</dt>
+      <dd>{challenge.private ? 'yes' : 'no'}</dd>
+      {club && <dt>Visible to club members</dt>}
+      {club && <dd>{club.name}</dd>}
     </dl>
   );
 };

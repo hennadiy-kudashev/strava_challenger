@@ -26,7 +26,8 @@ const EditStateConverter = {
                 name: challenge.criteria.activityLength.criterion,
                 value: challenge.criteria.activityLength.value,
             },
-            private: challenge.private
+            private: challenge.private,
+            club: challenge.club
         };
     },
     toApi(state){
@@ -53,7 +54,8 @@ const EditStateConverter = {
                     value: state.criteria_activity_length.value
                 },
             },
-            private: state.private
+            private: state.private,
+            club: state.club
         };
     }
 };

@@ -7,12 +7,13 @@ import Spinner from "../../shared/Spinner";
 import {browserHistory} from "react-router";
 import {Alert} from "react-bootstrap";
 
-const toState = ({displayName, description, views, criteria, 'private': _private})=>({
+const toState = ({displayName, description, views, criteria, 'private': _private, club})=>({
     displayName,
     description,
     views,
     criteria,
-    private: _private
+    private: _private,
+    club
 });
 class EditPage extends React.Component {
     constructor(props, context) {

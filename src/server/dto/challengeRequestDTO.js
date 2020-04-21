@@ -1,11 +1,12 @@
 
-module.exports.create = function (athleteID, { description, displayName, criteria, views, 'private': _private}) {
+module.exports.create = function (athleteID, { description, displayName, criteria, views, 'private': _private, club}) {
   return {
       description,
       displayName,
       criteria,
       views,
       createdBy: athleteID,
-      private: _private
+      private: _private,
+      club
   };
 };

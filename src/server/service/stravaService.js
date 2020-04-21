@@ -38,7 +38,7 @@ class StravaService {
     const PAGE_SIZE = 200; //max allowed by Strava.
     const PAGE_NUMBER = 1;
     return this._getActivitiesRecursion(after, before, PAGE_SIZE, PAGE_NUMBER, [])
-      //restrict types if something is selected
+    //restrict types if something is selected
       .then(activities => activities.filter(a => types.length > 0 ? types.includes(a.type) : true));
   }
 
@@ -67,6 +67,16 @@ class StravaService {
     }
 
     return strava.athlete.listActivities(args);
+  }
+
+  getAthleteClubs() {
+    const args = {
+      'access_token': this.accessToken,
+      'per_page': 30,
+      'page': 1
+    };
+    //make id as string to avoid comparing issues.
+    return strava.athlete.listClubs(args).map(club => ({ ...club, id: club.id.toString() }));
   }
 }
 
