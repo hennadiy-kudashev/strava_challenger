@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  node:
+    build: ./../
+    container_name: node
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    env_file:
+        - .env_docker
+  mongodb:
+    build: ./mongodb
+    container_name: mongo
+    ports:
+      - 27017-27019:27017-27019
+    volumes:
+      - ./mongodb/mongo-volume:/data/db
+  ngrok:
+    image: wernight/ngrok
+    container_name: ngrok
+    ports:
+      - 4040:4040
+    links:
+      - node
+    depends_on:
+      - node
+    environment:
+      - NGROK_AUTH=1Y29mHeyZVXDjF4oFjjC04SVHR9_3rzN5vw13Rho95pAaTnnu
+      - NGROK_SUBDOMAIN=pmchallenge
+      - NGROK_PROTOCO=http
+      - NGROK_REGION=eu
+      - NGROK_PORT=node:3000

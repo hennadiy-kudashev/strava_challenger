@@ -1,0 +1,10 @@
+FROM mongo:latest
+
+ADD ./custom-user.sh /docker-entrypoint-initdb.d/
+
+ENV MONGO_INITDB_DATABASE strava
+ENV MONGO_INITDB_ROOT_USERNAME root
+ENV MONGO_INITDB_ROOT_PASSWORD rootpassword
+ENV MONGO_NON_ROOT_ROLE readWrite
+ENV MONGO_NON_ROOT_USERNAME strava
+ENV MONGO_NON_ROOT_PASSWORD strava
