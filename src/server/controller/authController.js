@@ -24,6 +24,7 @@ module.exports.register = function (router, db) {
         const accessToken = data.access_token;
         const refreshToken = data.refresh_token;
         const expiresAt = data.expires_at;
+        const expiresIn = data.expires_in;
 
         const clubs = await new StravaService(accessToken).getAthleteClubs().map(club => club.id);
         const user = await userRepository.createOrUpdate({ accessToken, refreshToken, expiresAt, clubs, ...athlete });
@@ -35,7 +36,7 @@ module.exports.register = function (router, db) {
           userID: user._id
         };
         const token = jwt.sign(payload, config.secret, {
-          expiresIn: 86400 // expires in 24 hours
+          expiresIn: expiresIn // expires in 24 hours
         });
         response.status(201).send({ token, user: UserDTO.create(user) });
       } catch (error) {

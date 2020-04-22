@@ -19,10 +19,7 @@ module.exports = {
         new webpack.DefinePlugin(GLOBALS),
         new ExtractTextPlugin('styles.css'),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.ADMIN_STRAVA_ATHLETE_ID': JSON.stringify(process.env.ADMIN_STRAVA_ATHLETE_ID || '')
-        }),
+        new webpack.optimize.UglifyJsPlugin()
     ],
     module: {
         loaders: [

@@ -5,7 +5,6 @@ ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait
 
 WORKDIR /strava_challenger
 
-#ARG ADMIN_STRAVA_ATHLETE_ID=22381137
 ENV MONGOLAB_URI "mongodb://strava:strava@mongodb:27017/strava"
 ENV PORT 3000
 ENV WAIT_HOSTS mongodb:27017

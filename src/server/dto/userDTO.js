@@ -1,3 +1,4 @@
+const { canCreateChallenge } = require('../lib/admin');
 
 module.exports.create = function ({_id, id, profile, firstname, lastname}) {
   return {
@@ -5,6 +6,7 @@ module.exports.create = function ({_id, id, profile, firstname, lastname}) {
       id,
       profile,
       firstname,
-      lastname
+      lastname,
+      isAdmin: canCreateChallenge(id)
   };
 };

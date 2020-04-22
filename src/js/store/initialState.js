@@ -4,7 +4,8 @@ export default {
         user: {
             userName: '',
             fullName: '',
-            avatar: ''
+            avatar: '',
+            isAdmin: false
         }
     },
     challenges: [],

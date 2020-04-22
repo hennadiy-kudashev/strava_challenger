@@ -16,10 +16,7 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.ADMIN_STRAVA_ATHLETE_ID': JSON.stringify(process.env.ADMIN_STRAVA_ATHLETE_ID || '')
-        }),
+        new webpack.HotModuleReplacementPlugin()
     ],
     module: {
         preLoaders: [

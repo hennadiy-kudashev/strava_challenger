@@ -41,6 +41,7 @@ export function addChallenges(challenges) {
 
 export function joinChallenge(challengeId) {
   return function (dispatch) {
+    dispatch({ type: types.GET_CHALLENGE_ATHLETES_LOADING });
     return new ChallengeApi().addAthlete(challengeId).then(athlete => {
       dispatch(addChallengeAthletes(challengeId, [athlete]));
       dispatch({ type: types.EDIT_CHALLENGE, challenge: { _id: challengeId, joined: true } });
