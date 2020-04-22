@@ -19,7 +19,10 @@ module.exports = {
         new webpack.DefinePlugin(GLOBALS),
         new ExtractTextPlugin('styles.css'),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.ADMIN_STRAVA_ATHLETE_ID': JSON.stringify(process.env.ADMIN_STRAVA_ATHLETE_ID || '')
+        }),
     ],
     module: {
         loaders: [
@@ -61,6 +64,10 @@ module.exports = {
             {
                 test: /\.(sass|scss)$/,
                 loader: ExtractTextPlugin.extract(['css-loader','postcss-loader', 'sass-loader'])
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     }

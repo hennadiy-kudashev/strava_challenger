@@ -5,6 +5,7 @@ const UserRepository = require('../repository/userRepository');
 const ActivityDTO = require('../dto/activityDTO');
 const AthleteInfoDTO = require('../dto/athleteInfoDTO');
 const ChallengeRequestDTO = require('../dto/challengeRequestDTO');
+const { canCreateChallenge } = require('../lib/admin');
 
 function wrap(promise, response) {
   promise.then(
@@ -47,6 +48,11 @@ module.exports.register = function (router, db) {
     .put(function (request, response) {
       const challenge = request.body;
       const athleteID = request.strava.athleteID;
+      if (!canCreateChallenge(athleteID)) {
+        return response.status(403).send({
+          message: 'You don not have permission to create challenge.'
+        });
+      }
       wrap(challengeRepository.create(ChallengeRequestDTO.create(athleteID, challenge)).then(item => challengeDTO.create(athleteID, item)), response);
     });
   router.route('/challenges/:challengeID')
@@ -54,20 +60,40 @@ module.exports.register = function (router, db) {
       const challengeID = request.params.challengeID;
       wrap(challengeRepository.get(challengeID), response);
     })
-    .post(function (request, response) {
-      const challengeID = request.params.challengeID;
-      const challenge = request.body;
-      const athleteID = request.strava.athleteID;
-      wrap(challengeRepository.update(challengeID, ChallengeRequestDTO.create(athleteID, challenge)).then(item => challengeDTO.create(athleteID, item)), response);
-    })
-    .delete(function (request, response) {
-      const challengeID = request.params.challengeID;
-      const athleteID = request.strava.athleteID;
-      challengeRepository.remove(challengeID, athleteID).then(() => {
-        response.status(204).end();
-      }, error => {
+    .post(async (request, response) => {
+      try {
+        const challengeID = request.params.challengeID;
+        const challenge = request.body;
+        const athleteID = request.strava.athleteID;
+
+        const existedChallenge = await challengeRepository.get(challengeID);
+        if (existedChallenge.createdBy !== athleteID) {
+          return response.status(403).send({
+            message: 'You don not have permission to edit challenge.'
+          });
+        }
+        const challengeToSave = ChallengeRequestDTO.create(athleteID, challenge);
+        const updatedChallenge = await challengeRepository.update(challengeID, challengeToSave);
+        response.json(challengeDTO.create(athleteID, updatedChallenge));
+      } catch (error) {
         response.status(500).send({ error });
-      });
+      }
+    })
+    .delete(async (request, response) => {
+      try {
+        const challengeID = request.params.challengeID;
+        const athleteID = request.strava.athleteID;
+        const existedChallenge = await challengeRepository.get(challengeID);
+        if (existedChallenge.createdBy !== athleteID) {
+          return response.status(403).send({
+            message: 'You don not have permission to remove challenge.'
+          });
+        }
+        await challengeRepository.remove(challengeID, athleteID);
+        response.status(204).end();
+      } catch (error) {
+        response.status(500).send({ error });
+      }
     });
 
   const getActivities = (user, criteria) => {

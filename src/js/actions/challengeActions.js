@@ -28,6 +28,7 @@ export function removeChallenge(challengeID) {
 
 export function getChallenges() {
   return function (dispatch) {
+    dispatch({ type: types.GET_CHALLENGES_LOADING });
     return new ChallengeApi().getAll().then(challenges => {
       dispatch(addChallenges(challenges));
     });
@@ -35,7 +36,7 @@ export function getChallenges() {
 }
 
 export function addChallenges(challenges) {
-  return { type: types.ADD_CHALLENGES, challenges };
+  return { type: types.GET_CHALLENGES, challenges };
 }
 
 export function joinChallenge(challengeId) {
@@ -49,6 +50,7 @@ export function joinChallenge(challengeId) {
 
 export function getChallengeAthletes(id) {
   return function (dispatch) {
+    dispatch({ type: types.GET_CHALLENGE_ATHLETES_LOADING });
     return new ChallengeApi().getAthletes(id).then(athletes => {
       dispatch(addChallengeAthletes(id, athletes));
     });

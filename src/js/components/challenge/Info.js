@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import moment from "moment";
 import thresholds from './view/thresholds';
 import thresholdBYs from './view/thresholdBYs';
+import Markdown from "../shared/Markdown";
 
 const Info = ({ challenge }) => {
   const period = challenge.criteria.datetime;
@@ -18,7 +19,7 @@ const Info = ({ challenge }) => {
   return (
     <dl className="dl-horizontal">
       <dt>Description</dt>
-      <dd>{challenge.description}</dd>
+      <dd><Markdown>{challenge.description}</Markdown></dd>
       <dt>Start</dt>
       <dd>{moment(period.after).format('MMM Do YYYY, HH:mm')}</dd>
       <dt>End</dt>

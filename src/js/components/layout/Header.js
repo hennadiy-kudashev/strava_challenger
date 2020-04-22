@@ -5,6 +5,7 @@ import Logo from './Logo';
 import UserCard from './UserCard';
 import Dropdown from './Dropdown';
 import Error from './Error';
+import { canCreateChallenge} from '../../logic/admin';
 import { Link } from 'react-router';
 
 class Header extends React.Component  {
@@ -32,9 +33,9 @@ class Header extends React.Component  {
                         <span className="sr-only">Toggle navigation</span>
                     </a>
                     <div className="collapse navbar-collapse pull-left" id="navbar-collapse">
-                        <ul className="nav navbar-nav">
+                        {user.id && canCreateChallenge(user.id) && <ul className="nav navbar-nav">
                             <li><Link to="/challenge/create">Create</Link></li>
-                        </ul>
+                        </ul>}
                     </div>
                     <div className="navbar-custom-menu">
                         <ul className="nav navbar-nav">

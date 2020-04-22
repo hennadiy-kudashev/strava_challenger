@@ -19,7 +19,7 @@ class App extends Component {
     render() {
         return (
             <div className="skin-yellow-light" >
-                <div className={classnames('wrapper', {'sidebar-open':this.state.isSidebar})}>
+                <div className={classnames('wrapper', {'sidebar-open':this.state.isSidebar}, {'sidebar-collapse':!this.state.isSidebar})}>
                     <Header toggleSidebar={this.toggleSidebar}/>
                     <Sidebar />
                     <div className="content-wrapper">

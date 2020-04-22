@@ -11,6 +11,10 @@ class BaseView extends React.Component {
         return this.props.challenge;
     }
 
+    getUser(){
+        return this.props.user;
+    }
+
     getThresholdCriterion(){
         return Object.keys(this.getChallenge().criteria.threshold)[0];
     }
@@ -22,7 +26,7 @@ class BaseView extends React.Component {
     getThreshold(){
         return thresholds[this.getThresholdCriterion()];
     }
-    
+
     getSortedAthletes() {
         const sorter = new Sorter(this.getThresholdCriterion());
         return this.getChallenge().athletes.sort(sorter.getSortFn());
@@ -30,7 +34,8 @@ class BaseView extends React.Component {
 }
 
 BaseView.propTypes = {
-    challenge: PropTypes.object.isRequired
+    challenge: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
 };
 
 export default BaseView;

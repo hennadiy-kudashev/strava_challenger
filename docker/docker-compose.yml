@@ -19,14 +19,14 @@ services:
       - 27017-27019:27017-27019
     volumes:
       - ./mongodb/mongo-volume:/data/db
-  ngrok:
-    image: wernight/ngrok
-    container_name: ngrok
-    ports:
-      - 4040:4040
-    links:
-      - node
-    depends_on:
-      - node
-    env_file:
-      - .env_docker
+#  ngrok:
+#    image: wernight/ngrok
+#    container_name: ngrok
+#    ports:
+#      - 4040:4040
+#    links:
+#      - node
+#    depends_on:
+#      - node
+#    env_file:
+#      - .env_docker

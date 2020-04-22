@@ -15,7 +15,7 @@ The stage build can be tested [here](https://strava-challenger-stage.herokuapp.c
 ##Docker
 
 - Create ./docker/.env_docker from template ./docker/.env_docker.example
-- `cd /docker`
+- `cd docker`
 - `docker-compose build`
 - `docker-compose up`
 

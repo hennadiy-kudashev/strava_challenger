@@ -7,5 +7,7 @@ export default {
             avatar: ''
         }
     },
-    challenges: []
+    challenges: [],
+    challengesLoading: false,
+    challengeAthletesLoading: false,
 };

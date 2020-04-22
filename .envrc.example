@@ -1,7 +1,9 @@
 export STRAVA_CLIENT_ID=defineMe
 export STRAVA_CLIENT_SECRET=defineMe
-export STRAVA_REDIRECT_URI=defineMe
+export STRAVA_REDIRECT_URI="http://localhost:4001/code_receiver"
 export STRAVA_ACCESS_TOKEN=just_stub_strava_api_not_working_without_it
 export MONGOLAB_URI=defineMe
 export SECRET=use_any_string_to_secure_client_jwt_token
-export PORT=defineMe
+export PORT=4001
+#strava athlete id who is able to create challenges. If it is empty, anyone can do it
+export ADMIN_STRAVA_ATHLETE_ID=defineMe

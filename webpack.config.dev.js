@@ -16,7 +16,10 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.ADMIN_STRAVA_ATHLETE_ID': JSON.stringify(process.env.ADMIN_STRAVA_ATHLETE_ID || '')
+        }),
     ],
     module: {
         preLoaders: [
@@ -67,6 +70,10 @@ module.exports = {
             {
                 test: /(\.css)$/,
                 loaders: ['style-loader', 'css-loader?importLoaders=1']
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     }

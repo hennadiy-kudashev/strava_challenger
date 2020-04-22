@@ -14,7 +14,7 @@ export default function challengesReducer(state = initialState.challenges, actio
       ];
     case types.REMOVE_CHALLENGE:
       return state.filter(challenge => challenge._id !== action.challengeID);
-    case types.ADD_CHALLENGES:
+    case types.GET_CHALLENGES:
       return [...state, ...action.challenges];
     case types.ADD_CHALLENGE_ATHLETES:
       return state.map(challenge => {
