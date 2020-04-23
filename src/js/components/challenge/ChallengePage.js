@@ -9,7 +9,6 @@ import Tabs from "../layout/tabs/Tabs";
 import TabPane from "../layout/tabs/TabPane";
 import views from "./view/views";
 import Info from "./Info";
-import Progress from "./view/Progress";
 import JoinButton from "../layout/JoinButton";
 import AdminButtons from "./AdminButtons";
 

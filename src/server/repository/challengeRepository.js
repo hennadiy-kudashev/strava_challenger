@@ -22,6 +22,13 @@ class ChallengeRepository {
         ).then(item=>item.value);
     }
 
+    removeAthlete(challengeID, athlete) {
+        return this._db.collection('challenges').updateOne(
+          {_id: ObjectId(challengeID)},
+          {$pull: {athletes: athlete}}
+        );
+    }
+
     create(challenge) {
         return this._db.collection('challenges').insertOne(challenge).then(item=> {
             challenge._id = item.insertedId;

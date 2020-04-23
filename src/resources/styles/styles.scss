@@ -26,7 +26,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-   display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -192,11 +192,24 @@ body {
     }
 
     .logo {
+      width: 250px;
+      padding: 5px 15px;
       background-color: $primary-color;
+      display: flex;
+      align-items: center;
 
       &:hover {
         background-color: $primary-color;
       }
+    }
+
+    .logo-without-img {
+      justify-content: center;
+    }
+
+    .logo_img {
+      height: 40px;
+      margin-right: 10px;
     }
 
     li.user-header {
@@ -221,19 +234,21 @@ body {
   }
 
   .product-description {
-      overflow: visible;
-      white-space: inherit;
-      text-overflow: inherit;
-      width: 70%;
+    overflow: visible;
+    white-space: inherit;
+    text-overflow: inherit;
+    width: 70%;
   }
 }
 
 .collapse {
   display: none !important;
+
   &.in {
     display: block !important;
   }
 }
+
 .Select-menu-outer {
   z-index: 10;
 }
@@ -241,7 +256,8 @@ body {
 .progress-bar-failed {
   background-color: $primary-color;
 }
-div.callout.callout-danger{
+
+div.callout.callout-danger {
   background-color: $primary-color !important;
 }
 

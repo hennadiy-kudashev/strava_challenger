@@ -38,6 +38,10 @@ class ChallengeApi extends ServerApi {
     return super.put(`/api/challenges/${challengeID}/athletes`);
   }
 
+  removeAthlete(challengeID) {
+    return super.remove(`/api/challenges/${challengeID}/athletes`);
+  }
+
   create(challenge) {
     return super.put(`/api/challenges`, challenge);
   }

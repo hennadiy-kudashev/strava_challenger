@@ -160,5 +160,15 @@ module.exports.register = function (router, db) {
       } catch (error) {
         response.status(500).send({ error });
       }
+    })
+    .delete(async (request, response) => {
+      try {
+        const challengeID = request.params.challengeID;
+        const athleteId = request.strava.athleteID;
+        await challengeRepository.removeAthlete(challengeID, { id: athleteId });
+        response.json({ athleteId });
+      } catch (error) {
+        response.status(500).send({ error });
+      }
     });
 };

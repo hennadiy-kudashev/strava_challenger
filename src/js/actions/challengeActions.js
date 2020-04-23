@@ -49,6 +49,15 @@ export function joinChallenge(challengeId) {
   };
 }
 
+export function leaveChallenge(challengeId) {
+  return function (dispatch) {
+    return new ChallengeApi().removeAthlete(challengeId).then(({ athleteId }) => {
+      dispatch({ type: types.REMOVE_CHALLENGE_ATHLETES, challengeId, athleteId });
+      dispatch({ type: types.EDIT_CHALLENGE, challenge: { _id: challengeId, joined: false } });
+    });
+  };
+}
+
 export function getChallengeAthletes(id) {
   return function (dispatch) {
     dispatch({ type: types.GET_CHALLENGE_ATHLETES_LOADING });
