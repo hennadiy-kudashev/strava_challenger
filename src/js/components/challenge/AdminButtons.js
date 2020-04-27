@@ -4,6 +4,7 @@ import {Button} from "react-bootstrap";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as challengeActions from "../../actions/challengeActions";
+import Prompt from "../shared/Prompt";
 
 class AdminButtons extends React.Component {
     constructor(props) {
@@ -25,7 +26,9 @@ class AdminButtons extends React.Component {
             return null;
         }
         return (<div>
-            <Button type="button" bsClass="btn btn-default pull-right" onClick={this.removeChallenge}>Remove</Button>
+            <Prompt text="Are you sure you want to remove challenge?" confirm={this.removeChallenge}>
+                <Button type="button" bsClass="btn btn-default pull-right">Remove</Button>
+            </Prompt>
             <Link className="btn btn-default pull-right" to={"/challenge/edit/"+ challenge._id}>Edit</Link>
         </div>);
     }

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import Prompt from "../shared/Prompt";
 import * as challengeActions from "../../actions/challengeActions";
 
 class JoinButton extends React.Component {
@@ -25,7 +26,11 @@ class JoinButton extends React.Component {
   render() {
     const { challenge } = this.props;
     if (challenge.joined) {
-      return (<button onClick={this.leaveChallenge} className="btn btn-default pull-right">Leave Challenge</button>);
+      return (
+        <Prompt text="Are you sure you want to leave this challenge?" confirm={this.leaveChallenge}>
+          <button className="btn btn-default pull-right">Leave Challenge</button>
+        </Prompt>
+      );
     } else {
       return (<button onClick={this.joinChallenge} className="btn btn-default pull-right">Join Challenge</button>);
     }
