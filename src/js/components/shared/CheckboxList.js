@@ -1,5 +1,5 @@
 import React, {PropTypes} from "react";
-import {Checkbox} from "react-bootstrap";
+import Checkbox from "react-bootstrap/lib/Checkbox";
 
 const onChangeWith = (values, key, onChange) =>{
     return (e)=> {

@@ -1,10 +1,9 @@
 import React from "react";
 import UserInfo from "./UserInfo";
 import Table from "../../layout/table/Table";
-import { Diff, Unit, MinActivities } from './format';
+import { Diff, MinActivities, Unit } from './format';
 import BaseView from './BaseView';
 import Tooltip from '../../layout/Tooltip';
-import BY from "./thresholdBy";
 
 class UnitTable extends BaseView {
   constructor(props, context, unitClass) {
@@ -21,7 +20,8 @@ class UnitTable extends BaseView {
       this.getChallenge().criteria.minActivities
     );
 
-    const columns = ['Athlete'].concat(unitSummary.getPeriodLabels()).concat(['Total']);
+    const columns = ['Athlete'].concat(unitSummary.getPeriodLabels().map(label => <span key={label}
+                                                                                        className="nowrap">{label}</span>)).concat(['Total']);
 
     const rows = super.getSortedAthletes().map((athlete, indexA) => {
       const total = unitSummary.getTotal(athlete.activities, this.getThresholdCriterion());
