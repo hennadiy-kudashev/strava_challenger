@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+import cx from "classnames";
 
 const ProgressBar = ({ label, achieved, threshold, Component, summary, isFailed }) => {
   const percentage = Math.round((achieved / threshold) * 100);
@@ -9,7 +10,7 @@ const ProgressBar = ({ label, achieved, threshold, Component, summary, isFailed 
       <span className="progress-text">{label}</span>
       <span className="progress-number"><b><Component unit={achieved}/></b>/<Component
         unit={threshold}/></span>
-      <div className="progress">
+      <div className={cx("progress", {'progress-failed': isFailed})}>
         <div className={"progress-bar progress-bar-striped " + className}
              style={{ width: (percentage > 100 ? 100 : percentage) + '%' }}>{percentageLabel}</div>
         &nbsp;

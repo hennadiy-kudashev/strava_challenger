@@ -19,13 +19,16 @@ export function Metre({ unit: metres, colored }) {
 }
 
 export function Time({ unit: seconds, colored }) {
-  const hr = Math.floor(seconds / 3600);
-  const min = Math.round((seconds - (hr * 3600)) / 60);
-  return (<Base unit={seconds} colored={colored}>{Math.abs(hr)}h {min}m</Base>);
+  //to calc negative value (-1h20m) correctly
+  const secondsAbs = Math.abs(seconds);
+  const hr = Math.floor(secondsAbs / 3600);
+  const min = Math.round((secondsAbs - (hr * 3600)) / 60);
+  return (<Base unit={seconds} colored={colored}>{hr}h {min}m</Base>);
 }
 
 export function Diff({ total, diff, criterion }) {
-  if (total == 0) {
+  //show diff only for past period even if athlete has not done anything
+  if (diff === 0) {
     return (<span/>);
   }
   const Component = thresholds[criterion].component;
@@ -37,7 +40,7 @@ export function Diff({ total, diff, criterion }) {
 }
 
 export function Unit({ unit, criterion, ...props }) {
-  if (unit == 0) {
+  if (unit === 0) {
     return (<span/>);
   }
   const Component = thresholds[criterion].component;

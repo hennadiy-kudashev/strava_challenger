@@ -257,6 +257,10 @@ body {
   background-color: $primary-color;
 }
 
+.progress-failed {
+  background-color: rgba(252, 76, 2, 0.2);
+}
+
 div.callout.callout-danger {
   background-color: $primary-color !important;
 }

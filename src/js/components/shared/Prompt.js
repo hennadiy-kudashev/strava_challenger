@@ -1,3 +1,4 @@
+/*eslint-disable react/no-multi-comp*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/lib/Button';
@@ -8,14 +9,15 @@ const Prompt = ({ text, confirm, children }) => {
     confirm(e);
     close();
   };
+  const footer = (close) => (<div>
+    <Button onClick={close}>No</Button>
+    <Button bsStyle="primary" onClick={handleYes}>Yes</Button>
+  </div>);
   return (
     <Modal
       title="Are you sure?"
       trigger={children}
-      footer={(close) => <div>
-        <Button onClick={close}>No</Button>
-        <Button bsStyle="primary" onClick={handleYes}>Yes</Button>
-      </div>}
+      footer={footer}
     >
       {text}
     </Modal>
