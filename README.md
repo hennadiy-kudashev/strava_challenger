@@ -21,6 +21,6 @@ The stage build can be tested [here](https://strava-challenger-stage.herokuapp.c
 
 ## Customization
 
-#### Logo
+### Logo
 Logo will be displayed in header if file './src/resources/images/logo.jpg' exist.
 
