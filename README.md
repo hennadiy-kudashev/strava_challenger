@@ -1,4 +1,4 @@
-##Environment variables:
+## Environment variables:
  - MONGOLAB_URI
  - STRAVA_CLIENT_ID
  - STRAVA_CLIENT_SECRET
